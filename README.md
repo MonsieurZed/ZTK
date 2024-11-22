@@ -38,4 +38,4 @@ Zed's Toolkit aim to make a fresh install of windows easier by providing one for
 
 - [MonsieurZed](https://github.com/MonsieurZed)
 
-![say hi](https://raw.githubusercontent.com/MonsieurZed/ZMT/refs/heads/main/icon/purple-shark.ico)
+![picture.png](./assets/sharky.png)

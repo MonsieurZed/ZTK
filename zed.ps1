@@ -11,15 +11,14 @@
 $version = "v0.2.00"
 $debug = $env:USERNAME -eq "Zed"
 
-$base_path = if ($debug) { "D:\ZedsMinitools\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZMT/refs/heads/main" }
+$base_path = if ($debug) { "D:\ZMT\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZMT/refs/heads/main" }
 
-$github_token = "github_token_here"  
 
 $zed_dictionnary = @{
     command     = "irm $base_path/zed.ps1 | iex"
     name        = "Zed's Toolkit"
-    clearname   = "zedtoolkit"
-    temp_folder = "$env:TEMP\zedtoolkit"
+    clearname   = "zedstoolkit"
+    temp_folder = "$env:TEMP\zedstoolkit"
     icon_path   = "$base_path/icon/purple-shark.ico" 
 }
 
@@ -38,6 +37,7 @@ $script_dictionary = @{
     backup   = "$base_path/script/backup.ps1"
 }
 
+$github_token = if (Test-Path ".\github_token.txt") { Get-Content -Path ".\github_token.txt" -Raw } else { $null }`dddsadsadasdsadasd
 
 Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
 
