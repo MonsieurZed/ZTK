@@ -12,7 +12,7 @@ Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Mon
 Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
 
 Console_Setup
-Console_Header $zed_dictionnary.name -version $version
+Console_Header 
 
 Write-Cancel "Loading from $base_path"
 # ===========================================================================

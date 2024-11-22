@@ -1,12 +1,12 @@
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/function.ps1").Content
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
+if ($debug) { . "$base_path/library/console.ps1" }
+else { Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content }
 
 
 $select = $false
 Terminal_Setup "Backup"
-Terminal_header "Backup" -zed_libra
+Terminal_header "Backup"
                      
 while ($select -eq $false) {      
 

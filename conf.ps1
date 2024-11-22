@@ -1,5 +1,5 @@
 $version = "v0.2.00"
-$debug = $env:USERNAME -eq "Zed"
+$debug = $true
 $base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/" }
 
 

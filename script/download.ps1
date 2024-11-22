@@ -1,15 +1,20 @@
 
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/function.ps1").Content
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
 
-Write-Host $zed_dictionnary.name
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
+if ($debug) {
+    . "$base_path/library/console.ps1"
+}
+else {
+    Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
+}
+
 
 Console_Setup
 Console_Header "Downloader"
+write-host $zed_dictionnary.name
 
 $params = DecodeHastable $args[0]
-write-host $params.GetType()
+
 
 write-host "Getting file info"  -ForegroundColor Cyan
 

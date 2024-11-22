@@ -147,11 +147,12 @@ Function Console_Setup {
 function Console_Header {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script_name = $null,
-        [string]$zed_dictionnary = $zed_dictionnary
+        [string]$script = $null,
+        [string]$name = $zed_dictionnary
     )
 
-    Clear-Host
+    Clear-Host $zed_dictionnary.name
+    write-host 
     write-host "_______________________________________________________________"
     write-host "_______________________________________________________________"
     write-host "                                                               "
@@ -169,7 +170,7 @@ function Console_Header {
     Write-Host $zed_dictionnary.name.PadLeft((($zed_dictionnary.name.Length + 63) / 2), " ").PadRight(63, " ")
     write-host "                                                               "
     if (!($null -eq $zed_dictionnary.version)) {
-        Write-Host = $zed_dictionnary.version.PadLeft((($zed_dictionnary.version.Length + 63) / 2), " ").PadRight(63, " ")
+        Write-Host $zed_dictionnary.version.PadLeft((($zed_dictionnary.version.Length + 63) / 2), " ").PadRight(63, " ")
         write-host "                                                               "
     }
     write-host "_______________________________________________________________"
