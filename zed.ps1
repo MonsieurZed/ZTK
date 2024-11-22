@@ -11,15 +11,15 @@
 $version = "v0.2.00"
 $debug = $env:USERNAME -eq "Zed"
 
-$base_path = if ($debug) { "D:\ZedsMinitools\" } else { "D:\ZedsMinitools\" }
+$base_path = if ($debug) { "D:\ZedsMinitools\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZMT/refs/heads/main" }
 
 $github_token = "github_token_here"  
 
 $zed_dictionnary = @{
-    command     = if ($debug) { "irm $base_path\zed.ps1 | iex" } else { "irm $base_path | iex" }
-    name        = "Zed's Minitools"
-    clearname   = "zedsminitools"
-    temp_folder = "$env:TEMP\zedsminitools"
+    command     = "irm $base_path/zed.ps1 | iex"
+    name        = "Zed's Toolkit"
+    clearname   = "zedtoolkit"
+    temp_folder = "$env:TEMP\zedtoolkit"
     icon_path   = "$base_path/icon/purple-shark.ico" 
 }
 
@@ -106,7 +106,10 @@ if (!($null -eq $github_token)) {
         
     }
     catch {
-        Write-Error "[$($MyInvocation.ScriptLineNumber)] Error : $($_.Exception.Message)" 
+        Write-Error "Github user validation failed" 
+        if ($debug) {
+            Write-Error "Error : $($_.Exception.Message)" 
+        }
     }
 }
 
