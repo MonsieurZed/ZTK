@@ -1,4 +1,4 @@
-# ZMT
+# Zed's Toolkit
 
 Open source setup tool
 
