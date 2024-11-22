@@ -21,8 +21,8 @@ function DecodeHastable() {
 }
 
 
+#================ Write =============================
 
-#================ Console =============================
 Function Write-Base {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
@@ -128,13 +128,21 @@ Function Write-Cleaner {
     }
 }
 
+
+#================ Console =============================
 Function Console_Setup {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script_name
+        [string]$script_name = $null,
+        [string]$zed_dictionnary = $zed_dictionnary
     )
     $Host.UI.RawUI.BackgroundColor = "black"  
-    $Host.UI.RawUI.WindowTitle = "Zed's Minitools : $script_name"
+    if ($null -eq $script_name) {
+        $Host.UI.RawUI.WindowTitle = $zed_dictionnary.name
+    }
+    else {
+        $Host.UI.RawUI.WindowTitle = "$($zed_dictionnary.name) : $script_name"
+    }
 }
 
 function Console_Header {

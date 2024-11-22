@@ -1,3 +1,25 @@
+function IsEnabled {
+    param (
+        [string]$provider,
+        [System.Object]$source
+    )
+
+    switch ($provider) {
+        $app_dictionary.github {
+            return $source.github
+        }
+        $app_dictionary.winget {
+            return $source.winget
+        }
+        $app_dictionary.choco {
+            return $source.choco
+        }
+        default {
+            return $true
+        }
+    }
+}
+
 function Get_Group_Border {
     $groupBorder = New-Object Windows.Controls.Border
     $groupBorder.Margin = "2"
@@ -69,22 +91,28 @@ function Get_Checkbox {
         [string]$name,
         [string]$description,
         [string]$provider,
-        [string]$tag
+        [System.Object]$source
     )
-    # Add a checkbox
     $checkbox = New-Object Windows.Controls.CheckBox
     $checkbox.Content = $name
     $checkbox.Foreground = "#DDDDDD"
     $tooltip = New-Object Windows.Controls.ToolTip
     $tooltip.Content = "$description. [$provider]"
     $checkbox.ToolTip = $tooltip
+
+    if ((IsEnabled -provider $provider -source $source) -eq $false) {
+        $checkbox.IsEnabled = $false
+        $checkbox.Foreground = "#555555"
+    }
+
     return $checkbox
 }
 
 function Draw_Applications {
     param (
         [string[]]$json_path,
-        [System.Windows.Controls.Panel]$wrap_panel
+        [System.Windows.Controls.Panel]$wrap_panel,
+        [System.Object]$source
     )
     $json = Get-Content -Path $json_path -Raw | ConvertFrom-Json
     $checkboxes = New-Object System.Collections.ArrayList
@@ -119,8 +147,8 @@ function Draw_Applications {
                     Write-Error "Failed to load icon for $($item.name)"
                 }
             }
-
-            $checkbox = Get_Checkbox -name $item.name -description $item.description -provider $item.provider
+            
+            $checkbox = Get_Checkbox -name $item.name -description $item.description -provider $item.provider -source $source
             
             $item | Add-Member -MemberType NoteProperty -Name "checkbox" -Value $checkbox
             $item | Add-Member -MemberType NoteProperty -Name "browser" -Value $app.browser

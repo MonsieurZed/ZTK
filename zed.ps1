@@ -37,7 +37,6 @@ $script_dictionary = @{
     backup   = "$base_path/script/backup.ps1"
 }
 
-$github_token = if (Test-Path ".\github_token.txt") { Get-Content -Path ".\github_token.txt" -Raw } else { $null }`dddsadsadasdsadasd
 
 Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
 
@@ -63,18 +62,22 @@ $currentProcess = Get-Process | Where-Object { $_.Id -eq $PID }
 
 Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProcess.Id } | Stop-Process -Force
 
-
+if (-not (Test-Path -Path $zed_dictionnary.temp_folder)) {
+    New-Item -Path "$($zed_dictionnary.temp_folder)" -ItemType Directory | Out-Null
+}
 # =============================================================================================     
 #  Package manager  
 # =============================================================================================  
 
-$choco = $false
-$winget = $false
-$github = $false
+$source = @{
+    choco  = $false
+    winget = $false
+    github = $false
+}
 
 if (Get-Command winget -ErrorAction SilentlyContinue) {
     Write-Sucess "Winget is installed"
-    $winget = $true
+    $source.winget = $true
 }
 else {
     Write-Error "[$($MyInvocation.ScriptLineNumber)] Winget is not installed" 
@@ -82,7 +85,7 @@ else {
 }
 
 if (Get-Command choco -ErrorAction SilentlyContinue) {
-    $choco = $true
+    $source.choco = $true
     Write-Sucess "Choco is installed"
 
 }
@@ -90,6 +93,20 @@ else {
     Write-Error "[$($MyInvocation.ScriptLineNumber)] Choco is not installed" 
     
 }
+
+$github_token_path = "$($zed_dictionnary.temp_folder)\github_token.txt"
+$github_token = if (Test-Path $github_token_path) { Get-Content -Path $github_token_path -Raw } else { $null }
+
+if ($null -eq $github_token) { 
+    $github_token = Read-Host "Enter your GitHub token (https://github.com/settings/tokens)" 
+    $save = Read-Host "Do you want to save the key for later use {Y/N}" 
+
+    if ($save.ToLower() -ieq "y") { 
+        Set-Content -Path $github_token_path -Value $github_token
+    } 
+}
+
+
 
 if (!($null -eq $github_token)) {
     $url = "https://api.github.com/user"
@@ -102,7 +119,7 @@ if (!($null -eq $github_token)) {
     try {
         $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Get 
         Write-Sucess "Github User is: $($response.name)"
-        $github = $true
+        $source.github = $true
         
     }
     catch {
@@ -112,17 +129,18 @@ if (!($null -eq $github_token)) {
         }
     }
 }
-
-
-if (-not (Test-Path -Path $zed_dictionnary.temp_folder)) {
-    New-Item -Path "$($zed_dictionnary.temp_folder)" -ItemType Directory
+else {
+    Write-Error "User did not specify an github token" 
 }
+
+
+
 
 #===========================================================================
 # Load XAML  and Forms
 #===========================================================================\
 
-Write-Info "Loading ..."
+Write-Info "Loading xaml..."
 
 $inputXML = Get-Content $xaml_dictionnary.main
 $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
@@ -143,7 +161,7 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 # WPF Loading
 #===========================================================================
 
-Write-Info "Pret "
+Write-Info "Loading functionnality"
  
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
@@ -159,12 +177,12 @@ $x_Grid_ExtensionZone.Background = '#121212'
 $x_Grid_StatusBar.Background = '#242424'
 $x_Dropdown_Packages.Background = '#222222'
 
-$x_R_Winget.Foreground = if ($winget) { 'Green' }else { 'red' }
-$x_R_Choco.Foreground = if ($choco) { 'Green' }else { 'red' }
-$x_R_Github.Foreground = if ($github) { 'Green' }else { 'red' }
+$x_R_Winget.Foreground = if ($source.winget) { 'Green' }else { 'red' }
+$x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
+$x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-$applications = Draw_Applications -json_path $json_dictionnary.apps -wrap_panel $x_WP_Applications 
+$applications = Draw_Applications -json_path $json_dictionnary.apps -wrap_panel $x_WP_Applications -source $source
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
 $extensions = Draw_Applications -json_path $json_dictionnary.web  -wrap_panel $x_WP_Extensions
@@ -212,7 +230,7 @@ $tools_list = @(
         ('Appdata', { Invoke-Item -Path $env:APPDATA }, $null, "shell32.dll,-154"),
         ('Temp', { Invoke-Item -Path $env:TEMP }, $null, "shell32.dll,-152"))
     ),
-    ("ZedMinitools", @(
+    ("Zed Toolkit", @(
         ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
         ("Backup User", { DownloadAndExecuteScript $script_dictionary.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
         ("Temp Folder", { Invoke-Item -Path $zed_dictionnary.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
@@ -258,7 +276,7 @@ $soft_list = @(
 )
 Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft
 
-
+Write-Info "Ready to go !"
 
 #===========================================================================
 # Closing

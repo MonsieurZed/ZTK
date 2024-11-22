@@ -5,6 +5,7 @@ $app_dictionary = @{
     github = "github"
     iso    = "iso"
 }
+
 $web_dictionnary = @{
     default = @("default")
     opera   = @(
