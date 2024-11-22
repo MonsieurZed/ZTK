@@ -8,8 +8,7 @@ $app_dict = @{
   command     = "irm $base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
-  temp_folder = "$env:TEMP\zedstoolkit\debug"
-
+  temp_folder = "$env:TEMP\zedstoolkit"
   icon_path   = "$base_path/icon/purple-shark.ico" 
   version     = "0.2.12"
 }
