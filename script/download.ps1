@@ -1,7 +1,7 @@
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-. "$base_path/script/functions.ps1"
-. "$base_path/script/console.ps1"
+Invoke-Expression (Invoke-WebRequest -Uri $library_dictionnary.function).Content
+Invoke-Expression (Invoke-WebRequest -Uri $library_dictionnary.console).Content
 
 Terminal_Setup
 Terminal_header "File Downloader"

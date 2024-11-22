@@ -1,6 +1,6 @@
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-. $library_dictionnary.function
+Invoke-Expression (Invoke-WebRequest -Uri $library_dictionnary.function).Content
 
 $select = $false
 Terminal_Setup "Backup"

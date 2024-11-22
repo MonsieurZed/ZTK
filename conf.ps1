@@ -26,6 +26,12 @@ $script_dictionary = @{
   backup   = "$base_path/script/backup.ps1"
 }
 
+$library_dictionary = @{
+  download = "$base_path/library/function.ps1"
+  backup   = "$base_path/library/console.ps1"
+}
+
+
 $source = @{
   choco  = $false
   winget = $false
