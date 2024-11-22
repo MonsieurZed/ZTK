@@ -9,7 +9,7 @@ else {
 }
 
 
-Console_Setup
+Console_Setup "Downloader"
 Console_Header "Downloader"
 write-host $zed_dictionnary.name
 

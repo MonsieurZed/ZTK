@@ -1,5 +1,6 @@
+$debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { [bool](Get-Content -Path $github_token_path -Raw) } else { $false }
+
 $version = "v0.2.00"
-$debug = $true
 $base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/" }
 
 
@@ -8,6 +9,7 @@ $zed_dictionnary = @{
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
+  debug       = "$env:TEMP\zedstoolkit\debug"
   icon_path   = "$base_path/icon/purple-shark.ico" 
   version     = "0.2.12"
 }

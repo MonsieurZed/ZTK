@@ -1,8 +1,8 @@
-<Window x:Name="ZMT" x:Class="MainWindow" 
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+<Window x:Name="ZMT" x:Class="MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:ZMT" mc:Ignorable="d" SizeToContent="WidthAndHeight" Title="Zed's Toolkit" Icon="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/purple-shark.ico" Height="350" Width="525">
 	<Window.Resources>
 		<SolidColorBrush x:Key="BackgroundBrush" Color="Black" />
@@ -145,11 +145,16 @@
 			</Grid>
 		</Grid>
 		<Grid x:Name="Grid_StatusBar" Grid.Row="2" Height="auto">
-			<StackPanel x:Name="Stack_Info" Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
-				<TextBlock x:Name="Info_Time" Text="placeholder" FontSize="13" FontWeight="Bold" Foreground="#DDDDDD"  Margin="5,0,0,0"/>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<StackPanel x:Name="Stack_Info" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" Grid.Column="0">
+				<TextBlock x:Name="Info_Time" Text="placeholder" FontSize="13" FontWeight="Bold" Foreground="#DDDDDD" Margin="5,0,0,0"/>
 				<TextBlock x:Name="Info_Message" Text="placeholder" FontSize="13" Foreground="#DDDDDD" Margin="5,0,0,0" />
 				<TextBlock x:Name="Info_Postion" Text="placeholder" FontSize="13" FontStyle="Italic" Foreground="#DDDDDD" Margin="5,0,0,0" />
-			</StackPanel> 
+			</StackPanel>
+			<ToggleButton x:Name="Debug_Switch" Content="Debug Off" Width="100" Height="30" Grid.Column="1"/>
 		</Grid>
 	</Grid>
 </Window>

@@ -68,7 +68,7 @@ if ($null -eq $github_token) {
     $save = Read-Host "Do you want to save the key for later use { Y/N }" 
 
     if ($save.ToLower() -ieq "y") { 
-        Set-Content -Path $github_token_path -Value $github_token
+        Set-Content -Path $github_token_path -Value $github_token -Force
     } 
 }
 
@@ -123,11 +123,19 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 #===========================================================================
 
 Write-Info "Loading functionnality"
- 
+
+
+
+$x_Debug_Switch.IsChecked = $debug
+$x_Debug_Switch.Add_Click({
+        $debug = $x_Debug_Switch.Content
+        Set-Content -Path $zed_dictionnary.debug -Value $debug -Force
+        Write-Event "Debuging : $Debug"
+    })
+
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
 $x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
-
 
 $x_Grid_MenuBar.Background = '#111111'
 $x_Grid_MainWindow.Background = '#222222'

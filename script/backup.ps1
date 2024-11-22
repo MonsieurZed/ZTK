@@ -1,13 +1,17 @@
 
+
+
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-if ($debug) { . "$base_path/library/console.ps1" }
-else { Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content }
+if ($debug) {
+    . "$base_path/library/console.ps1"
+}
+else {
+    Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
+}
 
+Console_Setup "Downloader"
+Console_Header "Downloader"
 
-$select = $false
-Terminal_Setup "Backup"
-Terminal_header "Backup"
-                     
 while ($select -eq $false) {      
 
     # Liste des disques logiques disponibles
@@ -16,11 +20,11 @@ while ($select -eq $false) {
     # Afficher les disques disponibles
     write-host "Choose output drive :"
     foreach ($drive in $drives) {
-        write-host "$($drive.DeviceID) - $($drive.VolumeName) : $([math]::Round($drive.FreeSpace / 1GB)) Go libres"
+        write-host "$($drive.DeviceID) - $($drive.VolumeName.PadLeft((($drive.VolumeName.Length + 12) / 2), " ").PadRight(12, " ")) : $([math]::Round($drive.FreeSpace / 1GB)) Go libres"
     }
 
     # Demande à l'utilisateur de choisir un disque pour la sauvegarde
-    $driveLetter = Read-Host -Prompt "Enter drive letter (ex: D) : "
+    $driveLetter = Read-Host -Prompt "Enter drive letter (ex: D) "
 
     # Vérifier que le disque choisi est valide
     $selectedDrive = $drives | Where-Object { $_.DeviceID -eq "${driveLetter}:" }

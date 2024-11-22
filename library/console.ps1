@@ -132,8 +132,7 @@ Function Write-Cleaner {
 Function Console_Setup {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script_name = $null,
-        [string]$zed_dictionnary = $zed_dictionnary
+        [string]$script_name = $null
     )
     $Host.UI.RawUI.BackgroundColor = "black"  
     if ($null -eq $script_name) {
@@ -147,11 +146,10 @@ Function Console_Setup {
 function Console_Header {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script = $null,
-        [string]$name = $zed_dictionnary
+        [string]$script = $null
     )
 
-    Clear-Host $zed_dictionnary.name
+    Clear-Host 
     write-host 
     write-host "_______________________________________________________________"
     write-host "_______________________________________________________________"
