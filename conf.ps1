@@ -27,8 +27,8 @@ $script_dictionary = @{
 }
 
 $library_dictionary = @{
-  download = "$base_path/library/function.ps1"
-  backup   = "$base_path/library/console.ps1"
+  function = "$base_path/library/function.ps1"
+  console  = "$base_path/library/console.ps1"
 }
 
 
