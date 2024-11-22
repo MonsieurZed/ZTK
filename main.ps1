@@ -9,22 +9,27 @@
 #===========================================================================
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 
-Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
+if ($debug) {
+    Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
+}
+else {
+    $library_dict.GetEnumerator() | ForEach-Object { Invoke-Expression (Invoke-WebRequest -Uri $_.Value).Content }
+}
 
 Console_Setup
 Console_Header 
 
-Write-Cancel "Loading from $base_path"
 # ===========================================================================
 # Init     
 # ============================================================================
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
+
 $admin = $false
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Error "This script must be run as admin"
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($zed_dictionnary.command)" -Verb RunAs
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($default_dict.command)" -Verb RunAs
     exit
 }
 else {
@@ -34,8 +39,8 @@ $currentProcess = Get-Process | Where-Object { $_.Id -eq $PID }
 
 Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProcess.Id } | Stop-Process -Force
 
-if (-not (Test-Path -Path $zed_dictionnary.temp_folder)) {
-    New-Item -Path "$($zed_dictionnary.temp_folder)" -ItemType Directory | Out-Null
+if (-not (Test-Path -Path $default_dict.temp_folder)) {
+    New-Item -Path "$($default_dict.temp_folder)" -ItemType Directory | Out-Null
 }
 # =============================================================================================     
 #  Package manager  
@@ -60,15 +65,14 @@ else {
     
 }
 
-$github_token_path = "$($zed_dictionnary.temp_folder)\github_token.txt"
-$github_token = if (Test-Path $github_token_path) { Get-Content -Path $github_token_path -Raw } else { $null }
+$github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
 
 if ($null -eq $github_token) { 
     $github_token = Read-Host "Enter your GitHub token (https://github.com/settings/tokens)" 
     $save = Read-Host "Do you want to save the key for later use { Y/N }" 
 
     if ($save.ToLower() -ieq "y") { 
-        Set-Content -Path $github_token_path -Value $github_token
+        Set-Content -Path $var_dict.github_token -Value $github_token
     } 
 }
 
@@ -103,7 +107,13 @@ else {
 
 Write-Info "Loading xaml..."
 
-$inputXML = Get-Content $xaml_dictionnary.main
+if ($debug) { 
+    $inputXML = Get-Content $xaml_dict.main
+}
+else {
+    $inputXML = Invoke-WebRequest -Uri $xaml_dict.main -UseBasicParsing | Select-Object -ExpandProperty Content
+}
+
 $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
  
  
@@ -114,16 +124,12 @@ $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 try { $form = [Windows.Markup.XamlReader]::Load( $reader ) }
 catch { Write-Error "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed." }
  
-
- 
 $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $form.FindName($_.Name) }
 
 #===========================================================================
 # WPF Loading
 #===========================================================================
 
-Write-Info "Loading functionnality"
- 
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
 $x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
@@ -143,15 +149,14 @@ $x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
 $x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-$applications = Draw_Applications -json_path $json_dictionnary.apps -wrap_panel $x_WP_Applications -source $source
+$applications = Draw_Applications -json_path $json_dict.apps -wrap_panel $x_WP_Applications -source $source
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
-$extensions = Draw_Applications -json_path $json_dictionnary.web  -wrap_panel $x_WP_Extensions
+$extensions = Draw_Applications -json_path $json_dict.web  -wrap_panel $x_WP_Extensions
 $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
-$packages = Draw_Package -json_path $json_dictionnary.package -combo_box $x_Dropdown_Packages
+$packages = Draw_Package -json_path $json_dict.package -combo_box $x_Dropdown_Packages
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
-
 
 $windows_list = @(
     ('Connectivity', @(
@@ -193,8 +198,8 @@ $tools_list = @(
     ),
     ("Zed Toolkit", @(
         ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
-        ("Backup User", { DownloadAndExecuteScript $script_dictionary.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
-        ("Temp Folder", { Invoke-Item -Path $zed_dictionnary.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
+        ("Backup User", { DownloadAndExecuteScript $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
+        ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
         ("Clean and Exit", { Button_CleanMyMess }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
     ("Utility", @(
@@ -212,9 +217,9 @@ $soft_list = @(
         ('Titus', { Button_Titus }, 'Package installer + Windows Button_isation'))
     ),
     ('Software', @(
-        ('Dipiscan', { DownloadAndExecuteScript $script_dictionary.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; download_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { DownloadAndExecuteScript $script_dictionary.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; download_filename = "TreeSizeFree.exe" } }, $null),
-        ('Office Tool Plus', { DownloadAndExecuteScript $script_dictionary.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; download_filename = "Plus.exe" } }, $null),
+        ('Dipiscan', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; download_filename = "Dipiscan.exe" } }, $null),
+        ('TreeSize', { DownloadAndExecuteScript $script_dict.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; download_filename = "TreeSizeFree.exe" } }, $null),
+        ('Office Tool Plus', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; download_filename = "Plus.exe" } }, $null),
         ('Vscode', { DownloadFromGithubAndRun -repo "portapps/vscode-portable" -github_token $github_token -github_filename_filter ".zip" -filename_filter "Code.exe" }, $null))
     ),
     ('Hack', @(

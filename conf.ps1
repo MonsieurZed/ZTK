@@ -1,9 +1,15 @@
-$version = "v0.2.00"
-$debug = $true
-$base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/" }
 
+$debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { [bool](Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw) } else { $false }
 
-$zed_dictionnary = @{
+$version = "v0.2.12"
+$base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
+
+$xaml_dict = @{
+  main = "$base_path/xaml/MainWindow.xaml"
+}
+$inputXML = Invoke-Expression (Invoke-WebRequest -Uri $xaml_dict.main).Content
+
+$default_dict = @{
   command     = "irm $base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
@@ -12,33 +18,38 @@ $zed_dictionnary = @{
   version     = "0.2.12"
 }
 
-$xaml_dictionnary = @{
-  main = "$base_path/xaml/MainWindow.xaml"
+$var_dict = @{
+  debug        = "$($default_dict.temp_folder)\debug"
+  github_token = "$($default_dict.temp_folder)\github_token"
 }
 
-$json_dictionnary = @{
+
+
+$json_dict = @{
   apps    = "$base_path/json/app.json"
   web     = "$base_path/json/web.json"
   package = "$base_path/json/packages.json"
 }
 
-$script_dictionary = @{
+$script_dict = @{
   download = "$base_path/script/download.ps1"
   backup   = "$base_path/script/backup.ps1"
 }
 
-$library_dictionary = @{
-  function = "$base_path/library/function.ps1"
-  console  = "$base_path/library/console.ps1"
+$library_dict = @{
+  function    = "$base_path/library/function.ps1"
+  console     = "$base_path/library/console.ps1"
+  button      = "$base_path/library/button.ps1"
+  drawing     = "$base_path/library/drawing.ps1"
+  interaction = "$base_path/library/interaction.ps1"
 }
-
 $source = @{
   choco  = $false
   winget = $false
   github = $false
 }
 
-$app_dictionary = @{
+$conf_dict = @{
   winget = "winget"
   choco  = "choco"
   exe    = "exe"
@@ -46,7 +57,7 @@ $app_dictionary = @{
   iso    = "iso"
 }
 
-$web_dictionnary = @{
+$web_dict = @{
   default = @("default")
   opera   = @(
     "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\launcher.exe",

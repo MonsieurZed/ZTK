@@ -11,7 +11,7 @@ function DownloadAndExecuteScript {
     )
 
     $scriptName = [System.IO.Path]::GetFileName($script_url)
-    $scriptPath = [System.IO.Path]::Combine($zed_dictionnary.temp_folder, $scriptName)
+    $scriptPath = [System.IO.Path]::Combine($default_dict.temp_folder, $scriptName)
 
 
     if (Test-Path -Path $scriptPath) {
@@ -62,6 +62,6 @@ function DownloadFromGithubAndRun {
     }
 
     $asset = $response.assets | Where-Object { $_.name -match $filter }
-    DownloadAndExecuteScript $script_dictionary.download -params @{file_url = $asset.browser_download_url; download_filename = $asset.name ; filter_filename = $filename_filter }
+    DownloadAndExecuteScript $script_dict.download -params @{file_url = $asset.browser_download_url; download_filename = $asset.name ; filter_filename = $filename_filter }
 
 }

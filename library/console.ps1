@@ -132,26 +132,24 @@ Function Write-Cleaner {
 Function Console_Setup {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script_name = $null,
-        [string]$zed_dictionnary = $zed_dictionnary
+        [string]$script_name = $null
     )
     $Host.UI.RawUI.BackgroundColor = "black"  
     if ($null -eq $script_name) {
-        $Host.UI.RawUI.WindowTitle = $zed_dictionnary.name
+        $Host.UI.RawUI.WindowTitle = $default_dict.name
     }
     else {
-        $Host.UI.RawUI.WindowTitle = "$($zed_dictionnary.name) : $script_name"
+        $Host.UI.RawUI.WindowTitle = "$($default_dict.name) : $script_name"
     }
 }
 
 function Console_Header {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script = $null,
-        [string]$name = $zed_dictionnary
+        [string]$script = $null
     )
 
-    Clear-Host $zed_dictionnary.name
+    Clear-Host 
     write-host 
     write-host "_______________________________________________________________"
     write-host "_______________________________________________________________"
@@ -167,10 +165,10 @@ function Console_Header {
     write-host "_______________________________________________________________"
     write-host "_______________________________________________________________"
     write-host "                                                               "
-    Write-Host $zed_dictionnary.name.PadLeft((($zed_dictionnary.name.Length + 63) / 2), " ").PadRight(63, " ")
+    Write-Host $default_dict.name.PadLeft((($default_dict.name.Length + 63) / 2), " ").PadRight(63, " ")
     write-host "                                                               "
-    if (!($null -eq $zed_dictionnary.version)) {
-        Write-Host $zed_dictionnary.version.PadLeft((($zed_dictionnary.version.Length + 63) / 2), " ").PadRight(63, " ")
+    if (!($null -eq $default_dict.version)) {
+        Write-Host $default_dict.version.PadLeft((($default_dict.version.Length + 63) / 2), " ").PadRight(63, " ")
         write-host "                                                               "
     }
     write-host "_______________________________________________________________"

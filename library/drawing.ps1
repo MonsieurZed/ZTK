@@ -5,13 +5,13 @@ function IsEnabled {
     )
 
     switch ($provider) {
-        $app_dictionary.github {
+        $app_dict.github {
             return $source.github
         }
-        $app_dictionary.winget {
+        $app_dict.winget {
             return $source.winget
         }
-        $app_dictionary.choco {
+        $app_dict.choco {
             return $source.choco
         }
         default {
