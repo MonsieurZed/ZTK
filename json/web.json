@@ -1,0 +1,279 @@
+{
+  "_comment_1": "Never change the id manually, Run update id on the file when adding news item to the list.",
+  "_comment_2": "I don't like the way it done, will be change in the future",
+  "list": [
+    {
+      "title": "Opera",
+      "browser": "opera",
+      "order": "alpha",
+      "icon": "https://cdn-production-opera-website.operacdn.com/staticfiles/assets/images/favicon/favicon-32x32.ddd494719bed.png",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Extension de blocage des publicités",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=fr"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg?hl=fr"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://chromewebstore.google.com/detail/sponsorblock-pour-youtube/mnjggcdmjocbbbhaepdhchncahnbgone?hl=fr"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=fr"
+        }
+      ]
+    },
+    {
+      "title": "Brave",
+      "browser": "brave",
+      "order": "alpha",
+      "icon": "https://brave.com/static-assets/images/cropped-brave_appicon_release-32x32.png",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Extension de blocage des publicités",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=fr"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg?hl=fr"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://chromewebstore.google.com/detail/sponsorblock-pour-youtube/mnjggcdmjocbbbhaepdhchncahnbgone?hl=fr"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=fr"
+        }
+      ]
+    },
+    {
+      "title": "Chrome",
+      "browser": "chrome",
+      "order": "alpha",
+      "icon": "https://www.google.com/favicon.ico",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Extension de blocage des publicités",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=fr"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg?hl=fr"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://chromewebstore.google.com/detail/sponsorblock-pour-youtube/mnjggcdmjocbbbhaepdhchncahnbgone?hl=fr"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=fr"
+        }
+      ]
+    },
+    {
+      "title": "Edge",
+      "browser": "edge",
+      "order": "alpha",
+      "icon": "https://www.microsoft.com/favicon.ico",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Extension de blocage des publicités",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=fr"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg?hl=fr"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://chromewebstore.google.com/detail/sponsorblock-pour-youtube/mnjggcdmjocbbbhaepdhchncahnbgone?hl=fr"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=fr"
+        }
+      ]
+    },
+    {
+      "title": "Firefox",
+      "browser": "firefox",
+      "order": "alpha",
+      "icon": "https://www.mozilla.org/favicon.ico",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/bitwarden-password-manager/"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Extension de blocage des publicités",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/ublock-origin/"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/adguard-adblocker/"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/sponsorblock/"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/tampermonkey/"
+        }
+      ]
+    },
+    {
+      "title": "Autres",
+      "browser": "default",
+      "order": "alpha",
+      "icon": "https://cdn-icons-png.freepik.com/512/8576/8576378.png",
+      "items": [
+        {
+          "id": "WEBA9388",
+          "name": "Favoris",
+          "url": "https://zedcorp.fr/t/b",
+          "description": "Favoris personnalisés",
+          "icon": "https://zedcorp.fr/images/logo.webp"
+        },
+        {
+          "id": "WEB51D1F",
+          "name": "uBlock Filter",
+          "url": "https://subscribe.adblockplus.org/?location=https://raw.githubusercontent.com/fmhy/FMHYFilterlist/main/filterlist.txt&title=FMHY%20Filterlist",
+          "description": "Liste de filtres uBlock optimisée",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png"
+        }
+      ]
+    },
+    {
+      "title": "Scripts",
+      "browser": "default",
+      "order": "none",
+      "icon": "https://www.tampermonkey.net/favicon.ico",
+      "items": [
+        {
+          "id": "WEBC7AEC",
+          "name": "YggPlus",
+          "url": "https://github.com/MonsieurZed/custom_script/raw/refs/heads/main/yyg.user.js",
+          "description": "Script d'amélioration pour Ygg",
+          "icon": "https://yggland.fr/assets/img/yggland.png"
+        },
+        {
+          "id": "WEBAD425",
+          "name": "Bundle Extension",
+          "url": "https://update.greasyfork.org/scripts/32865/Steam%20Bundle%20Sites%20Extension.user.js",
+          "description": "Extension pour sites de bundles Steam",
+          "icon": "https://greasyfork.org/vite/assets/blacklogo16-DftkYuVe.png"
+        },
+        {
+          "id": "WEB4B2DC",
+          "name": "Bypass Shorturl",
+          "url": "https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shorturls.user.js",
+          "description": "Script pour contourner les raccourcisseurs de liens",
+          "icon": "https://greasyfork.org/vite/assets/blacklogo16-DftkYuVe.png"
+        },
+        {
+          "id": "WEB62CD9",
+          "name": "Peakviewer",
+          "url": "https://update.greasyfork.org/scripts/24204/Picviewer%20CE%2B.user.js",
+          "description": "Visionneuse d'images améliorée",
+          "icon": "https://greasyfork.org/vite/assets/blacklogo16-DftkYuVe.png"
+        }
+      ]
+    }
+  ]
+}

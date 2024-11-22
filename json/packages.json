@@ -1,0 +1,25 @@
+{
+    "_comment": "Never change the id manually, Run update id on the file when adding news item to the list.",
+    "list": [
+        {
+            "title": "Classique",
+            "description": "Office 365, Opera, 7zip, Anydesk",
+            "items": ["APPBC149","APP98FA3","APPF084E","APPF2800"]
+        },
+        {
+            "title": "Gaming",
+            "description": "Steam Epic Bnet,Opera, Discord, 7zip TeraCopy",
+            "items": ["APPBC149","APP98FA3","APP3D44F","APPF084E","APPF2800","APP918ED","APP0A6CF","APPF71A8","APP053BC"]
+        },
+        {
+            "title": "Dev",
+            "description": "Vscode 7zip TeraCopy Opera",
+            "items": ["APP5770B","APP98FA3","APP3D44F","APP673FA","APPF084E","APPF2800"]
+        },
+        {
+            "title": "Full",
+            "description": "Mega Pack",
+            "items": ["APPEBA04","APP5770B","APP0258D","APPC73B3","APP98FA3","APP3D44F","APPDE175","APP673FA","APPFB54E","APPD9C8B","APPF084E","APPD7CB5","APP053BC","APPE7D91","APPF2800","APP87374","APP918ED","APP123D1","APP0A6CF","APP91093","APPF71A8","APP7005C"]
+        }
+    ]
+}

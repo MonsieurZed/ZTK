@@ -1,0 +1,772 @@
+{
+  "_comment": "Never change the id manually, Run update id on the file when adding news item to the list.",
+  "list": [
+    {
+      "title": "Office",
+      "description": "Installeur office toute version, francais seulement",
+      "order": "none",
+      "items": [
+        {
+          "id": "APPBC149",
+          "name": "Office 365",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365HomePremRetail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 365 : Excel, OneNote, PowerPoint, Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APPEBA04",
+          "name": "Office 365 Pro Plus",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365ProPlusRetail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 365 : Access, Excel, Lync, OneNote, Outlook, PowerPoint, Publisher, Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APPB682C",
+          "name": "Office 2024",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Home2024Retail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 2024 : Excel, OneNote, PowerPoint, Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APP44827",
+          "name": "Office 2021",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=HomeStudent2021Retail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 2021 : Excel, OneNote, PowerPoint, Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APP56D01",
+          "name": "Office 2019",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Personal2019Retail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 2019 : Excel, Outlook, Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APPF0C67",
+          "name": "Office 2016",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=PersonalRetail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 2016 : Excel, Outlook, Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APPB408E",
+          "name": "Office 2013",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=HomeStudentRetail&platform=x64&language=fi-fi&version=O15GA",
+          "description": "Microsoft Office 2013: Excel, OneNote, PowerPoint, Word",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
+        },
+        {
+          "id": "APP456BB",
+          "name": "Excel 2024",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Excel2024Retail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 2024: Excel, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565571-microsoft-office-excel_81549.png"
+        },
+        {
+          "id": "APPE6730",
+          "name": "Word 2024",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Word2024Retail&platform=x64&language=fi-fi&version=O16GA",
+          "description": "Microsoft Office 2024: Word, OneDrive",
+          "provider": "exe",
+          "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565572-microsoft-office-word_81551.png"
+        },
+        {
+          "id": "APPC56E4",
+          "name": "Outlook For Windows",
+          "package": "9NRX63209R7B",
+          "description": "Microsoft Store : Outlook For Windows",
+          "provider": "winget",
+          "icon": "https://cdn.icon-icons.com/icons2/3053/PNG/512/microsoft_outlook_macos_bigsur_icon_189971.png"
+        }
+      ]
+    },
+    {
+      "title": "Runtime",
+      "description": "Gestion des environnements d'exécution",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPFF9C0",
+          "name": ".Net Desktop 9",
+          "package": "Microsoft.DotNet.DesktopRuntime.Preview",
+          "description": "Runtime pour applications .Net Desktop 9",
+          "provider": "winget",
+          "icon": "https://dotnet.microsoft.com/favicon.ico"
+        },
+        {
+          "id": "APP544B3",
+          "name": ".Net Desktop 8",
+          "package": "Microsoft.DotNet.DesktopRuntime.8",
+          "description": "Runtime pour applications .Net Desktop 8",
+          "provider": "winget",
+          "icon": "https://dotnet.microsoft.com/favicon.ico"
+        },
+        {
+          "id": "APP59DBC",
+          "name": ".Net Desktop 7",
+          "package": "Microsoft.DotNet.DesktopRuntime.7",
+          "description": "Runtime pour applications .Net Desktop 7",
+          "provider": "winget",
+          "icon": "https://dotnet.microsoft.com/favicon.ico"
+        },
+        {
+          "id": "APP1FA3A",
+          "name": "Java 8",
+          "package": "Oracle.JavaRuntimeEnvironment",
+          "description": "Runtime pour applications Java",
+          "provider": "winget",
+          "icon": "https://www.oracle.com/favicon.ico"
+        },
+        {
+          "id": "APPD7917",
+          "name": "Python 3",
+          "package": "python3",
+          "description": "Interpréteur pour scripts Python",
+          "provider": "choco",
+          "icon": "https://www.python.org/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Dev",
+      "description": "Outils de développement",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP884CB",
+          "name": "NotePad++",
+          "package": "notepadplusplus.install",
+          "description": "Éditeur de texte avancé",
+          "provider": "choco",
+          "icon": "https://notepad-plus-plus.org/favicon.ico"
+        },
+        {
+          "id": "APP73BCF",
+          "name": "Notion",
+          "package": "Notion.Notion",
+          "description": "Application de gestion et collaboration",
+          "provider": "choco",
+          "icon": "https://www.notion.com/front-static/favicon.ico"
+        },
+        {
+          "id": "APP5770B",
+          "name": "VSCode",
+          "package": "Microsoft.VisualStudioCode",
+          "description": "IDE pour développement multiplateforme",
+          "provider": "winget",
+          "icon": "https://code.visualstudio.com/favicon.ico"
+        },
+        {
+          "id": "APP026BF",
+          "name": "Visual Studio",
+          "package": "Microsoft.VisualStudio.2022.Community",
+          "description": "IDE pour développement multiplateforme",
+          "provider": "winget",
+          "icon": "https://static-00.iconduck.com/assets.00/apps-visual-studio-community-icon-512x512-t64k167e.png"
+        },
+        {
+          "id": "APPB949C",
+          "name": "Git",
+          "package": "Git.Git",
+          "description": "Git tool",
+          "provider": "winget",
+          "icon": "https://git-scm.com/images/logos/logomark-orange@2x.png"
+        }
+      ]
+    },
+    {
+      "title": "Outils",
+      "description": "Classification des applications",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP0258D",
+          "name": "PowerToys",
+          "package": "Microsoft.PowerToys",
+          "description": "Suite d'outils avancés pour Windows",
+          "provider": "winget",
+          "icon": "https://raw.githubusercontent.com/microsoft/PowerToys/refs/heads/main/src/runner/svgs/icon.ico"
+        },
+        {
+          "id": "APPD8C24",
+          "name": "OhMyPosh",
+          "package": "JanDeDobbeleer.OhMyPosh",
+          "description": "Personnalisation de l'invite de commande",
+          "provider": "winget",
+          "icon": "https://ohmyposh.dev/img/favicons.svg"
+        },
+        {
+          "id": "APPC73B3",
+          "name": "WindowsTerminal",
+          "package": "Microsoft.WindowsTerminal",
+          "description": "Terminal moderne pour Windows",
+          "provider": "winget",
+          "icon": "https://raw.githubusercontent.com/microsoft/terminal/refs/heads/main/res/terminal.ico"
+        }
+      ]
+    },
+    {
+      "title": "Fichier",
+      "description": "Gestion des fichiers",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPC3FF6",
+          "name": "Cyberduck",
+          "package": "Iterate.Cyberduck",
+          "description": "Client FTP/SFTP et cloud",
+          "provider": "winget",
+          "icon": "https://cyberduck.io/favicon.ico"
+        },
+        {
+          "id": "APP673FA",
+          "name": "WinSCP",
+          "package": "WinSCP.WinSCP",
+          "description": "Client SFTP/FTP open-source",
+          "provider": "winget",
+          "icon": "https://winscp.net/favicon.ico"
+        },
+        {
+          "id": "APPDE175",
+          "name": "TreeSize Free",
+          "package": "JAMSoftware.TreeSize.Free",
+          "description": "Analyseur de l'espace disque",
+          "provider": "winget",
+          "icon": "https://www.jam-software.com/favicon.ico"
+        },
+        {
+          "id": "APP3D44F",
+          "name": "TeraCopy",
+          "package": "CodeSector.TeraCopy",
+          "description": "Copie rapide et sécurisée de fichiers",
+          "provider": "winget",
+          "icon": "https://www.codesector.com/favicon.ico"
+        },
+        {
+          "id": "APP20A88",
+          "name": "dupeGuru",
+          "package": "DupeGuru.DupeGuru",
+          "description": "Détection de fichiers en double",
+          "provider": "winget",
+          "icon": "https://dupeguru.voltaicideas.net/favicon.ico"
+        },
+        {
+          "id": "APP98FA3",
+          "name": "7zip",
+          "package": "7zip.7zip",
+          "description": "Compression et décompression de fichiers",
+          "provider": "winget",
+          "icon": "https://www.7-zip.org/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Graphisme",
+      "description": "Applications graphiques",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPC8DBD",
+          "name": "Adobe CC",
+          "package": "Adobe.CreativeCloud",
+          "description": "Suite d'outils créatifs",
+          "provider": "winget",
+          "icon": "https://www.adobe.com/favicon.ico"
+        },
+        {
+          "id": "APP2F733",
+          "name": "Canva",
+          "package": "Canva.Canva",
+          "description": "Outil de design graphique en ligne",
+          "provider": "winget",
+          "icon": "https://www.canva.com/favicon.ico"
+        },
+        {
+          "id": "APP9C156",
+          "name": "Paint.net",
+          "package": "dotPDN.PaintDotNet",
+          "description": "Éditeur graphique léger",
+          "provider": "winget",
+          "icon": "https://www.getpaint.net/favicon.ico"
+        },
+        {
+          "id": "APPA30D4",
+          "name": "Windows scan",
+          "package": "9WZDNCRFJ3PV",
+          "description": "Outil de numérisation pour Windows",
+          "provider": "winget",
+          "icon": "https://www.microsoft.com/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Utility",
+      "description": "Applications utilitaires",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPD9C8B",
+          "name": "Rufus",
+          "package": "Rufus.Rufus",
+          "description": "Création de clés USB bootables",
+          "provider": "winget",
+          "icon": "https://rufus.ie/favicon.ico"
+        },
+        {
+          "id": "APPFB54E",
+          "name": "Bitwarden",
+          "package": "bitwarden",
+          "description": "Gestionnaire de mots de passe",
+          "provider": "choco",
+          "icon": "https://bitwarden.com/favicon.ico"
+        },
+        {
+          "id": "APP72906",
+          "name": "qBittorrent",
+          "package": "qBittorrent.qBittorrent",
+          "description": "Client torrent open-source",
+          "provider": "winget",
+          "icon": "https://www.qbittorrent.org/favicon.ico"
+        },
+        {
+          "id": "APP8E631",
+          "name": "BulkCrapUni",
+          "package": "Klocman.BulkCrapUninstaller",
+          "description": "Désinstallation massive de programmes",
+          "provider": "winget",
+          "icon": "https://www.bcuninstaller.com/assets/favicon.ico"
+        },
+        {
+          "id": "APP66E47",
+          "name": "Greenshot",
+          "package": "Greenshot.Greenshot",
+          "description": "Outil de capture d'écran",
+          "provider": "winget",
+          "icon": "https://getgreenshot.org/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Specification",
+      "description": "Analyse et diagnostic système",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP32760",
+          "name": "Dipiscan",
+          "package": "dipiscan",
+          "description": "Analyseur réseau léger",
+          "provider": "choco",
+          "icon": "https://www.dipisoft.com/favicon.ico"
+        },
+        {
+          "id": "APP503F6",
+          "name": "Crystal Disk Info",
+          "package": "crystaldiskinfo",
+          "description": "Surveillance des disques durs",
+          "provider": "choco",
+          "icon": "https://crystalmark.info/favicon.ico"
+        },
+        {
+          "id": "APP04B62",
+          "name": "Hw Monitor",
+          "package": "hwmonitor",
+          "description": "Monitoring matériel",
+          "provider": "choco",
+          "icon": "https://www.cpuid.com/medias/images/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Nvidia",
+      "description": "Applications liées aux cartes NVIDIA",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP09737",
+          "name": "NVIDIA Broadcast",
+          "package": "Nvidia.Broadcast",
+          "description": "Outils audio et vidéo NVIDIA",
+          "provider": "winget",
+          "icon": "https://www.nvidia.com/favicon.ico"
+        },
+        {
+          "id": "APPE222C",
+          "name": "NVIDIA NOW",
+          "package": "Nvidia.GeForceNow",
+          "description": "Gaming en cloud NVIDIA",
+          "provider": "winget",
+          "icon": "https://www.nvidia.com/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Remote Access",
+      "description": "Accès à distance",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPE80CE",
+          "name": "Parsec",
+          "package": "Parsec.Parsec",
+          "description": "Outil d'accès et gaming à distance",
+          "provider": "winget",
+          "icon": "https://parsec.app/favicon.ico"
+        },
+        {
+          "id": "APPF084E",
+          "name": "AnyDesk",
+          "package": "AnyDeskSoftwareGmbH.AnyDesk",
+          "description": "Logiciel d'accès à distance rapide",
+          "provider": "winget",
+          "icon": "https://www.anydesk.com/favicon.ico"
+        },
+        {
+          "id": "APP248C8",
+          "name": "TeamViewer",
+          "package": "TeamViewer.TeamViewer",
+          "description": "Accès et support à distance",
+          "provider": "winget",
+          "icon": "https://www.teamviewer.com/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Communication",
+      "description": "Outils de communication",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPD7CB5",
+          "name": "Beeper",
+          "package": "Beeper.Beeper",
+          "description": "Application de messagerie centralisée",
+          "provider": "winget",
+          "icon": "https://cdn.prod.website-files.com/5ffc199ed786423eb2569667/655f2ba43faf368c4a76b98d_Beeper_Adaptive_Icon_108dp.png"
+        },
+        {
+          "id": "APP6A40E",
+          "name": "WhatsApp",
+          "package": "WhatsApp.WhatsApp",
+          "description": "Messagerie instantanée populaire",
+          "provider": "winget",
+          "icon": "https://www.whatsapp.com/favicon.ico"
+        },
+        {
+          "id": "APP053BC",
+          "name": "Discord",
+          "package": "Discord.Discord",
+          "description": "Plateforme de communication et gaming",
+          "provider": "winget",
+          "icon": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/62fddf0fde45a8baedcc7ee5_847541504914fd33810e70a0ea73177e%20(2)-1.png"
+        }
+      ]
+    },
+    {
+      "title": "Navigateur",
+      "description": "Navigateurs web",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APPF2800",
+          "name": "Opera",
+          "package": "Opera.Opera",
+          "description": "Navigateur rapide et riche en fonctionnalités",
+          "provider": "winget",
+          "icon": "https://cdn-production-opera-website.operacdn.com/staticfiles/assets/images/favicon/favicon-32x32.ddd494719bed.png"
+        },
+        {
+          "id": "APP0F82F",
+          "name": "Edge",
+          "package": "Microsoft.Edge",
+          "description": "Navigateur Microsoft",
+          "provider": "winget",
+          "icon": "https://www.microsoft.com/favicon.ico"
+        },
+        {
+          "id": "APP2F262",
+          "name": "Firefox",
+          "package": "Mozilla.Firefox",
+          "description": "Navigateur open-source",
+          "provider": "winget",
+          "icon": "https://www.mozilla.org/favicon.ico"
+        },
+        {
+          "id": "APPC4EF2",
+          "name": "Chrome",
+          "package": "Google.Chrome",
+          "description": "Navigateur Google",
+          "provider": "winget",
+          "icon": "https://www.google.com/favicon.ico"
+        },
+        {
+          "id": "APP44337",
+          "name": "Chromium",
+          "package": "Hibbiki.Chromium",
+          "description": "Version open-source de Chrome",
+          "provider": "winget",
+          "icon": "https://www.chromium.org/favicon.ico"
+        },
+        {
+          "id": "APPE7D91",
+          "name": "Brave",
+          "package": "Brave.Brave",
+          "description": "Navigateur axé sur la vie privée",
+          "provider": "winget",
+          "icon": "https://brave.com/static-assets/images/cropped-brave_appicon_release-32x32.png"
+        }
+      ]
+    },
+    {
+      "title": "Launcher",
+      "description": "Gestionnaires de jeux",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP0A6CF",
+          "name": "EpicGames",
+          "package": "EpicGames.EpicGamesLauncher",
+          "description": "Lanceur de jeux Epic Games",
+          "provider": "winget",
+          "icon": "https://cdn.iconscout.com/icon/free/png-512/free-epic-games-logo-icon-download-in-svg-png-gif-file-formats--technology-brand-social-media-company-logos-pack-icons-6297201.png"
+        },
+        {
+          "id": "APP42697",
+          "name": "Ubisoft",
+          "package": "Ubisoft.Connect",
+          "description": "Lanceur de jeux Ubisoft",
+          "provider": "winget",
+          "icon": "https://cdn.iconscout.com/icon/free/png-512/free-ubisoft-logo-icon-download-in-svg-png-gif-file-formats--brand-logos-company-social-media-industry-pack-icons-7416984.png"
+        },
+        {
+          "id": "APPF1244",
+          "name": "EADesktop",
+          "package": "ElectronicArts.EADesktop",
+          "description": "Lanceur de jeux EA",
+          "provider": "winget",
+          "icon": "https://cdn.iconscout.com/icon/free/png-512/free-ea-logo-icon-download-in-svg-png-gif-file-formats--sports-company-brand-world-logos-vol-11-pack-icons-283134.png"
+        },
+        {
+          "id": "APPF71A8",
+          "name": "Steam",
+          "package": "Valve.Steam",
+          "description": "Lanceur de jeux Steam",
+          "provider": "winget",
+          "icon": "https://store.steampowered.com/favicon.ico"
+        },
+        {
+          "id": "APP918ED",
+          "name": "Battle.Net",
+          "package": "https://downloader.battle.net//download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live",
+          "description": "Lanceur de jeux Blizzard",
+          "provider": "exe",
+          "icon": "https://us.shop.battle.net/static/favicon-32x32.png"
+        },
+        {
+          "id": "APP87374",
+          "name": "Ankama",
+          "package": "https://download.ankama.com/launcher/full/win",
+          "description": "Lanceur de jeux Ankama",
+          "provider": "exe",
+          "icon": "https://static.ankama.com/dofus/ng/img/apple-touch-icon.png"
+        },
+        {
+          "id": "APP91093",
+          "name": "Fit-Launcher",
+          "package": "CarrotRub/Fit-Launcher",
+          "description": "Lanceur de jeux personnalisable",
+          "provider": "github",
+          "icon": "https://fitgirl-repacks.site/wp-content/uploads/2016/08/cropped-icon-32x32.jpg"
+        },
+        {
+          "id": "APP123D1",
+          "name": "CurseForge",
+          "package": "Overwolf.CurseForge",
+          "description": "Outil de modding de jeux",
+          "provider": "winget",
+          "icon": "https://static-beta.curseforge.com/images/favicon.ico​"
+        },
+        {
+          "id": "APP50EAF",
+          "name": "Minecraft Launcher",
+          "package": "Mojang.MinecraftLauncher",
+          "description": "Lanceur de Mojang",
+          "provider": "winget",
+          "icon": "https://seeklogo.com/images/M/mojang-logo-988A631D5C-seeklogo.com.png"
+        }
+      ]
+    },
+    {
+      "title": "Driver",
+      "description": "Pilotes et gestion matériel",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP43A57",
+          "name": "Nvidia Driver",
+          "package": "nvidia-display-driver",
+          "description": "Pilotes pour cartes NVIDIA",
+          "provider": "choco",
+          "icon": "https://www.nvidia.com/favicon.ico"
+        },
+        {
+          "id": "APPA7D1C",
+          "name": "Amd Ryzen",
+          "package": "amd-ryzen-chipset",
+          "description": "Pilotes pour processeurs AMD Ryzen",
+          "provider": "choco",
+          "icon": "https://www.amd.com/favicon.ico"
+        },
+        {
+          "id": "APP6D59B",
+          "name": "DriversCloud",
+          "package": "Cybelsoft.DriversCloud",
+          "description": "Détection et installation de pilotes",
+          "provider": "winget",
+          "icon": "https://www.driverscloud.com/favicon.ico"
+        },
+        {
+          "id": "APP03B5F",
+          "name": "HP Smart",
+          "package": "9WZDNCRFHWLH",
+          "description": "Application d'impression et de gestion HP",
+          "provider": "winget",
+          "icon": "https://www.hp.com/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Player",
+      "description": "Lecteurs multimédia et applications audio",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP4997D",
+          "name": "Deezer",
+          "package": "Deezer.Deezer",
+          "description": "Application de streaming musical",
+          "provider": "winget",
+          "icon": "https://www.deezer.com/favicon.ico"
+        },
+        {
+          "id": "APP7005C",
+          "name": "Spotify",
+          "package": "spotify",
+          "description": "Plateforme de musique en streaming",
+          "provider": "choco",
+          "icon": "https://www.spotify.com/favicon.ico"
+        },
+        {
+          "id": "APPADE73",
+          "name": "VLC",
+          "package": "VideoLAN.VLC",
+          "description": "Lecteur multimédia universel",
+          "provider": "winget",
+          "icon": "https://www.videolan.org/favicon.ico"
+        },
+        {
+          "id": "APPE8F7F",
+          "name": "MPC-BE",
+          "package": "spoMPC-BE.MPC-BEtify",
+          "description": "Lecteur multimédia léger et performant",
+          "provider": "winget",
+          "icon": "https://mpc-hc.org/assets/img/favicons/favicon-32x32.png"
+        }
+      ]
+    },
+    {
+      "title": "Codecs",
+      "description": "Ensemble de codecs multimédias",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP8C3FE",
+          "name": "K-Lite Full",
+          "package": "CodecGuide.K-LiteCodecPack.Full",
+          "description": "Pack de codecs multimédias complet",
+          "provider": "winget",
+          "icon": "https://www.codecguide.com/favicon.ico"
+        },
+        {
+          "id": "APP79EFC",
+          "name": "K-Pack Mega",
+          "package": "CodecGuide.K-LiteCodecPack.Mega",
+          "description": "Pack de codecs multimédias étendu",
+          "provider": "winget",
+          "icon": "https://www.codecguide.com/favicon.ico"
+        },
+        {
+          "id": "APP2061E",
+          "name": "K-Lite Standard",
+          "package": "CodecGuide.K-LiteCodecPack.Standard",
+          "description": "Pack de codecs multimédias standard",
+          "provider": "winget",
+          "icon": "https://www.codecguide.com/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Pimp",
+      "description": "Personnalisation et outils d'optimisation",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "APP44301",
+          "name": "TranslucentTB",
+          "package": "CharlesMilette.TranslucentTB",
+          "description": "Personnalisation de la barre des tâches Windows",
+          "provider": "winget",
+          "icon": "https://www.translucenttb.com/favicon.ico"
+        },
+        {
+          "id": "APP75304",
+          "name": "Everything",
+          "package": "voidtools.Everything",
+          "description": "Outil de recherche ultra-rapide pour fichiers",
+          "provider": "winget",
+          "icon": "https://www.voidtools.com/favicon.ico"
+        },
+        {
+          "id": "APPFF870",
+          "name": "WindhawK",
+          "package": "RamenSoftware.Windhawk",
+          "description": "Outil de personnalisation avancée pour Windows",
+          "provider": "winget",
+          "icon": "https://www.windhawk.net/favicon.ico"
+        },
+        {
+          "id": "APP31006",
+          "name": "Universal Tuning",
+          "package": "JamesCJ60/Universal-x86-Tuning-Utility",
+          "description": "Optimisation pour systèmes Windows x86",
+          "provider": "github",
+          "icon": "https://github.com/favicon.ico"
+        },
+        {
+          "id": "APP744F8",
+          "name": "Rainmeter",
+          "package": "Rainmeter.Rainmeter",
+          "description": "Application de widgets personnalisables pour le bureau",
+          "provider": "winget",
+          "icon": "https://www.rainmeter.net/favicon.ico"
+        },
+        {
+          "id": "APPFAFCF",
+          "name": "EarTrumpet",
+          "package": "File-New-Project.EarTrumpet",
+          "description": "Gestion avancée du volume audio",
+          "provider": "winget",
+          "icon": "https://www.storeimages.microsoft.com/favicon.ico"
+        }
+      ]
+    }
+  ]
+}
