@@ -14,7 +14,7 @@ Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $
 Console_Setup
 Console_Header 
 
-Write-Info "Degug: $debug - Loading from $base_path"
+Write-Info "Debug: $debug - Loading from $base_path"
 # ===========================================================================
 # Init     
 # ============================================================================

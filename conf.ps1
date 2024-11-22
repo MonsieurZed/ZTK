@@ -1,4 +1,10 @@
-$debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw } else { $null }
+
+try {
+  $debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw }
+}
+catch {
+  $debug = $false
+}
 
 $version = "v0.2.12"
 $base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/" }
