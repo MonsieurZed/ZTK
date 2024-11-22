@@ -1,5 +1,3 @@
-
-
 Function GenerateHash {
     param (
         [string]$InputString,

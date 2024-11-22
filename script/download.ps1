@@ -1,18 +1,15 @@
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-write-host $library_dictionary
-Invoke-Expression (Invoke-WebRequest -Uri $library_dictionnary.function).Content
-Invoke-Expression (Invoke-WebRequest -Uri $library_dictionnary.console).Content
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/function.ps1").Content
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
 
-Terminal_Setup
-Terminal_header "File Downloader"
+Write-Host $zed_dictionnary.name
 
-$AppClearName = "zedsminitools"
-$TEMP = "$env:TEMP\$AppClearName\"
+Console_Setup
+Console_Header "Downloader"
 
 $params = DecodeHastable $args[0]
 write-host $params.GetType()
-
 
 write-host "Getting file info"  -ForegroundColor Cyan
 
@@ -23,8 +20,8 @@ if ($params.file_url -notmatch "^https?://") {
 }
 
 if ($params.PSObject.Properties.Match("download_filename")) {
-    $filename = [System.IO.Path]::GetFileName($params.file_url)
-    $params | Add-Member -MemberType NoteProperty -Name "download_filename" -Value  [string]$filename -Force
+    $filename = ([System.IO.Path]::GetFileName($params.file_url)).ToString()
+    $params | Add-Member -MemberType NoteProperty -Name "download_filename" -Value $filename -Force
 }
 
 $filePath = Join-Path -Path $outputPath -ChildPath $params.download_filename

@@ -9,6 +9,7 @@ $zed_dictionnary = @{
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
   icon_path   = "$base_path/icon/purple-shark.ico" 
+  version     = "0.2.12"
 }
 
 $xaml_dictionnary = @{
@@ -31,13 +32,11 @@ $library_dictionary = @{
   console  = "$base_path/library/console.ps1"
 }
 
-
 $source = @{
   choco  = $false
   winget = $false
   github = $false
 }
-
 
 $app_dictionary = @{
   winget = "winget"
@@ -62,10 +61,8 @@ $web_dictionnary = @{
   )
   edge    = @(
     "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-        
   )
   firefox = @(
     "C:\Program Files\Mozilla Firefox\firefox.exe"
-  )  
-    
+  )    
 }
