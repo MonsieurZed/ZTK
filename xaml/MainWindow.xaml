@@ -154,7 +154,7 @@
 				<TextBlock x:Name="Info_Message" Text="placeholder" FontSize="13" Foreground="#DDDDDD" Margin="5,0,0,0" />
 				<TextBlock x:Name="Info_Postion" Text="placeholder" FontSize="13" FontStyle="Italic" Foreground="#DDDDDD" Margin="5,0,0,0" />
 			</StackPanel>
-			<ToggleButton x:Name="Debug_Switch" Content="Debug Off" Width="100" Height="30" Grid.Column="1"/>
+			<ToggleButton x:Name="Debug_Switch" Content="Debug" Width="100" Height="30" Grid.Column="1"/>
 		</Grid>
 	</Grid>
 </Window>
