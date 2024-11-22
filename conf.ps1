@@ -1,10 +1,10 @@
 $version = "v0.2.00"
 $debug = $env:USERNAME -eq "Zed"
-$base_path = if ($debug) { "D:\ZMT\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
+$base_path = if ($debug) { "D:\ZMT\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/main.ps1" }
 
 
 $zed_dictionnary = @{
-  command     = "irm $base_path/zed.ps1 | iex"
+  command     = "irm $base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
