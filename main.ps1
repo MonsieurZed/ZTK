@@ -388,14 +388,6 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 
 Write-Info "Loading functionnality"
 
-$x_Debug_Switch.IsChecked = $debug
-$x_Debug_Switch.Add_Click({
-        $debug = $x_Debug_Switch.Content
-        Set-Content -Path "$env:TEMP\zedstoolkit\debug" -Value $debug -Force
-        Write-Cancel "Debuging : $Debug"
-        Wait-Event 5
-        Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($zed_dictionnary.command)" -Verb RunAs
-    })
 
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
