@@ -9,7 +9,7 @@ Here is my take on a setup tool CTT Style
 #### Running it
 
 ```
-irm https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/zed.ps1 | iex
+irm https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/main.ps1 | iex
 ```
 
 Shorten url will come soon

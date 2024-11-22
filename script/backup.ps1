@@ -1,15 +1,12 @@
 
-$library_dictionnary = @{
-    function = "$base_path\library\functions.ps1"
-}
-
+. "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1"
 . $library_dictionnary.function
 
-$select=$false
+$select = $false
 Terminal_Setup "Backup"
 Terminal_header "Backup"
                      
-while($select -eq $false) {      
+while ($select -eq $false) {      
 
     # Liste des disques logiques disponibles
     $drives = Get-WmiObject -Class Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 }
@@ -32,7 +29,7 @@ while($select -eq $false) {
         write-host ""
     }
     else {
-        $select=$true
+        $select = $true
     }
 }
 
@@ -67,7 +64,8 @@ foreach ($folder in $foldersToBackup) {
         Start-Process -NoNewWindow -FilePath "robocopy" -ArgumentList "`"$sourceFolder`" `"$destinationFolder`" /E /R:3 /W:5" -Wait
         write-host "Saving $folder done."
         write-host ""
-    } else {
+    }
+    else {
         write-host "Folder $folder doesn't exist."
     }
 }

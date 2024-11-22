@@ -1,4 +1,6 @@
-. "D:\ZedsMinitools\library\functions.ps1"
+. "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1"
+. "$base_path/script/functions.ps1"
+. "$base_path/script/console.ps1"
 
 Terminal_Setup
 Terminal_header "File Downloader"
@@ -6,13 +8,13 @@ Terminal_header "File Downloader"
 $AppClearName = "zedsminitools"
 $TEMP = "$env:TEMP\$AppClearName\"
 
-$params= DecodeHastable $args[0]
+$params = DecodeHastable $args[0]
 write-host $params.GetType()
 
 
 write-host "Getting file info"  -ForegroundColor Cyan
 
-$outputPath= "$env:TEMP\$AppClearName\"
+$outputPath = "$env:TEMP\$AppClearName\"
 
 if ($params.file_url -notmatch "^https?://") {
     $params.file_url = "https://$($params.file_url)"
@@ -39,10 +41,8 @@ write-host "Downloading From : $($params.file_url)"
 write-host "Downloading To   : $filePath" 
 write-host "Downloading Size : $remoteFileSize" 
 
-if(!(Test-Path -Path $filePath))
-{ 
-    if($remoteFileSize -gt (100 * 1024 * 1024))
-    {   
+if (!(Test-Path -Path $filePath)) { 
+    if ($remoteFileSize -gt (100 * 1024 * 1024)) {   
         write-host "Downloading with BitsTransfer" -ForegroundColor Cyan
         try {
             $bitsTransfer = Start-BitsTransfer -Source $params.file_url -Destination $filePath -Asynchronous -Priority Normal
@@ -68,7 +68,8 @@ if(!(Test-Path -Path $filePath))
                 if ($downloadSpeedBytesPerSec -gt 0) {
                     $secondsRemaining = ($bytesTotal - $bytesTransferred) / $downloadSpeedBytesPerSec
                     $eta = [TimeSpan]::FromSeconds($secondsRemaining)
-                } else {
+                }
+                else {
                     $eta = [TimeSpan]::FromSeconds(0)
                 }
 
@@ -76,8 +77,8 @@ if(!(Test-Path -Path $filePath))
                 $downloadedSizeMB = [math]::Round($bytesTransferred / 1MB, 2)
 
                 Write-Progress -Activity "$params.download_filename" `
-                                -Status "$progressPercent% - $downloadedSizeMB MB / $totalSizeMB MB - $downloadSpeedMBps MB/s - $($eta.ToString('hh\:mm\:ss'))" `
-                                -PercentComplete $progressPercent
+                    -Status "$progressPercent% - $downloadedSizeMB MB / $totalSizeMB MB - $downloadSpeedMBps MB/s - $($eta.ToString('hh\:mm\:ss'))" `
+                    -PercentComplete $progressPercent
 
                 Start-Sleep -Seconds 1 
             }
@@ -85,7 +86,8 @@ if(!(Test-Path -Path $filePath))
             # Finalise le transfert
             Complete-BitsTransfer -BitsJob $bitsTransfer
             write-host "Downloaded finished : $filePath"  -ForegroundColor Cyan
-        } catch {
+        }
+        catch {
             write-host "Error while downloading : $_"  -ForegroundColor Red
             pause
         }
@@ -130,7 +132,8 @@ if(!(Test-Path -Path $filePath))
             $webResponse.Close()
 
             write-host "Finished : $filePath"  -ForegroundColor Cyan
-        } catch {
+        }
+        catch {
             write-host "Error while downloading : $_"  -ForegroundColor Red
             pause
         }
@@ -141,8 +144,7 @@ if(!(Test-Path -Path $filePath))
 if (Test-Path -Path $filePath) {
     try {
         write-host "Staring $filePath..."  -ForegroundColor Cyan
-        switch([System.IO.Path]::GetExtension($filePath))
-        {
+        switch ([System.IO.Path]::GetExtension($filePath)) {
             '.iso' {
                 write-host 'File extension : .iso' -ForegroundColor Cyan
                 $mountResult = Mount-DiskImage -ImagePath $filePath -PassThru
@@ -153,7 +155,8 @@ if (Test-Path -Path $filePath) {
                     write-host "Loading $exePath"
                     Start-Process -FilePath $exePath -wait
                     Dismount-DiskImage -ImagePath $filePath
-                } else {
+                }
+                else {
                     write-host "No exe file found"
                     Start-Process "$driveLetter`:\"
                 }
@@ -177,16 +180,19 @@ if (Test-Path -Path $filePath) {
                 $exeFile = Get-ChildItem -Path $extractPath -Filter $params.filter_filename -Recurse | Select-Object -First 1
                 if ($exeFile) {
                     Start-Process -FilePath  $exeFile.FullName
-                } else {
+                }
+                else {
                     Write-Host "No .exe found in archive."  -ForegroundColor Red
                 }
             }
         }
-    } catch {
+    }
+    catch {
         write-host "Error opening $_"  -ForegroundColor Red
         pause
     }
-} else {
+}
+else {
     write-host "Couldn't find file"  -ForegroundColor Red
 }
 pause

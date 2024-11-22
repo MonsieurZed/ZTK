@@ -1,34 +1,3 @@
-$app_dictionary = @{
-    winget = "winget"
-    choco  = "choco"
-    exe    = "exe"
-    github = "github"
-    iso    = "iso"
-}
-
-$web_dictionnary = @{
-    default = @("default")
-    opera   = @(
-        "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\launcher.exe",
-        "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\opera.exe"
-    )
-    brave   = @(
-        "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
-        "C:\Users\$env:USERNAME\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe"
-    )
-    chrome  = @(
-        "C:\Program Files\Google\Chrome\Application\chrome.exe"
-    )
-    edge    = @(
-        "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-        
-    )
-    firefox = @(
-        "C:\Program Files\Mozilla Firefox\firefox.exe"
-    )  
-    
-}
-
 # ============================================================================================= 
 # ============================ Main Functions  ================================================
 # ============================================================================================= 

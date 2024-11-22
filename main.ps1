@@ -7,42 +7,14 @@
 #===========================================================================
 # Config
 #===========================================================================
-
-$version = "v0.2.00"
-$debug = $env:USERNAME -eq "Zed"
-
-$base_path = if ($debug) { "D:\ZMT\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
-
-
-$zed_dictionnary = @{
-    command     = "irm $base_path/zed.ps1 | iex"
-    name        = "Zed's Toolkit"
-    clearname   = "zedstoolkit"
-    temp_folder = "$env:TEMP\zedstoolkit"
-    icon_path   = "$base_path/icon/purple-shark.ico" 
-}
-
-$xaml_dictionnary = @{
-    main = "$base_path/xaml/MainWindow.xaml"
-}
-
-$json_dictionnary = @{
-    apps    = "$base_path/json/app.json"
-    web     = "$base_path/json/web.json"
-    package = "$base_path/json/packages.json"
-}
-
-$script_dictionary = @{
-    download = "$base_path/script/download.ps1"
-    backup   = "$base_path/script/backup.ps1"
-}
-
+. "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1"
 
 Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
 
 Console_Setup
 Console_Header $zed_dictionnary.name -version $version
 
+Write-Cancel "Loading from $base_path"
 # ===========================================================================
 # Init     
 # ============================================================================
@@ -69,12 +41,6 @@ if (-not (Test-Path -Path $zed_dictionnary.temp_folder)) {
 #  Package manager  
 # =============================================================================================  
 
-$source = @{
-    choco  = $false
-    winget = $false
-    github = $false
-}
-
 if (Get-Command winget -ErrorAction SilentlyContinue) {
     Write-Sucess "Winget is installed"
     $source.winget = $true
@@ -99,14 +65,12 @@ $github_token = if (Test-Path $github_token_path) { Get-Content -Path $github_to
 
 if ($null -eq $github_token) { 
     $github_token = Read-Host "Enter your GitHub token (https://github.com/settings/tokens)" 
-    $save = Read-Host "Do you want to save the key for later use {Y/N}" 
+    $save = Read-Host "Do you want to save the key for later use { Y/N }" 
 
     if ($save.ToLower() -ieq "y") { 
         Set-Content -Path $github_token_path -Value $github_token
     } 
 }
-
-
 
 if (!($null -eq $github_token)) {
     $url = "https://api.github.com/user"
@@ -132,9 +96,6 @@ if (!($null -eq $github_token)) {
 else {
     Write-Error "User did not specify an github token" 
 }
-
-
-
 
 #===========================================================================
 # Load XAML  and Forms
