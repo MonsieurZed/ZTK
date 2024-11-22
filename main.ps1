@@ -14,7 +14,7 @@ Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $
 Console_Setup
 Console_Header 
 
-Write-Cancel "Loading from $base_path"
+Write-Info "Degug: $Debug - Loading from $base_path"
 # ===========================================================================
 # Init     
 # ============================================================================
@@ -24,7 +24,7 @@ Write-Cancel "Loading from $base_path"
 $admin = $false
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Error "This script must be run as admin"
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($zed_dictionnary.command)" -Verb RunAs
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($app_dict.command)" -Verb RunAs
     exit
 }
 else {
@@ -34,8 +34,8 @@ $currentProcess = Get-Process | Where-Object { $_.Id -eq $PID }
 
 Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProcess.Id } | Stop-Process -Force
 
-if (-not (Test-Path -Path $zed_dictionnary.temp_folder)) {
-    New-Item -Path "$($zed_dictionnary.temp_folder)" -ItemType Directory | Out-Null
+if (-not (Test-Path -Path $app_dict.temp_folder)) {
+    New-Item -Path "$($app_dict.temp_folder)" -ItemType Directory | Out-Null
 }
 # =============================================================================================     
 #  Package manager  
@@ -60,15 +60,15 @@ else {
     
 }
 
-$github_token_path = "$($zed_dictionnary.temp_folder)\github_token.txt"
-$github_token = if (Test-Path $github_token_path) { Get-Content -Path $github_token_path -Raw } else { $null }
+
+$github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
 
 if ($null -eq $github_token) { 
     $github_token = Read-Host "Enter your GitHub token (https://github.com/settings/tokens)" 
     $save = Read-Host "Do you want to save the key for later use { Y/N }" 
 
     if ($save.ToLower() -ieq "y") { 
-        Set-Content -Path $github_token_path -Value $github_token
+        Set-Content -Path $var_dict.github_token -Value $github_token
     } 
 }
 
@@ -103,7 +103,7 @@ else {
 
 Write-Info "Loading xaml..."
 
-$inputXML = Get-Content $xaml_dictionnary.main
+$inputXML = Get-Content $xaml_dict.main
 $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
  
  
@@ -122,8 +122,6 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 # WPF Loading
 #===========================================================================
 
-Write-Info "Loading functionnality"
- 
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
 $x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
@@ -143,13 +141,13 @@ $x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
 $x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-$applications = Draw_Applications -json_path $json_dictionnary.apps -wrap_panel $x_WP_Applications -source $source
+$applications = Draw_Applications -json_path $json_dict.apps -wrap_panel $x_WP_Applications -source $source
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
-$extensions = Draw_Applications -json_path $json_dictionnary.web  -wrap_panel $x_WP_Extensions
+$extensions = Draw_Applications -json_path $json_dict.web  -wrap_panel $x_WP_Extensions
 $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
-$packages = Draw_Package -json_path $json_dictionnary.package -combo_box $x_Dropdown_Packages
+$packages = Draw_Package -json_path $json_dict.package -combo_box $x_Dropdown_Packages
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
 
 
@@ -194,7 +192,7 @@ $tools_list = @(
     ("Zed Toolkit", @(
         ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
         ("Backup User", { DownloadAndExecuteScript $script_dictionary.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
-        ("Temp Folder", { Invoke-Item -Path $zed_dictionnary.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
+        ("Temp Folder", { Invoke-Item -Path $app_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
         ("Clean and Exit", { Button_CleanMyMess }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
     ("Utility", @(

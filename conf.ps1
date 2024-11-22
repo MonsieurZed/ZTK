@@ -1,24 +1,29 @@
-$debug = $true
+$debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw } else { $null }
 
-$version = "v0.2.00"
+$version = "v0.2.12"
 $base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/" }
 
 
-$zed_dictionnary = @{
+$app_dict = @{
   command     = "irm $base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
-  temp_folder = "$env:TEMP\zedstoolkit"
-  debug       = "$env:TEMP\zedstoolkit\debug"
+  temp_folder = "$env:TEMP\zedstoolkit\debug"
+
   icon_path   = "$base_path/icon/purple-shark.ico" 
   version     = "0.2.12"
 }
 
-$xaml_dictionnary = @{
+$var_dict = @{
+  debug        = "$($app_dict.temp_folder)\debug"
+  github_token = "$($app_dict.temp_folder)\github_token"
+}
+
+$xaml_dict = @{
   main = "$base_path/xaml/MainWindow.xaml"
 }
 
-$json_dictionnary = @{
+$json_dict = @{
   apps    = "$base_path/json/app.json"
   web     = "$base_path/json/web.json"
   package = "$base_path/json/packages.json"
@@ -48,7 +53,7 @@ $app_dictionary = @{
   iso    = "iso"
 }
 
-$web_dictionnary = @{
+$web_dict = @{
   default = @("default")
   opera   = @(
     "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\launcher.exe",

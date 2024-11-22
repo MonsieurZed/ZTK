@@ -96,7 +96,7 @@ function Button_Extensions {
             Write-Event "Ouverture [$($current.browser)] $($current.name)" 
             $success = $false
 
-            $web_dictionnary[$_.browser] |
+            $web_dict[$_.browser] |
             ForEach-Object {
                 $path = $PSItem
                 write-host $path
@@ -104,6 +104,9 @@ function Button_Extensions {
                     Write-Event "$($current.browser) is installed"
                     Start-Process $path -ArgumentList $current.url
                     $success = $true
+                }
+                if ($success) {
+                    break
                 }
             }
             

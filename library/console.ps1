@@ -136,10 +136,10 @@ Function Console_Setup {
     )
     $Host.UI.RawUI.BackgroundColor = "black"  
     if ($null -eq $script_name) {
-        $Host.UI.RawUI.WindowTitle = $zed_dictionnary.name
+        $Host.UI.RawUI.WindowTitle = $app_dict.name
     }
     else {
-        $Host.UI.RawUI.WindowTitle = "$($zed_dictionnary.name) : $script_name"
+        $Host.UI.RawUI.WindowTitle = "$($app_dict.name) : $script_name"
     }
 }
 
@@ -165,10 +165,10 @@ function Console_Header {
     write-host "_______________________________________________________________"
     write-host "_______________________________________________________________"
     write-host "                                                               "
-    Write-Host $zed_dictionnary.name.PadLeft((($zed_dictionnary.name.Length + 63) / 2), " ").PadRight(63, " ")
+    Write-Host $app_dict.name.PadLeft((($app_dict.name.Length + 63) / 2), " ").PadRight(63, " ")
     write-host "                                                               "
-    if (!($null -eq $zed_dictionnary.version)) {
-        Write-Host $zed_dictionnary.version.PadLeft((($zed_dictionnary.version.Length + 63) / 2), " ").PadRight(63, " ")
+    if (!($null -eq $app_dict.version)) {
+        Write-Host $app_dict.version.PadLeft((($app_dict.version.Length + 63) / 2), " ").PadRight(63, " ")
         write-host "                                                               "
     }
     write-host "_______________________________________________________________"

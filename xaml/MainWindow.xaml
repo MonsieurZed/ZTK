@@ -147,14 +147,12 @@
 		<Grid x:Name="Grid_StatusBar" Grid.Row="2" Height="auto">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			<StackPanel x:Name="Stack_Info" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" Grid.Column="0">
 				<TextBlock x:Name="Info_Time" Text="placeholder" FontSize="13" FontWeight="Bold" Foreground="#DDDDDD" Margin="5,0,0,0"/>
 				<TextBlock x:Name="Info_Message" Text="placeholder" FontSize="13" Foreground="#DDDDDD" Margin="5,0,0,0" />
 				<TextBlock x:Name="Info_Postion" Text="placeholder" FontSize="13" FontStyle="Italic" Foreground="#DDDDDD" Margin="5,0,0,0" />
 			</StackPanel>
-			<ToggleButton x:Name="Debug_Switch" Content="Debug" Width="100" Height="30" Grid.Column="1"/>
 		</Grid>
 	</Grid>
 </Window>
