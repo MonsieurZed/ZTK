@@ -7,7 +7,7 @@
 #===========================================================================
 # Config
 #===========================================================================
-. "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1"
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 
 Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
 

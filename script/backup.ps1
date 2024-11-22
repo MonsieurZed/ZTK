@@ -1,5 +1,5 @@
 
-. "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1"
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 . $library_dictionnary.function
 
 $select = $false
