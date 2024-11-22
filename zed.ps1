@@ -11,7 +11,7 @@
 $version = "v0.2.00"
 $debug = $env:USERNAME -eq "Zed"
 
-$base_path = if ($debug) { "D:\ZMT\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZMT/refs/heads/main" }
+$base_path = if ($debug) { "D:\ZMT\" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
 
 
 $zed_dictionnary = @{
