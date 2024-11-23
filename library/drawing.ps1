@@ -108,7 +108,7 @@ function Get_Checkbox {
     return $checkbox
 }
 
-function Draw_Applications {
+function Draw_Checkboxes {
     param (
         [object]$json,
         [System.Windows.Controls.Panel]$wrap_panel,
@@ -165,64 +165,6 @@ function Draw_Applications {
     }
     return $checkboxes
 }
-
-
-# function Draw_Extensions {
-#     param (
-#         [string[]]$json_path,
-#         [System.Windows.Controls.Panel]$wrap_panel
-#     )
-
-#     $json = Get-Content -Path $json_path -Raw | ConvertFrom-Json
-#     $checkboxes = New-Object System.Collections.ArrayList
-
-#     foreach ($app in $json.list) {
-#         foreach ($browser in $app.browser) {
-            
-#             $items = $null
-#             [void]($items = $app.items | Sort-Object -Property name)
-
-#             $groupBorder = Get_Group_Border
-#             $groupPanel = Get_Group_Panel
-
-#             $title = if ($browser.name -eq "Main") { $app.title }else { $browser.name }
-#             $header = GetTextblockHeader -text  $title -iconUrl $browser.icon
-
-#             [void]$groupPanel.Children.Add($header)
-    
-#             foreach ($item in $items) {
-
-#                 $itemPanel = Get_Item_Panel
-
-#                 if ($item.icon) {
-#                     try {
-#                         $icon = Get_Icon_Panel -iconUrl $item.icon
-#                         [void]$itemPanel.Children.Add($icon)
-#                     }
-#                     catch {
-#                         Write-Error "Failed to load icon for $($item.name)" 
-#                     }
-#                 }
-
-#                 $checkbox = Get_Checkbox -name $item.name -description $item.description
-               
-#                 $item | Add-Member -MemberType NoteProperty -Name "checkbox" -Value $checkbox -Force
-#                 $item | Add-Member -MemberType NoteProperty -Name "browser" -Value $browser.name -Force
-
-#                 [void]$checkboxes.Add($item)
-
-#                 [void]$itemPanel.Children.Add($checkbox)
-            
-#                 [void]$groupPanel.Children.Add($itemPanel)
-#             }
-
-#             $groupBorder.Child = $groupPanel
-
-#             [void]$wrap_panel.Children.Add($groupBorder)
-#         }
-#     }
-#     return $checkboxes
-# }
 
 
 function Draw_Buttons {

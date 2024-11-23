@@ -12,13 +12,17 @@ Here is my take on a setup tool CTT Style
 irm https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/main.ps1 | iex
 ```
 
-Shorten url will come soon
+or
+
+```
+irm zedcorp.fr/t | iex
+```
 
 ## What is it ?
 
 Zed's Toolkit aim to make a fresh install of windows easier by providing a all in one installer tools.
 
-- Bulk install package from Winget, chocolatey, any executable Path, archive Path or Iso Path.
+- Bulk install package from Winget, Chocolatey, any executable Path, archive Path or Iso Path.
 - Per browers extensions link opener
 - Access user folders
 - Access to windows interface
