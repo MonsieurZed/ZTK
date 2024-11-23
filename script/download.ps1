@@ -1,5 +1,5 @@
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-if ($debug) {
+if ($Global:debug) {
     . "$base_path/library/console.ps1"
 }
 else {
@@ -12,7 +12,7 @@ Console_Header "Downloader"
 try {
     Write-Info "Getting file info"
     $params = DecodeHastable ($MyInvocation.MyCommand -split "'")[1]
-    if ($debug) {
+    if ($Global:debug) {
         Write-Pretty $params
     }
 }
@@ -48,9 +48,9 @@ if (Test-Path -Path $filePath) {
     }
 }
 
-Write-Ok "Downloading From : $($params.file_url)"
-Write-Ok "Downloading To   : $filePath" 
-Write-Ok "Downloading Size : $remoteFileSize" 
+Write-Sucess "Downloading From : $($params.file_url)"
+Write-Sucess "Downloading To   : $filePath" 
+Write-Sucess "Downloading Size : $remoteFileSize" 
 
 if (!(Test-Path -Path $filePath)) { 
     if ($remoteFileSize -gt (100 * 1024 * 1024)) {   

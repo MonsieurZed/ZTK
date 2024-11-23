@@ -30,36 +30,38 @@ function Button_Applications {
     $result = [System.Windows.MessageBox]::Show("Voulez vous installez le(s) logiciel(s) suivant : $names", "Package Manager", [System.Windows.MessageBoxButton]::OKCancel)
    
     if ($result -eq [System.Windows.MessageBoxResult]::OK) {
-        Write-Info  "Starting the multi Installer" 
+        Write-Info "Multi-install : Starting"
+        Write-Host $conf_dict.winget
         $checked |
         ForEach-Object {
-            $item = $PSItem
+            $item = $_
+            Write-Info " - [$($item.provider)] $($item.name)" 
             switch ($item.provider) {
-                $default_dict.winget {  
+                $conf_dict.winget {  
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     winget install --id $item.package --accept-package-agreements --accept-source-agreements -e | Out-String -Stream | Write-Cleaner
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 }
-                $default_dict.choco {                             
+                $conf_dict.choco {                             
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     choco install $item.package -y 2>&1 | Out-String -Stream | Write-Cleaner
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 }
-                $default_dict.exe {
+                $conf_dict.exe {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 
-                $default_dict.iso {
+                $conf_dict.iso {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 
-                $default_dict.github {
+                $conf_dict.github {
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     GithubDownload -repo $item.package -token $github_token
                     Write-Host "Download started in a other shell"
@@ -67,6 +69,7 @@ function Button_Applications {
                 } 
             }
         }
+        Write-Info  "Multi-install : Finished" 
     }
     elseif ($result -eq [System.Windows.MessageBoxResult]::Cancel) { 
         Write-Host "Canceled" 

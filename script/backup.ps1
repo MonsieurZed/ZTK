@@ -2,7 +2,7 @@
 
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-if ($debug) {
+if ($Global:debug) {
     . "$base_path/library/console.ps1"
 }
 else {

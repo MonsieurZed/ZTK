@@ -33,7 +33,7 @@ Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProces
 # Admin     
 # ============================================================================
 
-if ($debug) {
+if ($Global:debug) {
     Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
 
 }
@@ -98,7 +98,7 @@ if (!($null -eq $github_token)) {
     }
     catch {
         Write-Error "Github user validation failed" 
-        if ($debug) {
+        if ($Global:debug) {
             Write-Error "Error : $($_.Exception.Message)" 
         }
     }
@@ -110,10 +110,9 @@ else {
 #===========================================================================
 # Load XAML  and Forms
 #===========================================================================\
-
 Write-Info "Loading xaml..."
 
-if ($debug) { 
+if ($Global:debug) { 
     Write-Info "Debug mode"
     $inputXML = Get-Content $xaml_dict.main
 }
@@ -136,7 +135,6 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 #===========================================================================
 # WPF Loading
 #===========================================================================
-
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
 $x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
@@ -156,7 +154,7 @@ $x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
 $x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-if ($debug) {
+if ($Global:debug) {
     $json_app = Get-Content -Path $json_dict.apps -Raw | ConvertFrom-Json
     $json_ext = Get-Content -Path $json_dict.web -Raw | ConvertFrom-Json
     $json_pac = Get-Content -Path $json_dict.package -Raw | ConvertFrom-Json

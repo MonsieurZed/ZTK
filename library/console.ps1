@@ -7,22 +7,22 @@
 function EncodeHastable() {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [System.Collections.Hashtable]$Object
+        [System.Collections.Hashtable]$object
     )
-    return [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((ConvertTo-Json $Object -Compress)))
+    return [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((ConvertTo-Json $object -Compress)))
 }
 
 function DecodeHastable() {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object
+        [string]$object
     )
-    return [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Object)) | ConvertFrom-Json
+    return [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($object)) | ConvertFrom-Json
 }
 
 function GetHastable() {
     param (
-        [string]$Object
+        [string]$object
     )
     retunr
 }
@@ -31,24 +31,24 @@ function GetHastable() {
 Function Write-Base {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object,
+        [string]$object,
         [object]$invocation = $MyInvocation,
         [System.ConsoleColor] $color = "White"
     )
     $str = ""
     $time = (Get-Date).ToString("[HH:mm:ss]")
-    if ($debug) {
-        $str = "$time $Object at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)"
+    if ($Global:debug) {
+        $str = "$time $object at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)"
     }
     else {
-        $str = "$time $Object" 
+        $str = "$object" 
     }
     write-host $str -ForegroundColor $color
 
     if (!($null -eq $x_Info_Time)) {   
         $x_Info_Time.Text = $time 
-        $x_Info_Message.Text = $Object 
-        if ($debug) {
+        $x_Info_Message.Text = $object 
+        if ($Global:debug) {
             $x_Info_Postion.Text = "$($invocation.PSCommandPath):$($invocation.ScriptLineNumber)"
         }
     }
@@ -57,53 +57,53 @@ Function Write-Base {
 Function Write-Error {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object,
+        [string]$object,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $Object -invocation $invocation -color Red
+    Write-Base -Object $object -invocation $invocation -color Red
 }
 
 Function Write-Sucess {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object,
+        [string]$object,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $Object -invocation $invocation -color DarkCyan
+    Write-Base -Object $object -invocation $invocation -color DarkCyan
 }
 Function Write-Sucess {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object,
+        [string]$object,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $Object -invocation $invocation -color Green
+    Write-Base -Object $object -invocation $invocation -color Green
 }
 Function Write-Info {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object,
+        [string]$object,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $Object -invocation $invocation -color White
+    Write-Base -Object $object -invocation $invocation -color White
 }
 
 Function Write-Cancel {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$Object,
+        [string]$object,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $Object -invocation $invocation -color Magenta
+    Write-Base -Object $object -invocation $invocation -color Magenta
 }
 
 Function Write-Pretty {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [PSCustomObject]$Object
+        [PSCustomObject]$object
     )
-    Write-Host $Object.GetType() -ForegroundColor Cyan
-    $Object.PSObject.Properties | ForEach-Object {
+    Write-Host $object.GetType() -ForegroundColor Cyan
+    $object.PSObject.Properties | ForEach-Object {
         $property = $_.Name
         $value = $_.Value
         if ($value.Length -gt 100) {
