@@ -1,8 +1,14 @@
 
-$Global:debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { [bool](Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw) } else { $false }
+$Global:debug = $false
+$Global:base_path = "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main"
+
+if (Test-Path "$env:TEMP\zedstoolkit\debug") {
+  $json_debug = Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw | ConvertFrom-Json
+  $Global:debug = $json_debug.debug
+  $Global:base_path = $json_debug.path
+} 
 
 $version = "v0.2.13"
-$base_path = if ($Global:debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
 
 $default_dict = @{
   command     = "irm $base_path/main.ps1 | iex"
