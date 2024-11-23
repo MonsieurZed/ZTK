@@ -20,6 +20,12 @@ function DecodeHastable() {
     return [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Object)) | ConvertFrom-Json
 }
 
+function GetHastable() {
+    param (
+        [string]$Object
+    )
+    retunr
+}
 
 #================ Write =============================
 

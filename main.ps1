@@ -149,13 +149,24 @@ $x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
 $x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-$applications = Draw_Applications -json_path $json_dict.apps -wrap_panel $x_WP_Applications -source $source
+if ($debug) {
+    $json_app = Get-Content -Path $json_dict.apps -Raw | ConvertFrom-Json
+    $json_ext = Get-Content -Path $json_dict.web -Raw | ConvertFrom-Json
+    $json_pac = Get-Content -Path $json_dict.package -Raw | ConvertFrom-Json
+}
+else {
+    $json_app = Invoke-WebRequest -Uri $json_dict.app -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $json_ext = Invoke-WebRequest -Uri $json_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $json_pac = Invoke-WebRequest -Uri $json_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+}
+
+$applications = Draw_Applications -json $json_app  -wrap_panel $x_WP_Applications -source $source
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
-$extensions = Draw_Applications -json_path $json_dict.web  -wrap_panel $x_WP_Extensions
+$extensions = Draw_Applications -json $json_ext  -wrap_panel $x_WP_Extensions
 $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
-$packages = Draw_Package -json_path $json_dict.package -combo_box $x_Dropdown_Packages
+$packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
 
 $windows_list = @(
@@ -217,9 +228,9 @@ $soft_list = @(
         ('Titus', { Button_Titus }, 'Package installer + Windows Button_isation'))
     ),
     ('Software', @(
-        ('Dipiscan', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; download_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { DownloadAndExecuteScript $script_dict.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; download_filename = "TreeSizeFree.exe" } }, $null),
-        ('Office Tool Plus', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; download_filename = "Plus.exe" } }, $null),
+        ('Dipiscan', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
+        ('TreeSize', { DownloadAndExecuteScript $script_dict.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; filter_filename = "TreeSizeFree.exe" } }, $null),
+        ('Office Tool Plus', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null),
         ('Vscode', { DownloadFromGithubAndRun -repo "portapps/vscode-portable" -github_token $github_token -github_filename_filter ".zip" -filename_filter "Code.exe" }, $null))
     ),
     ('Hack', @(

@@ -1,5 +1,3 @@
-
-
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 if ($debug) {
     . "$base_path/library/console.ps1"
@@ -8,17 +6,17 @@ else {
     Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
 }
 
-
 Console_Setup "Downloader"
 Console_Header "Downloader"
-write-host $default_dict.name
+
 
 $params = DecodeHastable $args[0]
-
-
+if ($debug) {
+    Write-Pretty $params
+}
 write-host "Getting file info"  -ForegroundColor Cyan
 
-$outputPath = "$env:TEMP\$AppClearName\"
+$outputPath = $default_dict.temp_folder
 
 if ($params.file_url -notmatch "^https?://") {
     $params.file_url = "https://$($params.file_url)"
@@ -183,6 +181,7 @@ if (Test-Path -Path $filePath) {
                 }   
                 $exeFile = Get-ChildItem -Path $extractPath -Filter $params.filter_filename -Recurse | Select-Object -First 1
                 if ($exeFile) {
+                    Write-Info "Trying to open $exeFile"
                     Start-Process -FilePath  $exeFile.FullName
                 }
                 else {

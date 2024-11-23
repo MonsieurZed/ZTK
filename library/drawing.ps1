@@ -110,7 +110,7 @@ function Get_Checkbox {
 
 function Draw_Applications {
     param (
-        [string[]]$json_path,
+        [Json]$json,
         [System.Windows.Controls.Panel]$wrap_panel,
         [System.Object]$source
     )
