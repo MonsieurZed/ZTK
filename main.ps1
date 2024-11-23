@@ -233,10 +233,10 @@ $soft_list = @(
         ('Titus', { Button_Titus }, 'Package installer + Windows Button_isation'))
     ),
     ('Software', @(
-        ('Dipiscan', { ExecuteScript $script_dict.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { ExecuteScript $script_dict.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; filter_filename = "TreeSizeFree.exe" } }, $null),
-        ('Office Tool Plus', { ExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null),
-        ('Vscode', { GithubDownload -repo "portapps/vscode-portable" -github_token $github_token -github_filename_filter ".zip" -filename_filter "Code.exe" }, $null))
+        ('Dipiscan', { ExecuteScript $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
+        ('TreeSize', { ExecuteScript $script_dict.download  -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } }, $null),
+        ('Sublime Text', { ExecuteScript $script_dict.download  -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }, $null),
+        ('Office Tool Plus', { ExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null))
     ),
     ('Hack', @(
         ('SpotX', 

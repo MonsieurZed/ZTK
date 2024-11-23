@@ -31,50 +31,49 @@ function Button_Applications {
    
     if ($result -eq [System.Windows.MessageBoxResult]::OK) {
         Write-Info "Multi-install : Starting"
-        Write-Host $conf_dict.winget
         $checked |
         ForEach-Object {
             $item = $_
             Write-Info " - [$($item.provider)] $($item.name)" 
             switch ($item.provider) {
                 $conf_dict.winget {  
-                    Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
+                    Write-Info "[$($item.provider)] $($item.name) : Starting"
                     winget install --id $item.package --accept-package-agreements --accept-source-agreements -e | Out-String -Stream | Write-Cleaner
-                    Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
+                    Write-Info "[$($item.provider)] $($item.name) : Finished"
                 }
                 $conf_dict.choco {                             
-                    Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
+                    Write-Info "[$($item.provider)] $($item.name) : Starting"
                     choco install $item.package -y 2>&1 | Out-String -Stream | Write-Cleaner
-                    Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
+                    Write-Info "[$($item.provider)] $($item.name) : Finished"
                 }
                 $conf_dict.exe {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
-                    Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
+                    Write-Info "[$($item.provider)] $($item.name) : Starting"
                     ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
-                    Write-Host "Download started in a other shell"
-                    Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
+                    Write-Info "Download started in a other shell"
+                    Write-Info "[$($item.provider)] $($item.name) : Finished"
                 } 
                 $conf_dict.iso {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
-                    Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
+                    Write-Info "[$($item.provider)] $($item.name) : Starting"
                     ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
-                    Write-Host "Download started in a other shell"
-                    Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
+                    Write-Info "Download started in a other shell"
+                    Write-Info "[$($item.provider)] $($item.name) : Finished"
                 } 
                 $conf_dict.github {
-                    Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    write-host ($item.package -split ";")
+                    Write-Info "[$($item.provider)] $($item.name) : Starting"
+                    Write-Info ($item.package -split ";")
                     $repo, $ghf, $ff = $item.package -split ";"
                     GithubDownload -repo $repo -token $github_token -github_filename_filter $ghf -filename_filter $ff
-                    Write-Host "Download started in a other shell"
-                    Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
+                    Write-Info "Download started in a other shell"
+                    Write-Info "[$($item.provider)] $($item.name) : Finished"
                 } 
             }
         }
         Write-Info  "Multi-install : Finished" 
     }
     elseif ($result -eq [System.Windows.MessageBoxResult]::Cancel) { 
-        Write-Host "Canceled" 
+        Write-Cancel "Canceled" 
     } 
 
 }
@@ -104,7 +103,7 @@ function Button_Extensions {
             $web_dict[$_.browser] |
             ForEach-Object {
                 $path = $PSItem
-                write-host $path
+                Write-Info $path
                 if (Test-Path $path) {
                     Write-Info "$($current.browser) is installed"
                     Start-Process $path -ArgumentList $current.url
@@ -116,7 +115,7 @@ function Button_Extensions {
             }
             
             if ($success -eq $false) {
-                write-host "Couldn't fine browser, opening in the default one."
+                Write-Canel "Couldn't fine browser, opening in the default one."
                 Start-Process $current.url     
             }
         }
