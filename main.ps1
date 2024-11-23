@@ -7,8 +7,8 @@
 #===========================================================================
 # Config
 #===========================================================================
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 
 # ===========================================================================
 # Admin     
@@ -35,12 +35,13 @@ Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProces
 
 if ($debug) {
     Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
+
 }
 else {
     $library_dict.GetEnumerator() | ForEach-Object { Invoke-Expression (Invoke-WebRequest -Uri $_.Value).Content }
 }
 
-Console_Setup
+Console_Setup 
 Console_Header 
 
 if (-not (Test-Path -Path $default_dict.temp_folder)) {
@@ -113,6 +114,7 @@ else {
 Write-Info "Loading xaml..."
 
 if ($debug) { 
+    Write-Info "Debug mode"
     $inputXML = Get-Content $xaml_dict.main
 }
 else {
@@ -263,9 +265,6 @@ Write-Info "Ready to go !"
 #===========================================================================
 # Closing
 #===========================================================================
-Write-Host $default_dict.temp_folder
-$v = Get-ChildItem -Path $default_dict.temp_folder | Where-Object { $_ -match ".tmp" }
-
 $form.add_Closing({
         Write-Info "Closing..."
         Get-ChildItem -Path $default_dict.temp_folder -File -Filter "*.tmp" -Force | Remove-Item -Force

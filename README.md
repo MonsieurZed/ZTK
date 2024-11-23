@@ -16,18 +16,18 @@ Shorten url will come soon
 
 ## What is it ?
 
-Zed's Toolkit aim to make a fresh install of windows easier by providing one for all installer tools. This will be achieve by creating an GUI that allow the user :
+Zed's Toolkit aim to make a fresh install of windows easier by providing a all in one installer tools.
 
 - Bulk install package from Winget, chocolatey, any executable Path, archive Path or Iso Path.
-- Per browers extensions shortcut
+- Per browers extensions link opener
 - Access user folders
-- Access to most windows interface
-- Access to most useful irm|iex tools
+- Access to windows interface
+- Access to useful irm-iex tools
 
 ## What next ?
 
 - Better UI/UX
-- Rredegit tweaks
+- Redegit tweaks
 - Package search
 - Multi Language support
 

@@ -136,10 +136,10 @@ Function Write-Cleaner {
 Function Console_Setup {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script_name = $null
+        [string]$script_name = ""
     )
     $Host.UI.RawUI.BackgroundColor = "black"  
-    if ($null -eq $script_name) {
+    if ($script_name.Length -eq 0) {
         $Host.UI.RawUI.WindowTitle = $default_dict.name
     }
     else {
