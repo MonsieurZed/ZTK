@@ -9,7 +9,6 @@ else {
 Console_Setup "Downloader"
 Console_Header "Downloader"
 
-
 $params = DecodeHastable $args[0]
 if ($debug) {
     Write-Pretty $params
