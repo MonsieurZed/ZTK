@@ -11,7 +11,7 @@ else {
 
 Console_Setup "Downloader"
 Console_Header "Downloader"
-write-host $app_dict.name
+write-host $default_dict.name
 
 $params = DecodeHastable $args[0]
 

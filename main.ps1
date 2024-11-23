@@ -29,7 +29,7 @@ Console_Header
 $admin = $false
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Error "This script must be run as admin"
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($app_dict.command)" -Verb RunAs
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($default_dict.command)" -Verb RunAs
     exit
 }
 else {
@@ -39,8 +39,8 @@ $currentProcess = Get-Process | Where-Object { $_.Id -eq $PID }
 
 Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProcess.Id } | Stop-Process -Force
 
-if (-not (Test-Path -Path $app_dict.temp_folder)) {
-    New-Item -Path "$($app_dict.temp_folder)" -ItemType Directory | Out-Null
+if (-not (Test-Path -Path $default_dict.temp_folder)) {
+    New-Item -Path "$($default_dict.temp_folder)" -ItemType Directory | Out-Null
 }
 # =============================================================================================     
 #  Package manager  
@@ -197,7 +197,7 @@ $tools_list = @(
     ("Zed Toolkit", @(
         ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
         ("Backup User", { DownloadAndExecuteScript $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
-        ("Temp Folder", { Invoke-Item -Path $app_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
+        ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
         ("Clean and Exit", { Button_CleanMyMess }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
     ("Utility", @(

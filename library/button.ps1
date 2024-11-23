@@ -35,11 +35,11 @@ function Button_Upgrade_All_Package {
 }
 
 function Button_Add_Shortcut {
-    $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$app_dict.name.lnk")
-    $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$app_dict.name.lnk")
+    $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$default_dict.name.lnk")
+    $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$default_dict.name.lnk")
 
     $powershellPath = (Get-Command "powershell.exe").Source
-    $arguments = "-NoProfile -Command Start-Process powershell -ArgumentList '-NoProfile -Command $app_dict.command' -Verb RunAs"
+    $arguments = "-NoProfile -Command Start-Process powershell -ArgumentList '-NoProfile -Command $default_dict.command' -Verb RunAs"
     #-WindowStyle Hidden 
 
     $wShell = New-Object -ComObject WScript.Shell
@@ -86,16 +86,16 @@ function Button_Add_ExclusionFolder {
 
 
 function Button_CleanApp {
-    $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$app_dict.name.lnk")
-    $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$app_dict.name.lnk")
+    $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$default_dict.name.lnk")
+    $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$default_dict.name.lnk")
 
     Write-Event "Cleaning the mess" 
 
     $wshell = New-Object -ComObject Wscript.Shell
-    switch ($wshell.Popup("Voulez vous vraiment quitter", 0, $app_dict.name, 4 + 32)) {
+    switch ($wshell.Popup("Voulez vous vraiment quitter", 0, $default_dict.name, 4 + 32)) {
         6 { 
             Remove-Item -Path $startMenuPath, $desktopPath -Force
-            Remove-Item -Path $app_dict.temp_folder -Recurse -Force
+            Remove-Item -Path $default_dict.temp_folder -Recurse -Force
             Stop-Process -Id $PID
         }
         7 { 
@@ -114,10 +114,10 @@ function Button_Install_Winget {
     }
 
     $url = "https://aka.ms/getwinget"
-    $app_dict.temp_folder = "$env:TEMP\Microsoft.DesktopAppInstaller.appxbundle"
-    Invoke-WebRequest -Uri $url -OutFile $app_dict.temp_folder
-    Add-AppxPackage -Path $app_dict.temp_folder
-    Remove-Item $app_dict.temp_folder
+    $default_dict.temp_folder = "$env:TEMP\Microsoft.DesktopAppInstaller.appxbundle"
+    Invoke-WebRequest -Uri $url -OutFile $default_dict.temp_folder
+    Add-AppxPackage -Path $default_dict.temp_folder
+    Remove-Item $default_dict.temp_folder
 
     if (Get-Command winget -ErrorAction SilentlyContinue) {
         Write-Ok "Winget is installed"

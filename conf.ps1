@@ -5,7 +5,7 @@ $version = "v0.2.12"
 $base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
 
 
-$app_dict = @{
+$default_dict = @{
   command     = "irm $base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
@@ -15,8 +15,8 @@ $app_dict = @{
 }
 
 $var_dict = @{
-  debug        = "$($app_dict.temp_folder)\debug"
-  github_token = "$($app_dict.temp_folder)\github_token"
+  debug        = "$($default_dict.temp_folder)\debug"
+  github_token = "$($default_dict.temp_folder)\github_token"
 }
 
 $xaml_dict = @{
@@ -48,7 +48,7 @@ $source = @{
   github = $false
 }
 
-$app_dict = @{
+$conf_dict = @{
   winget = "winget"
   choco  = "choco"
   exe    = "exe"

@@ -136,10 +136,10 @@ Function Console_Setup {
     )
     $Host.UI.RawUI.BackgroundColor = "black"  
     if ($null -eq $script_name) {
-        $Host.UI.RawUI.WindowTitle = $app_dict.name
+        $Host.UI.RawUI.WindowTitle = $default_dict.name
     }
     else {
-        $Host.UI.RawUI.WindowTitle = "$($app_dict.name) : $script_name"
+        $Host.UI.RawUI.WindowTitle = "$($default_dict.name) : $script_name"
     }
 }
 
@@ -165,10 +165,10 @@ function Console_Header {
     write-host "_______________________________________________________________"
     write-host "_______________________________________________________________"
     write-host "                                                               "
-    Write-Host $app_dict.name.PadLeft((($app_dict.name.Length + 63) / 2), " ").PadRight(63, " ")
+    Write-Host $default_dict.name.PadLeft((($default_dict.name.Length + 63) / 2), " ").PadRight(63, " ")
     write-host "                                                               "
-    if (!($null -eq $app_dict.version)) {
-        Write-Host $app_dict.version.PadLeft((($app_dict.version.Length + 63) / 2), " ").PadRight(63, " ")
+    if (!($null -eq $default_dict.version)) {
+        Write-Host $default_dict.version.PadLeft((($default_dict.version.Length + 63) / 2), " ").PadRight(63, " ")
         write-host "                                                               "
     }
     write-host "_______________________________________________________________"

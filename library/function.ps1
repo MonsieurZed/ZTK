@@ -11,7 +11,7 @@ function DownloadAndExecuteScript {
     )
 
     $scriptName = [System.IO.Path]::GetFileName($script_url)
-    $scriptPath = [System.IO.Path]::Combine($app_dict.temp_folder, $scriptName)
+    $scriptPath = [System.IO.Path]::Combine($default_dict.temp_folder, $scriptName)
 
 
     if (Test-Path -Path $scriptPath) {
