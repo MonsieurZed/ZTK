@@ -5,8 +5,6 @@ if (-not (Test-Path -Path $app_dict.temp_folder)) {
   New-Item -Path "$($app_dict.temp_folder)" -ItemType Directory | Out-Null
 }
 
-Set-Content -Path $var_dict.debug -Value $true -Force $true
-
-$boolean = if (Test-Path "$env:TEMP\zedstoolkit\debug") { [bool](Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw) } else { $false }
-
-write-host $boolean
+$current_debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { [bool](Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw) } else { $false }
+Set-Content -Path $var_dict.debug -Value $true -Force
+write-host "Debug is activated"

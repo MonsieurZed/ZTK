@@ -14,12 +14,12 @@ Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $
 Console_Setup
 Console_Header 
 
-Write-Info "Debug: $debug - Loading from $base_path"
 # ===========================================================================
 # Init     
 # ============================================================================
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 
 $admin = $false
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
