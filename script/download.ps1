@@ -9,11 +9,11 @@ else {
 Console_Setup "Downloader"
 Console_Header "Downloader"
 
-$params = DecodeHastable $args[0]
+$params = DecodeHastable ($MyInvocation.MyCommand -split "'")[1]
 if ($debug) {
     Write-Pretty $params
 }
-write-host "Getting file info"  -ForegroundColor Cyan
+write-host "Getting file info" -ForegroundColor Cyan
 
 $outputPath = $default_dict.temp_folder
 
@@ -34,7 +34,8 @@ $remoteFileSize = [Convert]::ToInt64($webRequest.Headers["Content-Length"])
 if (Test-Path -Path $filePath) {
     $localFileSize = (Get-Item -Path $filePath).Length
     if ($localFileSize -ne $remoteFileSize) {
-        Remove-Item -Path $filePath -Force
+        Write-Info "File size is incorrect. Deleting the old one.."
+        Remove-Item -Path $filePath -Force -Recurse
     }
 }
 

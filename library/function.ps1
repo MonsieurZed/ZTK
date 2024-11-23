@@ -3,7 +3,7 @@
 # ============================================================================================= 
 
 
-function DownloadAndExecuteScript {
+function ExecuteScript {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
         [string]$script_url,
@@ -13,35 +13,21 @@ function DownloadAndExecuteScript {
     $scriptName = [System.IO.Path]::GetFileName($script_url)
     $scriptPath = [System.IO.Path]::Combine($default_dict.temp_folder, $scriptName)
 
-
-    if (Test-Path -Path $scriptPath) {
-        $webRequest = Invoke-WebRequest -Uri $script_url -Method Head
-        $remoteFileSize = [Convert]::ToInt64($webRequest.Headers["Content-Length"])
-        $localFileSize = (Get-Item -Path $scriptPath).Length
-        if ($localFileSize -ne $remoteFileSize) {
-            Remove-Item -Path $scriptPath -Force
-        }
-    }
-
-    if (!(Test-Path -Path $scriptPath)) {
-        try {
-            Invoke-WebRequest -Uri $script_url -OutFile $scriptPath
-        }
-        catch {
-            Write-Error "[$($MyInvocation.ScriptLineNumber)] Failing to get $scriptName script : $_" 
-            return
-        }
-    }
     try {
         $encoded = EncodeHastable $params
-        Start-Process powershell -ArgumentList "-NoExit", "-File", $scriptPath, $encoded -Verb RunAs
+        Start-Process powershell -ArgumentList @(
+            "-NoProfile",
+            "-Command",
+            "irm $script_url | iex; '$encoded'"
+        )
+        # Start-Process powershell -ArgumentList "-NoExit", "-File", $scriptPath, $encoded -Verb RunAs
     }
     catch {
         Write-Error "[$($MyInvocation.ScriptLineNumber)] Error start $scriptName : $_"  
     }
 }
 
-function DownloadFromGithubAndRun {
+function GithubDownload {
     param (
         [string]$repo,
         [string]$github_token,
@@ -57,11 +43,24 @@ function DownloadFromGithubAndRun {
     $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest" -Headers $headers
 
     if ($response.assets.Count -eq 0) {
-        Write-Cancel "Aucun fichier dans la dernière release."
+        Write-Cancel "No file in last release"
         exit
     }
 
-    $asset = $response.assets | Where-Object { $_.name -match $filter }
-    DownloadAndExecuteScript $script_dict.download -params @{file_url = $asset.browser_download_url; download_filename = $asset.name ; filter_filename = $filename_filter }
+    $file_url = ""
+    $response.assets | ForEach-Object {
+        if ($_.name -match $github_filename_filter) {
+            $file_url = $_.browser_download_url
+        }
+    }
+    
+    if ($file_url -eq "") {
+        Write-Cancel "Couldn't file $github_filename_filter in $repo"
+
+    }
+    else {
+        ExecuteScript $script_dict.download -params @{file_url = $file_url; download_filename = $asset.name ; filter_filename = $filename_filter }
+    }
+
 
 }

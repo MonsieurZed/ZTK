@@ -40,8 +40,8 @@ else {
     $library_dict.GetEnumerator() | ForEach-Object { Invoke-Expression (Invoke-WebRequest -Uri $_.Value).Content }
 }
 
-# Console_Setup
-# Console_Header 
+Console_Setup
+Console_Header 
 
 if (-not (Test-Path -Path $default_dict.temp_folder)) {
     New-Item -Path "$($default_dict.temp_folder)" -ItemType Directory | Out-Null
@@ -214,7 +214,7 @@ $tools_list = @(
     ),
     ("Zed Toolkit", @(
         ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
-        ("Backup User", { DownloadAndExecuteScript $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
+        ("Backup User", { ExecuteScript $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
         ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
         ("Clean and Exit", { Button_CleanMyMess }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
@@ -233,10 +233,10 @@ $soft_list = @(
         ('Titus', { Button_Titus }, 'Package installer + Windows Button_isation'))
     ),
     ('Software', @(
-        ('Dipiscan', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { DownloadAndExecuteScript $script_dict.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; filter_filename = "TreeSizeFree.exe" } }, $null),
-        ('Office Tool Plus', { DownloadAndExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null),
-        ('Vscode', { DownloadFromGithubAndRun -repo "portapps/vscode-portable" -github_token $github_token -github_filename_filter ".zip" -filename_filter "Code.exe" }, $null))
+        ('Dipiscan', { ExecuteScript $script_dict.download -params @{file_url = "zedcorp.fr/t/z/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
+        ('TreeSize', { ExecuteScript $script_dict.download  -params @{file_url = "zedcorp.fr/t/z/TreeSizeFree-Portable.zip" ; filter_filename = "TreeSizeFree.exe" } }, $null),
+        ('Office Tool Plus', { ExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null),
+        ('Vscode', { GithubDownload -repo "portapps/vscode-portable" -github_token $github_token -github_filename_filter ".zip" -filename_filter "Code.exe" }, $null))
     ),
     ('Hack', @(
         ('SpotX', 
@@ -253,7 +253,7 @@ $soft_list = @(
             }
             $job | Wait-Job | Receive-Job
         },
-        'Windows et Office Activateur'))
+        'Windows et Office Activateur')) 
     )
 )
 Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft

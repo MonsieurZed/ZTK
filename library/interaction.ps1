@@ -48,20 +48,20 @@ function Button_Applications {
                 $default_dict.exe {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    DownloadAndExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
+                    ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 
                 $default_dict.iso {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    DownloadAndExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
+                    ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 
                 $default_dict.github {
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    DownloadFromGithubAndRun -repo $item.package -token $github_token
+                    GithubDownload -repo $item.package -token $github_token
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 

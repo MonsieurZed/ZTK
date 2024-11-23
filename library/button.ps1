@@ -127,6 +127,7 @@ function Button_Install_Winget {
         Write-Error "Winget failed to install" 
     }
 }
+
 function Button_Install_Choco {
     if (Get-Command choco -ErrorAction SilentlyContinue) {
         Write-Info "Chocolatey is already installed"
