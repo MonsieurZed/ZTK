@@ -163,7 +163,7 @@ else {
 $applications = Draw_Applications -json $json_app  -wrap_panel $x_WP_Applications -source $source
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
-$extensions = Draw_Applications -json $json_ext  -wrap_panel $x_WP_Extensions
+$extensions = Draw_Applications -json $json_ext -wrap_panel $x_WP_Extensions
 $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
 $packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages

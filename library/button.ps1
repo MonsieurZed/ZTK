@@ -66,7 +66,7 @@ function Button_Add_ExclusionFolder {
         Write-Ok "Folder created: $exclusionFolderPath" 
     }
     else {
-        Write-Event "The folder already exists: $exclusionFolderPath" 
+        Write-Info "The folder already exists: $exclusionFolderPath" 
     }
     Add-MpPreference -ExclusionPath $exclusionFolderPath
     $exclusions = Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
@@ -89,7 +89,7 @@ function Button_CleanApp {
     $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$default_dict.name.lnk")
     $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$default_dict.name.lnk")
 
-    Write-Event "Cleaning the mess" 
+    Write-Info "Cleaning the mess" 
 
     $wshell = New-Object -ComObject Wscript.Shell
     switch ($wshell.Popup("Voulez vous vraiment quitter", 0, $default_dict.name, 4 + 32)) {
@@ -109,7 +109,7 @@ function Button_CleanApp {
 function Button_Install_Winget {
 
     if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Event "Winget is already installed"
+        Write-Info "Winget is already installed"
         return $true
     }
 
@@ -129,7 +129,7 @@ function Button_Install_Winget {
 }
 function Button_Install_Choco {
     if (Get-Command choco -ErrorAction SilentlyContinue) {
-        Write-Event "Chocolatey is already installed"
+        Write-Info "Chocolatey is already installed"
         return $true
     }
    

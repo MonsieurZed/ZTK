@@ -30,7 +30,7 @@ function Button_Applications {
     $result = [System.Windows.MessageBox]::Show("Voulez vous installez le(s) logiciel(s) suivant : $names", "Package Manager", [System.Windows.MessageBoxButton]::OKCancel)
    
     if ($result -eq [System.Windows.MessageBoxResult]::OK) {
-        Write-Event  "Starting the multi Installer" 
+        Write-Info  "Starting the multi Installer" 
         $checked |
         ForEach-Object {
             $item = $PSItem
@@ -93,7 +93,7 @@ function Button_Extensions {
         $checked |
         ForEach-Object {
             $current = $PSItem
-            Write-Event "Ouverture [$($current.browser)] $($current.name)" 
+            Write-Info "Ouverture [$($current.browser)] $($current.name)" 
             $success = $false
 
             $web_dict[$_.browser] |
@@ -101,7 +101,7 @@ function Button_Extensions {
                 $path = $PSItem
                 write-host $path
                 if (Test-Path $path) {
-                    Write-Event "$($current.browser) is installed"
+                    Write-Info "$($current.browser) is installed"
                     Start-Process $path -ArgumentList $current.url
                     $success = $true
                 }

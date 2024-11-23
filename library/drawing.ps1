@@ -114,7 +114,6 @@ function Draw_Applications {
         [System.Windows.Controls.Panel]$wrap_panel,
         [System.Object]$source
     )
-    $json = Get-Content -Path $json_path -Raw | ConvertFrom-Json
     $checkboxes = New-Object System.Collections.ArrayList
 
     foreach ($app in $json.list) {
@@ -273,7 +272,6 @@ function Draw_Package {
         [object]$json,
         [System.Windows.Controls.ComboBox]$combo_box
     )
-    $json = Get-Content -Path $json_path -Raw | ConvertFrom-Json
     $packages = New-Object System.Collections.ArrayList
 
     foreach ($item in $json.list | Sort-Object -Property title) {
