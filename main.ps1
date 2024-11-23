@@ -65,7 +65,6 @@ else {
     
 }
 
-
 $github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
 
 if ($null -eq $github_token) { 
@@ -125,8 +124,6 @@ $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 try { $form = [Windows.Markup.XamlReader]::Load( $reader ) }
 catch { Write-Error "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed." }
  
-
- 
 $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $form.FindName($_.Name) }
 
 #===========================================================================
@@ -160,7 +157,6 @@ $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
 $packages = Draw_Package -json_path $json_dict.package -combo_box $x_Dropdown_Packages
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
-
 
 $windows_list = @(
     ('Connectivity', @(
