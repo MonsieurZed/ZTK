@@ -35,6 +35,18 @@ Zed's Toolkit aim to make a fresh install of windows easier by providing a all i
 - Package search
 - Multi Language support
 
+## Running Locally
+
+Git clone this project then run the following command
+
+```
+ . '.\tools\debug.ps1'
+```
+
+This will create a debug file in temp where you can specify the path of your project if it change (or just re-run the command)
+
+Now next time you run the main.ps1 or the irm | iex command it will use your local file instead of thoose on github
+
 ## Licence
 
 - This project is under the licence GNU3
