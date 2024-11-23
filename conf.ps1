@@ -29,14 +29,17 @@ $json_dict = @{
   package = "$base_path/json/packages.json"
 }
 
-$script_dictionary = @{
+$script_dict = @{
   download = "$base_path/script/download.ps1"
   backup   = "$base_path/script/backup.ps1"
 }
 
-$library_dictionary = @{
-  function = "$base_path/library/function.ps1"
-  console  = "$base_path/library/console.ps1"
+$library_dict = @{
+  function    = "$base_path/library/function.ps1"
+  console     = "$base_path/library/console.ps1"
+  button      = "$base_path/library/button.ps1"
+  drawing     = "$base_path/library/drawing.ps1"
+  interaction = "$base_path/library/interaction.ps1"
 }
 
 $source = @{
@@ -45,7 +48,7 @@ $source = @{
   github = $false
 }
 
-$app_dictionary = @{
+$app_dict = @{
   winget = "winget"
   choco  = "choco"
   exe    = "exe"

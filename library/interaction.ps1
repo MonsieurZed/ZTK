@@ -35,31 +35,31 @@ function Button_Applications {
         ForEach-Object {
             $item = $PSItem
             switch ($item.provider) {
-                $app_dictionary.winget {  
+                $app_dict.winget {  
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     winget install --id $item.package --accept-package-agreements --accept-source-agreements -e | Out-String -Stream | Write-Cleaner
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 }
-                $app_dictionary.choco {                             
+                $app_dict.choco {                             
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     choco install $item.package -y 2>&1 | Out-String -Stream | Write-Cleaner
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 }
-                $app_dictionary.exe {
+                $app_dict.exe {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    DownloadAndExecuteScript $script_dictionary.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
+                    DownloadAndExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 
-                $app_dictionary.iso {
+                $app_dict.iso {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    DownloadAndExecuteScript $script_dictionary.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
+                    DownloadAndExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 
-                $app_dictionary.github {
+                $app_dict.github {
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
                     DownloadFromGithubAndRun -repo $item.package -token $github_token
                     Write-Host "Download started in a other shell"
