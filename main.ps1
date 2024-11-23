@@ -108,7 +108,12 @@ else {
 
 Write-Info "Loading xaml..."
 
-$inputXML = Get-Content $xaml_dict.main
+if ($debug)
+{ $inputXML = Get-Content $xaml_dict.main }
+else {
+    $inputXML = Invoke-Expression (Invoke-WebRequest -Uri $xaml_dict.main).Content
+}
+
 $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
  
  
