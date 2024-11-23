@@ -63,7 +63,9 @@ function Button_Applications {
                 } 
                 $conf_dict.github {
                     Write-Host "[$($item.provider)] $($item.name) : Starting" -ForegroundColor DarkCyan
-                    GithubDownload -repo $item.package -token $github_token
+                    write-host ($item.package -split ";")
+                    $repo, $ghf, $ff = $item.package -split ";"
+                    GithubDownload -repo $repo -token $github_token -github_filename_filter $ghf -filename_filter $ff
                     Write-Host "Download started in a other shell"
                     Write-Host "[$($item.provider)] $($item.name) : Finished" -ForegroundColor DarkCyan
                 } 

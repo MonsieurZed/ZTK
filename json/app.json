@@ -581,7 +581,7 @@
         {
           "id": "APP91093",
           "name": "Fit-Launcher",
-          "package": "CarrotRub/Fit-Launcher",
+          "package": "CarrotRub/Fit-Launcher;Fit.Launcher*.msi",
           "description": "Lanceur de jeux personnalisable",
           "provider": "github",
           "icon": "https://fitgirl-repacks.site/wp-content/uploads/2016/08/cropped-icon-32x32.jpg"
@@ -745,7 +745,7 @@
         {
           "id": "APP31006",
           "name": "Universal Tuning",
-          "package": "JamesCJ60/Universal-x86-Tuning-Utility",
+          "package": "JamesCJ60/Universal-x86-Tuning-Utility;*V2.msi",
           "description": "Optimisation pour systèmes Windows x86",
           "provider": "github",
           "icon": "https://github.com/favicon.ico"

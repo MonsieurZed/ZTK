@@ -35,15 +35,26 @@ Function Write-Base {
         [object]$invocation = $MyInvocation,
         [System.ConsoleColor] $color = "White"
     )
-    $str = ""
-    $time = (Get-Date).ToString("[HH:mm:ss]")
-    if ($Global:debug) {
-        $str = "$time $object at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)"
+    $darkColor = ""
+    if ($color -in $("Blue", "Green", "Cyan", "Red", "Magenta", "Yellow", "Gray")) {
+        $darkColor = "Dark$color"
+    }
+    elseif ($color -eq "White" ) {
+        $darkColor = "DarkGray"
     }
     else {
-        $str = "$object" 
+        $darkColor = $color
     }
-    write-host $str -ForegroundColor $color
+    $time = (Get-Date).ToString("[HH:mm:ss]")
+    if ($Global:debug) {
+        write-host "$time " -ForegroundColor $darkColor -NoNewline
+        write-host "$object " -ForegroundColor $color -NoNewline
+        write-host "at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)" -ForegroundColor $darkColor
+    }
+    else {
+        write-host $object -ForegroundColor $color
+    }
+   
 
     if (!($null -eq $x_Info_Time)) {   
         $x_Info_Time.Text = $time 
