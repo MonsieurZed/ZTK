@@ -155,7 +155,7 @@ if ($debug) {
     $json_pac = Get-Content -Path $json_dict.package -Raw | ConvertFrom-Json
 }
 else {
-    $json_app = Invoke-WebRequest -Uri $json_dict.app -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $json_app = Invoke-WebRequest -Uri $json_dict.apps -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
     $json_ext = Invoke-WebRequest -Uri $json_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
     $json_pac = Invoke-WebRequest -Uri $json_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
 }
