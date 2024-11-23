@@ -9,18 +9,9 @@
 #===========================================================================
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
 
-if ($debug) {
-    Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
-}
-else {
-    $library_dict.GetEnumerator() | ForEach-Object { Invoke-Expression (Invoke-WebRequest -Uri $_.Value).Content }
-}
-
-Console_Setup
-Console_Header 
 
 # ===========================================================================
-# Init     
+# Admin     
 # ============================================================================
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -28,7 +19,6 @@ Console_Header
 
 $admin = $false
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    Write-Error "This script must be run as admin"
     Start-Process powershell -ArgumentList "-NoExit", "-Command", "$($default_dict.command)" -Verb RunAs
     exit
 }
@@ -36,12 +26,27 @@ else {
     $admin = $true
 }
 $currentProcess = Get-Process | Where-Object { $_.Id -eq $PID }
-
 Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProcess.Id } | Stop-Process -Force
+
+
+# ===========================================================================
+# Admin     
+# ============================================================================
+
+if ($debug) {
+    Get-ChildItem -Path "$base_path\library\" -Filter "*.ps1" | ForEach-Object { . $_.FullName }
+}
+else {
+    $library_dict.GetEnumerator() | ForEach-Object { Invoke-Expression (Invoke-WebRequest -Uri $_.Value).Content }
+}
+
+# Console_Setup
+# Console_Header 
 
 if (-not (Test-Path -Path $default_dict.temp_folder)) {
     New-Item -Path "$($default_dict.temp_folder)" -ItemType Directory | Out-Null
 }
+
 # =============================================================================================     
 #  Package manager  
 # =============================================================================================  

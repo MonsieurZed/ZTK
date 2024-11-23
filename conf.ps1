@@ -1,13 +1,8 @@
 
 $debug = if (Test-Path "$env:TEMP\zedstoolkit\debug") { [bool](Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw) } else { $false }
 
-$version = "v0.2.12"
+$version = "v0.2.13"
 $base_path = if ($debug) { "D:\ZMT" } else { "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main" }
-
-$xaml_dict = @{
-  main = "$base_path/xaml/MainWindow.xaml"
-}
-$inputXML = Invoke-Expression (Invoke-WebRequest -Uri $xaml_dict.main).Content
 
 $default_dict = @{
   command     = "irm $base_path/main.ps1 | iex"
@@ -23,7 +18,9 @@ $var_dict = @{
   github_token = "$($default_dict.temp_folder)\github_token"
 }
 
-
+$xaml_dict = @{
+  main = "$base_path/xaml/MainWindow.xaml"
+}
 
 $json_dict = @{
   apps    = "$base_path/json/app.json"

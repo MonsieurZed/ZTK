@@ -149,9 +149,9 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<StackPanel x:Name="Stack_Info" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" Grid.Column="0">
-				<TextBlock x:Name="Info_Time" Text="placeholder" FontSize="13" FontWeight="Bold" Foreground="#DDDDDD" Margin="5,0,0,0"/>
-				<TextBlock x:Name="Info_Message" Text="placeholder" FontSize="13" Foreground="#DDDDDD" Margin="5,0,0,0" />
-				<TextBlock x:Name="Info_Postion" Text="placeholder" FontSize="13" FontStyle="Italic" Foreground="#DDDDDD" Margin="5,0,0,0" />
+				<TextBlock x:Name="Info_Time" Text=" " FontSize="13" FontWeight="Bold" Foreground="#DDDDDD" Margin="5,0,0,0"/>
+				<TextBlock x:Name="Info_Message" Text=" " FontSize="13" Foreground="#DDDDDD" Margin="5,0,0,0" />
+				<TextBlock x:Name="Info_Postion" Text=" " FontSize="13" FontStyle="Italic" Foreground="#DDDDDD" Margin="5,0,0,0" />
 			</StackPanel>
 		</Grid>
 	</Grid>
