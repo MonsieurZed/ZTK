@@ -9,11 +9,20 @@ else {
 Console_Setup "Downloader"
 Console_Header "Downloader"
 
-$params = DecodeHastable ($MyInvocation.MyCommand -split "'")[1]
-if ($debug) {
-    Write-Pretty $params
+try {
+    Write-Info "Getting file info"
+    $params = DecodeHastable ($MyInvocation.MyCommand -split "'")[1]
+    if ($debug) {
+        Write-Pretty $params
+    }
 }
-write-host "Getting file info" -ForegroundColor Cyan
+catch {
+    Write-Cancel "Something is wrong"
+    Write-Cancel "Please check parameters"
+    Pause
+    exit
+}
+
 
 $outputPath = $default_dict.temp_folder
 
@@ -39,13 +48,13 @@ if (Test-Path -Path $filePath) {
     }
 }
 
-write-host "Downloading From : $($params.file_url)"
-write-host "Downloading To   : $filePath" 
-write-host "Downloading Size : $remoteFileSize" 
+Write-Ok "Downloading From : $($params.file_url)"
+Write-Ok "Downloading To   : $filePath" 
+Write-Ok "Downloading Size : $remoteFileSize" 
 
 if (!(Test-Path -Path $filePath)) { 
     if ($remoteFileSize -gt (100 * 1024 * 1024)) {   
-        write-host "Downloading with BitsTransfer" -ForegroundColor Cyan
+        Write-Info "Downloading with BitsTransfer"
         try {
             $bitsTransfer = Start-BitsTransfer -Source $params.file_url -Destination $filePath -Asynchronous -Priority Normal
 
@@ -87,16 +96,16 @@ if (!(Test-Path -Path $filePath)) {
 
             # Finalise le transfert
             Complete-BitsTransfer -BitsJob $bitsTransfer
-            write-host "Downloaded finished : $filePath"  -ForegroundColor Cyan
+            Write-Info "Downloaded finished : $filePath" 
         }
         catch {
-            write-host "Error while downloading : $_"  -ForegroundColor Red
+            Write-Error "Error while downloading : $_"  
             pause
         }
     }
     else {
         try {
-            write-host "Downloading with HttpWebRequest"  -ForegroundColor Cyan
+            Write-Info "Downloading with HttpWebRequest"  
             $startTime = Get-Date
             # Requête initiale pour obtenir la taille du fichier, en utilisant Int64 pour les grands fichiers
             $request = [System.Net.WebRequest]::Create($params.file_url)
@@ -133,10 +142,10 @@ if (!(Test-Path -Path $filePath)) {
             $responseStream.Close()
             $webResponse.Close()
 
-            write-host "Finished : $filePath"  -ForegroundColor Cyan
+            Write-Info  "Finished : $filePath" 
         }
         catch {
-            write-host "Error while downloading : $_"  -ForegroundColor Red
+            Write-Error  "Error while downloading : $_" 
             pause
         }
     }
@@ -145,34 +154,34 @@ if (!(Test-Path -Path $filePath)) {
 
 if (Test-Path -Path $filePath) {
     try {
-        write-host "Staring $filePath..."  -ForegroundColor Cyan
+        Write-Info "Staring $filePath..."  
         switch ([System.IO.Path]::GetExtension($filePath)) {
             '.iso' {
-                write-host 'File extension : .iso' -ForegroundColor Cyan
+                Write-Info 'File extension : .iso' 
                 $mountResult = Mount-DiskImage -ImagePath $filePath -PassThru
                 $driveLetter = ($mountResult | Get-Volume).DriveLetter
                 $exeFiles = Get-ChildItem "$driveLetter`:\" -Filter *.exe -Recurse | Select-Object -First 1
                 if ($exeFiles) {
                     $exePath = $exeFiles.FullName
-                    write-host "Loading $exePath"
+                    Write-Info "Loading $exePath"
                     Start-Process -FilePath $exePath -wait
                     Dismount-DiskImage -ImagePath $filePath
                 }
                 else {
-                    write-host "No exe file found"
+                    Write-Info "No exe file found"
                     Start-Process "$driveLetter`:\"
                 }
             }
             '.exe' {
-                write-host 'File extension : .exe' -ForegroundColor Cyan
+                Write-Info 'File extension : .exe' 
                 Start-Process -FilePath $filePath
             }
             '.msi' {
-                write-host 'File extension : .msi' -ForegroundColor Cyan
+                Write-Info 'File extension : .msi' 
                 Start-Process -FilePath $filePath
             }
             '.zip' {
-                write-host 'File extension : .zip' -ForegroundColor Cyan
+                Write-Info 'File extension : .zip' 
                 $extractPath = "$filePath-extracted"
                 Add-Type -AssemblyName System.IO.Compression.FileSystem
                 if (!(Test-Path -Path $extractPath)) {
@@ -185,18 +194,20 @@ if (Test-Path -Path $filePath) {
                     Start-Process -FilePath  $exeFile.FullName
                 }
                 else {
-                    Write-Host "No .exe found in archive."  -ForegroundColor Red
+                    Write-Error "No .exe found in archive." 
                 }
             }
         }
     }
     catch {
-        write-host "Error opening $_"  -ForegroundColor Red
+        Write-Error "Error opening $_" 
         pause
     }
 }
 else {
-    write-host "Couldn't find file"  -ForegroundColor Red
+    Write-Error "Couldn't find file" 
 }
+
 pause
+
 Stop-Process -Id $PID

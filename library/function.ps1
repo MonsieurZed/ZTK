@@ -1,18 +1,13 @@
 # ============================================================================================= 
 # ================================   Function Library  ========================================
 # ============================================================================================= 
-
-
 function ExecuteScript {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
         [string]$script_url,
         [object]$params
     )
-
     $scriptName = [System.IO.Path]::GetFileName($script_url)
-    $scriptPath = [System.IO.Path]::Combine($default_dict.temp_folder, $scriptName)
-
     try {
         $encoded = EncodeHastable $params
         Start-Process powershell -ArgumentList @(
@@ -61,6 +56,4 @@ function GithubDownload {
     else {
         ExecuteScript $script_dict.download -params @{file_url = $file_url; download_filename = $asset.name ; filter_filename = $filename_filter }
     }
-
-
 }

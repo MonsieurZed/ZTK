@@ -28,7 +28,6 @@ function GetHastable() {
 }
 
 #================ Write =============================
-
 Function Write-Base {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
@@ -98,7 +97,6 @@ Function Write-Cancel {
     Write-Base -Object $Object -invocation $invocation -color Magenta
 }
 
-write-error "test"
 Function Write-Pretty {
     param (
         [Parameter(Position = 0, Mandatory = $true)]

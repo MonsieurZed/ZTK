@@ -263,10 +263,13 @@ Write-Info "Ready to go !"
 #===========================================================================
 # Closing
 #===========================================================================
+Write-Host $default_dict.temp_folder
+$v = Get-ChildItem -Path $default_dict.temp_folder | Where-Object { $_ -match ".tmp" }
 
 $form.add_Closing({
+        Write-Info "Closing..."
+        Get-ChildItem -Path $default_dict.temp_folder -File -Filter "*.tmp" -Force | Remove-Item -Force
         Stop-Process -Id $PID
     })
-
 $form.ShowDialog() | out-null
 

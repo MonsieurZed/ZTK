@@ -12,6 +12,12 @@ else {
 Console_Setup "Downloader"
 Console_Header "Downloader"
 
+$ExecutionContext.InvokeCommand.RegisterEngineEvent([System.Console]::CancelKeyPress, {
+        # Command to execute when console is closing
+        Write-Host "Console is closing. Executing cleanup..."
+        Pause
+    })
+
 while ($select -eq $false) {      
 
     # Liste des disques logiques disponibles
