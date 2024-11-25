@@ -1,13 +1,12 @@
 # ============================================================================================= 
 # ================================   Function Library  ========================================
 # ============================================================================================= 
-function ExecuteScript {
+function Execute_Script {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
         [string]$script_url,
         [object]$params
     )
-    $scriptName = [System.IO.Path]::GetFileName($script_url)
     try {
         $encoded = EncodeHastable $params
         Start-Process powershell -ArgumentList @(
@@ -18,11 +17,11 @@ function ExecuteScript {
         # Start-Process powershell -ArgumentList "-NoExit", "-File", $scriptPath, $encoded -Verb RunAs
     }
     catch {
-        Write-Error "[$($MyInvocation.ScriptLineNumber)] Error start $scriptName : $_"  
+        Write-Error "Error starting $([System.IO.Path]::GetFileName($script_url)) : $_"  
     }
 }
 
-function GithubDownload {
+function Github_Download {
     param (
         [string]$repo,
         [string]$github_token,
@@ -33,7 +32,7 @@ function GithubDownload {
     $headers = @{
         Accept = "application/vnd.github.v3+json"
     }
-    if ($github_token) { $headers.Authorization = "token $github_token" }
+    if ($github_token -and ($github_token -ne 'no_token')) { $headers.Authorization = "token $github_token" }
 
     $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest" -Headers $headers
 
@@ -62,7 +61,7 @@ function GithubDownload {
         return
     }
     else {
-        ExecuteScript $script_dict.download -params @{file_url = $file_url; download_filename = $asset.name ; filter_filename = $filename_filter }
+        Execute_Script $script_dict.download -params @{file_url = $file_url; download_filename = $asset.name ; filter_filename = $filename_filter }
     }
     
 }

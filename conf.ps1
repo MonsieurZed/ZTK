@@ -35,8 +35,9 @@ $json_dict = @{
 }
 
 $script_dict = @{
-  download = "$base_path/script/download.ps1"
-  backup   = "$base_path/script/backup.ps1"
+  download  = "$base_path/script/download.ps1"
+  backup    = "$base_path/script/backup.ps1"
+  installer = "$base_path/script/installer.ps1"
 }
 
 $library_dict = @{

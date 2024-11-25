@@ -7,9 +7,19 @@
 function EncodeHastable() {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [System.Collections.Hashtable]$object
+        [System.Collections.Hashtable]$object,
+        [bool] $dbg = $false
     )
-    return [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((ConvertTo-Json $object -Compress)))
+    if ($dbg) {
+        $jsoned = ConvertTo-Json $object -Compress
+        write-host $jsoned
+        $b64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($jsoned))
+        write-host $b64
+        return $b64
+    }
+    else { 
+        return [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((ConvertTo-Json $object -Compress))) 
+    }
 }
 
 function DecodeHastable() {
@@ -24,7 +34,7 @@ function DecodeHastable() {
 Function Write-Base {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$object,
+        [string]$message,
         [object]$invocation = $MyInvocation,
         [System.ConsoleColor] $color = "White"
     )
@@ -39,13 +49,18 @@ Function Write-Base {
         $darkColor = $color
     }
     $time = (Get-Date).ToString("[HH:mm:ss]")
+
+    if ($message.Length -gt 150) {
+        $message = $message.Substring(0, $maxLength) + "..."
+    }
+
     if ($Global:debug) {
         write-host "$time " -ForegroundColor $darkColor -NoNewline
-        write-host "$object " -ForegroundColor $color -NoNewline
+        write-host "$message " -ForegroundColor $color -NoNewline
         write-host "at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)" -ForegroundColor $darkColor
     }
     else {
-        write-host $object -ForegroundColor $color
+        write-host $message -ForegroundColor $color
     }
    
 
@@ -61,44 +76,53 @@ Function Write-Base {
 Function Write-Error {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$object,
+        [string]$message,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $object -invocation $invocation -color Red
+    Write-Base -message $message -invocation $invocation -color Red
 }
 
 Function Write-Sucess {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$object,
+        [string]$message,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $object -invocation $invocation -color DarkCyan
+    Write-Base -message $message -invocation $invocation -color DarkCyan
 }
 Function Write-Sucess {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$object,
+        [string]$message,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $object -invocation $invocation -color Green
+    Write-Base -message $message -invocation $invocation -color Green
 }
 Function Write-Info {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$object,
+        [string]$message,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $object -invocation $invocation -color White
+    Write-Base -message $message -invocation $invocation -color White
 }
 
 Function Write-Cancel {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
-        [string]$object,
+        [string]$message,
         [object]$invocation = $MyInvocation
     )
-    Write-Base -Object $object -invocation $invocation -color Magenta
+    Write-Base -message $message -invocation $invocation -color Magenta
+}
+
+Function Write-Event {
+    param (
+        [Parameter(Position = 0, Mandatory = $true)]
+        [string]$message,
+        [object]$invocation = $MyInvocation
+    )
+    Write-Base -message $message -invocation $invocation -color Blue
 }
 
 Function Write-Pretty {

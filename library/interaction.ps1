@@ -1,7 +1,6 @@
 # ============================================================================================= 
 # ============================ Main Functions  ================================================
 # ============================================================================================= 
-
 function Button_Applications {
     param (
         [System.Object[]]$list
@@ -13,19 +12,7 @@ function Button_Applications {
         Write-Cancel "No software has been selected" 
         return
     }
-
-    if (($choco -eq $false) -or ($winget -eq $false)) {
-        $result = [System.Windows.MessageBox]::Show("Cette fonctionnalité requiere Winget et Chocolatey. Voulez vous les installer?", "Package Manager", [System.Windows.MessageBoxButton]::OKCancel)
-        if ($result -eq [System.Windows.MessageBoxResult]::OK) {
-            $winget = CustomInstallWinget
-            $choco = CustomInstallChoco
-        }
-        elseif ($result -eq [System.Windows.MessageBoxResult]::Cancel) {
-            Write-Cancel "Installation cancelled" 
-        }
-    }
-    
-
+ 
     $names = ($checked | ForEach-Object { $_.name }) -join ", "
     $result = [System.Windows.MessageBox]::Show("Voulez vous installez le(s) logiciel(s) suivant : $names", "Package Manager", [System.Windows.MessageBoxButton]::OKCancel)
    
@@ -49,14 +36,14 @@ function Button_Applications {
                 $conf_dict.exe {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Info "[$($item.provider)] $($item.name) : Starting"
-                    ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
+                    Execute_Script $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.exe" }
                     Write-Info "Download started in a other shell"
                     Write-Info "[$($item.provider)] $($item.name) : Finished"
                 } 
                 $conf_dict.iso {
                     $cleanedfilename = $item.name -replace '[ .:*?"<>|]', ''
                     Write-Info "[$($item.provider)] $($item.name) : Starting"
-                    ExecuteScript $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
+                    Execute_Script $script_dict.download  -params @{file_url = $item.package ; download_filename = "$cleanedfilename.iso" }
                     Write-Info "Download started in a other shell"
                     Write-Info "[$($item.provider)] $($item.name) : Finished"
                 } 
@@ -64,7 +51,7 @@ function Button_Applications {
                     Write-Info "[$($item.provider)] $($item.name) : Starting"
                     Write-Info ($item.package -split ";")
                     $repo, $ghf, $ff = $item.package -split ";"
-                    GithubDownload -repo $repo -token $github_token -github_filename_filter $ghf -filename_filter $ff
+                    Github_Download -repo $repo -token $github_token -github_filename_filter $ghf -filename_filter $ff
                     Write-Info "Download started in a other shell"
                     Write-Info "[$($item.provider)] $($item.name) : Finished"
                 } 

@@ -25,12 +25,13 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 else {
     $admin = $true
 }
+
 $currentProcess = Get-Process | Where-Object { $_.Id -eq $PID }
 Get-Process -Name $currentProcess.Name | Where-Object { $_.Id -ne $currentProcess.Id } | Stop-Process -Force
 
 
 # ===========================================================================
-# Admin     
+# Load libraries    
 # ============================================================================
 
 if ($Global:debug) {
@@ -40,6 +41,10 @@ if ($Global:debug) {
 else {
     $library_dict.GetEnumerator() | ForEach-Object { Invoke-Expression (Invoke-WebRequest -Uri $_.Value).Content }
 }
+
+# ===========================================================================
+# Configure console   
+# ============================================================================
 
 Console_Setup 
 Console_Header 
@@ -57,7 +62,11 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     $source.winget = $true
 }
 else {
-    Write-Error "[$($MyInvocation.ScriptLineNumber)] Winget is not installed" 
+    Write-Event "Some packages need Winget to be installed" 
+    $result = Read-Host " - Would you like to install it now? (Y/n)"
+    if ($result.ToLower() -ieq "y") {
+        $source.winget = CustomInstallWinget
+    }
 
 }
 
@@ -67,18 +76,25 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
 
 }
 else {
-    Write-Error "[$($MyInvocation.ScriptLineNumber)] Choco is not installed" 
+    Write-Event "Some packages need Choloatey to be installed" 
+    $result = Read-Host "Would you like to install it now? (Y/n)"
+    if ($result.ToLower() -ieq "y") {
+        $source.choco = CustomInstallChoco
+    }
     
 }
 
 $github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
 
 if ($null -eq $github_token) { 
-    $github_token = Read-Host "Enter your GitHub token (https://github.com/settings/tokens)" 
-    $save = Read-Host "Do you want to save the key for later use { Y/N }" 
+    $github_token = Read-Host "(Optionel) Enter your GitHub token (https://github.com/settings/tokens)" 
+    if (-not [string]::IsNullOrWhiteSpace($github_token)) {
+        $save = Read-Host "Do you want to save the token for later use  (Y/n)" 
+    }
 
     if ($save.ToLower() -ieq "y") { 
         Set-Content -Path $var_dict.github_token -Value $github_token
+        Write-Event "Github token saved at $($var_dict.github_token)"
     } 
 }
 
@@ -109,7 +125,8 @@ else {
 
 #===========================================================================
 # Load XAML  and Forms
-#===========================================================================\
+#===========================================================================
+
 Write-Info "Loading xaml..."
 
 if ($Global:debug) { 
@@ -135,6 +152,7 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 #===========================================================================
 # WPF Loading
 #===========================================================================
+
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
 $x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
@@ -214,9 +232,9 @@ $tools_list = @(
     ),
     ("Zed Toolkit", @(
         ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
-        ("Backup User", { ExecuteScript $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
+        ("Backup User", { Execute_Script $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
         ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
-        ("Clean and Exit", { Button_CleanMyMess }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
+        ("Clean and Exit", { Button_Clean_App }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
     ("Utility", @(
         ("Winget", { Button_Install_Winget }, "Install Winget Packet Manager", ""),
@@ -233,10 +251,10 @@ $soft_list = @(
         ('Titus', { Button_Titus }, 'Package installer + Windows Button_isation'))
     ),
     ('Software', @(
-        ('Dipiscan', { ExecuteScript $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { ExecuteScript $script_dict.download  -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } }, $null),
-        ('Sublime Text', { ExecuteScript $script_dict.download  -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }, $null),
-        ('Office Tool Plus', { ExecuteScript $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null))
+        ('Dipiscan', { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
+        ('TreeSize', { Execute_Script $script_dict.download  -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } }, $null),
+        ('Sublime Text', { Execute_Script $script_dict.download  -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }, $null),
+        ('Office Tool Plus', { Execute_Script $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null))
     ),
     ('Hack', @(
         ('SpotX', 

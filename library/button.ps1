@@ -59,7 +59,7 @@ function Button_Add_Shortcut {
     $desk_shortcut.Save()
 }
 
-function Button_Add_ExclusionFolder {
+function Button_Add_Exclusion_Folder {
     $exclusionFolderPath = "C:\Exclusions" 
     if (!(Test-Path -Path $exclusionFolderPath)) {
         New-Item -Path $exclusionFolderPath -ItemType Directory | Out-Null
@@ -76,16 +76,16 @@ function Button_Add_ExclusionFolder {
             Invoke-Item -Path $exclusionFolderPath
         }
         else {
-            Write-Error "[$($MyInvocation.ScriptLineNumber)] Exclusion path is not defined."
+            Write-Error "Exclusion path is not defined."
         }
     }
     else {
-        Write-Error "[$($MyInvocation.ScriptLineNumber)] Failed to add the folder to the exclusion list." 
+        Write-Error "Failed to add the folder to the exclusion list." 
     }   
 }
 
 
-function Button_CleanApp {
+function Button_Clean_App {
     $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$default_dict.name.lnk")
     $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$default_dict.name.lnk")
 
