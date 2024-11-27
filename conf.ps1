@@ -25,7 +25,8 @@ $var_dict = @{
 }
 
 $xaml_dict = @{
-  main = "$base_path/xaml/MainWindow.xaml"
+  main  = "$base_path/xaml/MainWindow.xaml"
+  style = "$base_path/xaml/style.xaml"
 }
 
 $json_dict = @{
@@ -43,10 +44,11 @@ $script_dict = @{
 $library_dict = @{
   function    = "$base_path/library/function.ps1"
   console     = "$base_path/library/console.ps1"
-  button      = "$base_path/library/button.ps1"
+  script      = "$base_path/library/script.ps1"
   drawing     = "$base_path/library/drawing.ps1"
   interaction = "$base_path/library/interaction.ps1"
 }
+
 $source = @{
   choco  = $false
   winget = $false
@@ -80,4 +82,17 @@ $web_dict = @{
   firefox = @(
     "C:\Program Files\Mozilla Firefox\firefox.exe"
   )    
+}
+
+Function Load_Library {
+  param (
+    [Parameter(Position = 0, Mandatory = $true)]
+    [object]$lib_name
+  )
+  if ($Global:debug) {
+    . $lib_name
+  }
+  else {
+    Invoke-Expression (Invoke-WebRequest -Uri $lib_name).Content
+  }
 }
