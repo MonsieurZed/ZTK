@@ -170,7 +170,8 @@ function Draw_Checkboxes {
 function Draw_Buttons {
     param (
         [Object[]]$button_list,
-        [Object]$wrap_panel
+        [Object]$wrap_panel,
+        [Object]$form
     )
 
     foreach ($category in $button_list) {
@@ -195,7 +196,7 @@ function Draw_Buttons {
             $button.Height = 30
             $button.Background = "#222222"
             $button.ToolTip = $description
-
+            $button.Style = $Form.Resources["ButtonStyle"]
             $button.Add_Click(
                 $action
             )

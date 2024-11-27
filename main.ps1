@@ -147,18 +147,40 @@ $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 try { $form = [Windows.Markup.XamlReader]::Load( $reader ) }
 catch { Write-Error "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed." }
  
-$xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $form.FindName($_.Name) }
+$xaml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name "x_$($_.Name)" -Value $form.FindName($_.Name) }
 
 #===========================================================================
 # WPF Loading
 #===========================================================================
+
+Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public class User32 {
+   [DllImport("user32.dll")]
+   [return: MarshalAs(UnmanagedType.Bool)]
+   public static extern bool ReleaseCapture();
+   
+   [DllImport("user32.dll")]
+   public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+}
+"@
+
+Add-Type -AssemblyName PresentationFramework
+Add-Type -AssemblyName PresentationCore
+Add-Type -AssemblyName WindowsBase
+
+$x_titleBar.Add_MouseLeftButtonDown({ $form.DragMove() })
+$x_closeButton.Add_Click({ $form.Close() })
+$x_maxButton.Add_Click({ if ($form.WindowState -eq 'Maximized') { $form.WindowState = 'Normal' } else { $form.WindowState = 'Maximized' } })
+$x_minButton.Add_Click({ $form.WindowState = 'Minimized' })
+
 
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
 $x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
 $x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
 
 
-$x_Grid_MenuBar.Background = '#111111'
 $x_Grid_MainWindow.Background = '#222222'
 $x_Grid_StatusBar.Background = '#111111'
 $x_Grid_ButtonZone.Background = '#131313'
@@ -168,8 +190,11 @@ $x_Grid_StatusBar.Background = '#242424'
 $x_Dropdown_Packages.Background = '#222222'
 
 $x_R_Winget.Foreground = if ($source.winget) { 'Green' }else { 'red' }
+$x_R_Winget.Tooltip = if (!$source.winget) { "Winget n'est pas installé, certaine applications ne seront donc pas accessible." }
 $x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
+$x_R_Choco.Tooltip = if (!$source.choco) { "Chocolatey n'est pas installé, certaine applications ne seront donc pas accessible." }
 $x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
+$x_R_Github.Tooltip = if (!$source.github) { "Pas de Token Github, certaine applications ne seront donc pas accessible." }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
 if ($Global:debug) {
@@ -216,7 +241,7 @@ $windows_list = @(
         ("Device Manager", { Start-Process "devmgmt.msc" }, "Gérer les périphériques matériels", ""))
     ))
 
-Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows
+Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows -form $form
 
 $tools_list = @(
     ('Folder', @(
@@ -242,7 +267,7 @@ $tools_list = @(
     )
 )
 
-Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools
+Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools -form $form
 
 $soft_list = @(
     ('Tools', @(
@@ -274,7 +299,7 @@ $soft_list = @(
         'Windows et Office Activateur')) 
     )
 )
-Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft
+Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft -form $form
 
 Write-Info "Ready to go !"
 

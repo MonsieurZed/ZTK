@@ -3,44 +3,78 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:local="clr-namespace:ZMT" mc:Ignorable="d" SizeToContent="WidthAndHeight" Title="Zed's Toolkit" Icon="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/purple-shark.ico" Height="350" Width="525">
+	xmlns:local="clr-namespace:ZMT" mc:Ignorable="d" SizeToContent="WidthAndHeight" Title="Zed's Toolkit" AllowsTransparency="True" WindowStyle="None" Background="Transparent" Opacity="0.95">
 	<Window.Resources>
-		<SolidColorBrush x:Key="BackgroundBrush" Color="Black" />
-		<SolidColorBrush x:Key="ForegroundBrush" Color="White" />
-		<Style x:Key="WindowStyle" TargetType="Window">
-			<Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+		<Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Background" Value="#3498db"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="BorderThickness" Value="0.5"/>
+			<Setter Property="BorderBrush" Value="#2980b9"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+							<ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="border" Property="Background" Value="#2980b9"/>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="border" Property="Background" Value="#21618c"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
 		</Style>
-		<Style x:Key="TextBlockStyle" TargetType="TextBlock">
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="FontWeight" Value="Bold" />
-			<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-		</Style>
-		<Style x:Key="ComboBoxStyle" TargetType="ComboBox">
-			<Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
-			<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Style x:Key="TopButtonStyle" TargetType="Button">
+			<Setter Property="Background" Value="#222222"/>
+			<Setter Property="Foreground" Value="#AAAAAA"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+							<ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="border" Property="Background" Value="#2980b9"/>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="border" Property="Background" Value="#21618c"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
 		</Style>
 	</Window.Resources>
 	<Grid x:Name="Grid_Window">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="30" />
+			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
-		<Grid x:Name="Grid_MenuBar" Grid.Row="0">
+		<Grid Grid.Row='0' Background='#333333' x:Name='TitleBar'>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="auto"/>
 			</Grid.ColumnDefinitions>
-			<TextBlock Grid.Column="1" FontSize="15" Foreground="White" Margin="5">
-				<Run Text="Checklist: " Foreground="Gray"/>
-				<Run x:Name="R_Winget" Text="Winget" Foreground="Red"/>
-				<Run Text=" / " Foreground="Gray" />
-				<Run x:Name="R_Choco" Text="Choco" Foreground="Red"/>
-				<Run Text=" / " Foreground="Gray" />
-				<Run x:Name="R_Github" Text="Github" Foreground="Red"/>
-				<Run Text=" / " Foreground="Gray" />
-				<Run x:Name="R_Admin" Text="Admin" Foreground="Red"/>
-			</TextBlock>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column='0'>
+				<Image Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/purple-shark.ico" Width="20" Height="20" Margin="3" />
+				<TextBlock Text="Zed's Toolkit" VerticalAlignment="Center" />
+			</StackPanel>
+			<StackPanel Orientation='Horizontal' HorizontalAlignment='Right' Grid.Column='1'>
+				<Button Content='_' x:Name='MinButton' Width='30' Style="{StaticResource TopButtonStyle}"/>
+				<Button Content='[]' x:Name='MaxButton' Width='30' Style="{StaticResource TopButtonStyle}"/>
+				<Button Content='X' x:Name='CloseButton' Width='30' Style="{StaticResource TopButtonStyle}"/>
+			</StackPanel>
 		</Grid>
 		<Grid x:Name="Grid_MainWindow" Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -147,12 +181,23 @@
 		<Grid x:Name="Grid_StatusBar" Grid.Row="2" Height="auto">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
 			<StackPanel x:Name="Stack_Info" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" Grid.Column="0">
 				<TextBlock x:Name="Info_Time" Text=" " FontSize="13" FontWeight="Bold" Foreground="#DDDDDD" Margin="5,0,0,0"/>
 				<TextBlock x:Name="Info_Message" Text=" " FontSize="13" Foreground="#DDDDDD" Margin="5,0,0,0" />
 				<TextBlock x:Name="Info_Postion" Text=" " FontSize="13" FontStyle="Italic" Foreground="#DDDDDD" Margin="5,0,0,0" />
 			</StackPanel>
+			<TextBlock Grid.Column="1" FontSize="15" Foreground="White" Margin="5">
+				<Run Text="Checklist: " Foreground="Gray"/>
+				<Run x:Name="R_Winget" Text="Winget" Foreground="Red"/>
+				<Run Text=" / " Foreground="Gray" />
+				<Run x:Name="R_Choco" Text="Choco" Foreground="Red"/>
+				<Run Text=" / " Foreground="Gray" />
+				<Run x:Name="R_Github" Text="Github" Foreground="Red"/>
+				<Run Text=" / " Foreground="Gray" />
+				<Run x:Name="R_Admin" Text="Admin" Foreground="Red"/>
+			</TextBlock>
 		</Grid>
 	</Grid>
 </Window>
