@@ -7,8 +7,8 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<!--<ResourceDictionary Source="D:/ZMT/xaml/Style.xaml" />-->
-				<ResourceDictionary Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" />
+				<ResourceDictionary Source="D:/ZMT/xaml/Style.xaml" />
+				<!-- <ResourceDictionary Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" /> -->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Window.Resources>
@@ -16,7 +16,7 @@
 		<Grid x:Name="Grid_Window">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="auto" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="auto" />
 				<RowDefinition Height="auto" />
 			</Grid.RowDefinitions>
 			<Grid x:Name="Grid_MainWindow" Grid.Row="1">
@@ -79,26 +79,26 @@
 							</Grid.ColumnDefinitions>
 							<TextBlock Text="Applications" FontSize="16" FontWeight="Bold" Foreground="White" Margin="10,15,10,10" Grid.Column="0" VerticalAlignment="Center"/>
 							<StackPanel Orientation="Horizontal" Grid.Column="1" Margin="10,10,10,0">
-								<Button x:Name="Button_Copy_Applications" ToolTip="Copy to clipboard" Foreground="White" Background="#444444" FontWeight="Bold" VerticalAlignment="Center">
+								<Button x:Name="Button_Copy_Applications" ToolTip="Copy to clipboard" Style="{StaticResource TopButtonStyle}" Width="30" Height="30" Margin="0">
 									<Button.Content>
 										<Image Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/copy.png" Width="25" Height="25"/>
 									</Button.Content>
 								</Button>
-								<Button x:Name="Button_Paste_Applications" ToolTip="Paste from clipboard" Foreground="White" Background="#444444" FontWeight="Bold" VerticalAlignment="Center">
+								<Button x:Name="Button_Paste_Applications" ToolTip="Paste from clipboard" Style="{StaticResource TopButtonStyle}" Width="30" Height="30" Margin="0">
 									<Button.Content>
 										<Image Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/paste.png" Width="25" Height="25"/>
 									</Button.Content>
 								</Button>
-								<Button x:Name="Button_Clear_Applications" ToolTip="Clear" Foreground="White" Background="#444444" FontWeight="Bold" VerticalAlignment="Center">
+								<Button x:Name="Button_Clear_Applications" ToolTip="Clear" Style="{StaticResource TopButtonStyle}" Width="30" Height="30" Margin="0">
 									<Button.Content>
-										<Image Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/reset.png" Width="25" Height="25"/>
+										<Image Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/reset.png" Width="25" Height="25" />
 									</Button.Content>
 								</Button>
 							</StackPanel>
 							<ComboBox x:Name="Dropdown_Packages" Width="120" Height="25" Margin="10,10,10,0" Grid.Column="2" VerticalAlignment="Center">
 								<ComboBoxItem Content="Package" IsSelected="True" IsEnabled="False"/>
 							</ComboBox>
-							<Button x:Name="Button_Applications" Content="Install" Width="100" Height="30" Foreground="White" Background="#222222" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="3" Margin="10,10,10,0"/>
+							<Button x:Name="Button_Applications" Content="Install" Style="{StaticResource TopButtonStyle}" Grid.Column="3"/>
 						</Grid>
 						<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 							<WrapPanel x:Name="WP_Applications" Margin="5" ItemWidth="Auto" ItemHeight="Auto" Orientation="Vertical" MaxHeight="600" VerticalAlignment="Top"></WrapPanel>
@@ -113,7 +113,7 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 							<TextBlock Text="Extensions" FontSize="16" FontWeight="Bold" Foreground="White" Margin="10,15,10,10" Grid.Column="0"/>
-							<Button x:Name="Button_Extensions" Content="Open" Width="100" Height="30" Foreground="White" Background='#222222' FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,10,0"/>
+							<Button x:Name="Button_Extensions" Content="Open" Grid.Column="1" Style="{StaticResource TopButtonStyle}"/>
 						</Grid>
 						<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 							<WrapPanel x:Name="WP_Extensions" Margin="5" ItemWidth="Auto" ItemHeight="Auto" Orientation="Vertical" MaxHeight="600" VerticalAlignment="Top"></WrapPanel>

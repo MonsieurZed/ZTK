@@ -2,13 +2,20 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!-- Color Dictionnary -->
-  <SolidColorBrush x:Key="PrimaryColor" Color="#11182D" />
-  <SolidColorBrush x:Key="SecondColor" Color="#11182D" />
+  <SolidColorBrush x:Key="PrimaryColor" Color="#092635" />
+  <SolidColorBrush x:Key="SecondColor" Color="#1B4242" />
+  <SolidColorBrush x:Key="ThirdColor" Color="#5C8374" />
+  <SolidColorBrush x:Key="FourthColor" Color="#9EC8B9" />
+
   <SolidColorBrush x:Key="TextColor" Color="White" />
   <!-- Top Style -->
   <Style x:Key="TopButtonStyle" TargetType="Button">
-    <Setter Property="Background" Value="#222222"/>
+    <Setter Property="Background" Value="{StaticResource SecondColor}"/>
     <Setter Property="Foreground" Value="#FFFFFF"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Margin" Value="10,10,10,0"/>
+    <Setter Property="Width" Value="100"/>
+    <Setter Property="Height" Value="30"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -21,10 +28,10 @@
           </Border>
           <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-              <Setter TargetName="border" Property="Background" Value="#2980b9"/>
+              <Setter TargetName="border" Property="Background" Value="{StaticResource ThirdColor}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-              <Setter TargetName="border" Property="Background" Value="#21618c"/>
+              <Setter TargetName="border" Property="Background" Value="{StaticResource FourthColor}"/>
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -33,9 +40,10 @@
   </Style>
   <!-- Main Style -->
   <Style x:Key="Main_Stack_Button" TargetType="Button">
-    <Setter Property="Background" Value="#000000"/>
+    <Setter Property="Background" Value="{StaticResource SecondColor}"/>
     <Setter Property="Foreground" Value="White"/>
     <Setter Property="BorderThickness" Value="0.5"/>
+    <Setter Property="Margin" Value="1"/>
     <Setter Property="BorderBrush" Value="#2980b9"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -47,10 +55,10 @@
           </Border>
           <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-              <Setter TargetName="border" Property="Background" Value="#2980b9"/>
+              <Setter TargetName="border" Property="Background" Value="{StaticResource ThirdColor}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-              <Setter TargetName="border" Property="Background" Value="#21618c"/>
+              <Setter TargetName="border" Property="Background" Value="{StaticResource FourthColor}"/>
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -58,14 +66,14 @@
     </Setter>
   </Style>
   <Style x:Key="Main_Stack_Border" TargetType="Border">
-    <Setter Property="Background" Value="#222222"/>
+    <Setter Property="Background" Value="{StaticResource SecondColor}"/>
     <Setter Property="Margin" Value="2"/>
-    <Setter Property="Padding" Value="5"/>
+    <Setter Property="Padding" Value="2"/>
     <Setter Property="CornerRadius" Value="5"/>
   </Style>
   <Style x:Key="Main_Stack_StackPanel" TargetType="StackPanel">
     <Setter Property="Orientation" Value="Vertical"/>
-    <Setter Property="Margin" Value="5"/>
+    <Setter Property="Margin" Value="2"/>
   </Style>
   <Style x:Key="Main_Stack_Title_StackPanel" TargetType="StackPanel">
     <Setter Property="Orientation" Value="Horizontal"/>

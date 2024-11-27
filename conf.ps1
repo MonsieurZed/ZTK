@@ -96,6 +96,3 @@ Function Load_Library {
     Invoke-Expression (Invoke-WebRequest -Uri $lib_name).Content
   }
 }
-
-https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml
-https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/style.xaml
