@@ -65,7 +65,7 @@ else {
     Write-Event "Some packages need Winget to be installed" 
     $result = Read-Host " - Would you like to install it now? (Y/n)"
     if ($result.ToLower() -ieq "y") {
-        $source.winget = CustomInstallWinget
+        $source.winget = Install_Winget
     }
 
 }
@@ -79,9 +79,8 @@ else {
     Write-Event "Some packages need Choloatey to be installed" 
     $result = Read-Host "Would you like to install it now? (Y/n)"
     if ($result.ToLower() -ieq "y") {
-        $source.choco = CustomInstallChoco
+        $source.choco = Install_Choco
     }
-    
 }
 
 $github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
@@ -91,10 +90,11 @@ if ($null -eq $github_token) {
     if (-not [string]::IsNullOrWhiteSpace($github_token)) {
         $save = Read-Host "Do you want to save the token for later use  (Y/n)" 
     }
-
-    if ($save.ToLower() -ieq "y") { 
-        Set-Content -Path $var_dict.github_token -Value $github_token
-        Write-Event "Github token saved at $($var_dict.github_token)"
+    if ($github_token) {
+        if ($save.ToLower() -ieq "y") { 
+            Set-Content -Path $var_dict.github_token -Value $github_token
+            Write-Event "Github token saved at $($var_dict.github_token)"
+        }
     } 
 }
 
@@ -153,9 +153,9 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 # WPF Loading
 #===========================================================================
 
-$x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
-$x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
-$x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
+$x_Script_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
+$x_Script_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
+$x_Script_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
 
 
 $x_Grid_MenuBar.Background = '#111111'
@@ -184,10 +184,10 @@ else {
 }
 
 $applications = Draw_Checkboxes -json $json_app  -wrap_panel $x_WP_Applications -source $source
-$x_Button_Applications.Add_Click({ Button_Applications -list $applications })
+$x_Script_Applications.Add_Click({ Script_Applications -list $applications })
 
 $extensions = Draw_Checkboxes -json $json_ext -wrap_panel $x_WP_Extensions
-$x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
+$x_Script_Extensions.Add_Click({ Script_Extensions -list $extensions })
 
 $packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
@@ -216,7 +216,7 @@ $windows_list = @(
         ("Device Manager", { Start-Process "devmgmt.msc" }, "Gérer les périphériques matériels", ""))
     ))
 
-Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows
+Draw_Buttons -Script_list $windows_list -wrap_panel $x_WP_Windows
 
 $tools_list = @(
     ('Folder', @(
@@ -226,29 +226,29 @@ $tools_list = @(
         ('Downloads', { Invoke-Item -Path "$env:USERPROFILE\Downloads" }, $null, "shell32.dll,-226"),
         ('Videos', { Invoke-Item -Path "$env:USERPROFILE\Videos" }, $null, "shell32.dll,-116"),
         ('Pictures', { Invoke-Item -Path "$env:USERPROFILE\Pictures" }, $null, "shell32.dll,-113"),
-        ('Exclusion', { Button_Add_Exclusion_Folder }, $null, "shell32.dll,-45"),
+        ('Exclusion', { Script_Add_Exclusion_Folder }, $null, "shell32.dll,-45"),
         ('Appdata', { Invoke-Item -Path $env:APPDATA }, $null, "shell32.dll,-154"),
         ('Temp', { Invoke-Item -Path $env:TEMP }, $null, "shell32.dll,-152"))
     ),
     ("Zed Toolkit", @(
-        ("Add Shortcut", { Button_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
+        ("Add Shortcut", { Script_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
         ("Backup User", { Execute_Script $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
         ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
-        ("Clean and Exit", { Button_Clean_App }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
+        ("Clean and Exit", { Script_Clean_App }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
     ("Utility", @(
-        ("Winget", { Button_Install_Winget }, "Install Winget Packet Manager", ""),
-        ("Choco", { Button_Install_Choco }, "Install Choco Packet Manager", ""))
+        ("Winget", { Install_Winget }, "Install Winget Packet Manager", ""),
+        ("Choco", { Install_Choco }, "Install Choco Packet Manager", ""))
     )
 )
 
-Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools
+Draw_Buttons -Script_list $tools_list -wrap_panel $x_WP_Tools
 
 $soft_list = @(
     ('Tools', @(
         ('Powershell', { Start-Process powershell }, ''),
-        ('Debloat', { Button_Debloat }, 'Supprime les application bloatware de windows'),
-        ('Titus', { Button_Titus }, 'Package installer + Windows Button_isation'))
+        ('Debloat', { Script_Debloat }, 'Supprime les application bloatware de windows'),
+        ('Titus', { Script_Titus }, 'Package installer + Windows Script_isation'))
     ),
     ('Software', @(
         ('Dipiscan', { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
@@ -274,7 +274,7 @@ $soft_list = @(
         'Windows et Office Activateur')) 
     )
 )
-Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft
+Draw_Buttons -Script_list $soft_list -wrap_panel $x_WP_Soft
 
 Write-Info "Ready to go !"
 
