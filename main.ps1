@@ -67,7 +67,6 @@ else {
     if ($result.ToLower() -ieq "y") {
         $source.winget = Install_Winget
     }
-
 }
 
 if (Get-Command choco -ErrorAction SilentlyContinue) {
