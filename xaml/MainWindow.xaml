@@ -4,7 +4,15 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:ZMT" mc:Ignorable="d" ResizeMode="CanResize" SizeToContent="WidthAndHeight" Title="Zed's Toolkit" WindowStyle="ThreeDBorderWindow">
-	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<!--<ResourceDictionary Source="D:/ZMT/xaml/Style.xaml" />-->
+				<ResourceDictionary Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="{StaticResource PrimaryColor}">
 		<Grid x:Name="Grid_Window">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="auto" />
