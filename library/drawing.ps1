@@ -3,15 +3,14 @@ function IsEnabled {
         [string]$provider,
         [System.Object]$source
     )
-
     switch ($provider) {
-        $app_dict.github {
+        $conf_dict.github {
             return $source.github
         }
-        $app_dict.winget {
+        $conf_dict.winget {
             return $source.winget
         }
-        $app_dict.choco {
+        $conf_dict.choco {
             return $source.choco
         }
         default {
@@ -100,7 +99,8 @@ function Get_Checkbox {
     $tooltip.Content = "$description. [$provider]"
     $checkbox.ToolTip = $tooltip
 
-    if ((IsEnabled -provider $provider -source $source) -eq $false) {
+    $enabled = IsEnabled -provider $provider -source $source
+    if ($enabled -eq $false) {
         $checkbox.IsEnabled = $false
         $checkbox.Foreground = "#555555"
     }

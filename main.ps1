@@ -85,7 +85,7 @@ else {
 
 $github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
 
-if ($null -eq $github_token) { 
+if ($github_token) { 
     $github_token = Read-Host "(Optionel) Enter your GitHub token (https://github.com/settings/tokens)" 
     if (-not [string]::IsNullOrWhiteSpace($github_token)) {
         $save = Read-Host "Do you want to save the token for later use  (Y/n)" 
@@ -98,7 +98,7 @@ if ($null -eq $github_token) {
     } 
 }
 
-if (!($null -eq $github_token)) {
+if ($github_token) {
     $url = "https://api.github.com/user"
 
     $headers = @{
@@ -120,7 +120,7 @@ if (!($null -eq $github_token)) {
     }
 }
 else {
-    Write-Error "User did not specify an github token" 
+    Write-Cancel "User did not specify an github token" 
 }
 
 #===========================================================================
@@ -153,9 +153,9 @@ $xaml.SelectNodes("//*[@Name]") | % { Set-Variable -Name "x_$($_.Name)" -Value $
 # WPF Loading
 #===========================================================================
 
-$x_Script_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
-$x_Script_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
-$x_Script_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
+$x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
+$x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
+$x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
 
 
 $x_Grid_MenuBar.Background = '#111111'
@@ -184,10 +184,10 @@ else {
 }
 
 $applications = Draw_Checkboxes -json $json_app  -wrap_panel $x_WP_Applications -source $source
-$x_Script_Applications.Add_Click({ Script_Applications -list $applications })
+$x_Button_Applications.Add_Click({ Script_Applications -list $applications })
 
 $extensions = Draw_Checkboxes -json $json_ext -wrap_panel $x_WP_Extensions
-$x_Script_Extensions.Add_Click({ Script_Extensions -list $extensions })
+$x_Button_Extensions.Add_Click({ Script_Extensions -list $extensions })
 
 $packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
@@ -216,7 +216,7 @@ $windows_list = @(
         ("Device Manager", { Start-Process "devmgmt.msc" }, "Gérer les périphériques matériels", ""))
     ))
 
-Draw_Buttons -Script_list $windows_list -wrap_panel $x_WP_Windows
+Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows
 
 $tools_list = @(
     ('Folder', @(
@@ -242,7 +242,7 @@ $tools_list = @(
     )
 )
 
-Draw_Buttons -Script_list $tools_list -wrap_panel $x_WP_Tools
+Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools
 
 $soft_list = @(
     ('Tools', @(
@@ -274,7 +274,7 @@ $soft_list = @(
         'Windows et Office Activateur')) 
     )
 )
-Draw_Buttons -Script_list $soft_list -wrap_panel $x_WP_Soft
+Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft
 
 Write-Info "Ready to go !"
 
