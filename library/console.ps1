@@ -254,3 +254,21 @@ function Button_Install_Choco {
         Write-Error "Chocolatey failed to install" 
     }
 }
+
+
+function Load_Resource_Dictionary {
+    param([string]$xamlFilePath)
+
+    [void][System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
+
+    if ($xamlFilePath -match 'http') {
+        $xamlContent = Invoke-WebRequest -Uri $xamlFilePath -UseBasicParsing | Select-Object -ExpandProperty Content
+    }
+    else {
+        $xamlContent = Get-Content $xamlFilePath -Raw
+    }
+    
+    [xml]$xamlXml = $xamlContent
+    $reader = New-Object System.Xml.XmlNodeReader $xamlXml
+    return [Windows.Markup.XamlReader]::Load($reader)
+}

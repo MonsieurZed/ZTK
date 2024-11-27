@@ -9,7 +9,10 @@
 #===========================================================================
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-
+$xaml_dict = @{
+    main  = "$base_path/xaml/MainWindow.xaml"
+    style = "$base_path/xaml/style.xaml"
+}
 # ===========================================================================
 # Admin     
 # ============================================================================
@@ -85,7 +88,7 @@ else {
 
 $github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
 
-if ($github_token) { 
+if ($github_token -eq $null) { 
     $github_token = Read-Host "(Optionel) Enter your GitHub token (https://github.com/settings/tokens)" 
     if (-not [string]::IsNullOrWhiteSpace($github_token)) {
         $save = Read-Host "Do you want to save the token for later use  (Y/n)" 
@@ -148,6 +151,10 @@ try { $form = [Windows.Markup.XamlReader]::Load( $reader ) }
 catch { Write-Error "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed." }
  
 $xaml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name "x_$($_.Name)" -Value $form.FindName($_.Name) }
+$form.GetType().GetProperties() | ForEach-Object {
+    $elementName = $_.Name
+    Set-Variable -Name "x_$elementName" -Value $form.FindName($elementName)
+}
 
 #===========================================================================
 # WPF Loading
@@ -170,32 +177,7 @@ Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName PresentationCore
 Add-Type -AssemblyName WindowsBase
 
-$x_titleBar.Add_MouseLeftButtonDown({ $form.DragMove() })
-$x_closeButton.Add_Click({ $form.Close() })
-$x_maxButton.Add_Click({ if ($form.WindowState -eq 'Maximized') { $form.WindowState = 'Normal' } else { $form.WindowState = 'Maximized' } })
-$x_minButton.Add_Click({ $form.WindowState = 'Minimized' })
-
-
-$x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
-$x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
-$x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
-
-
-$x_Grid_MainWindow.Background = '#222222'
-$x_Grid_StatusBar.Background = '#111111'
-$x_Grid_ButtonZone.Background = '#131313'
-$x_Grid_AutoInstallZone.Background = '#111111'
-$x_Grid_ExtensionZone.Background = '#121212'
-$x_Grid_StatusBar.Background = '#242424'
-$x_Dropdown_Packages.Background = '#222222'
-
-$x_R_Winget.Foreground = if ($source.winget) { 'Green' }else { 'red' }
-$x_R_Winget.Tooltip = if (!$source.winget) { "Winget n'est pas installé, certaine applications ne seront donc pas accessible." }
-$x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
-$x_R_Choco.Tooltip = if (!$source.choco) { "Chocolatey n'est pas installé, certaine applications ne seront donc pas accessible." }
-$x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
-$x_R_Github.Tooltip = if (!$source.github) { "Pas de Token Github, certaine applications ne seront donc pas accessible." }
-$x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
+$resource_dictionary = Load_Resource_Dictionary -xamlFilePath $xaml_dict.style
 
 if ($Global:debug) {
     $json_app = Get-Content -Path $json_dict.apps -Raw | ConvertFrom-Json
@@ -208,13 +190,25 @@ else {
     $json_pac = Invoke-WebRequest -Uri $json_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
 }
 
-$applications = Draw_Checkboxes -json $json_app  -wrap_panel $x_WP_Applications -source $source
-$x_Button_Applications.Add_Click({ Script_Applications -list $applications })
+$x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
+$x_Button_Paste_Applications.Add_Click({ Paste_Applications -list $applications })
+$x_Button_Clear_Applications.Add_Click({ Clear_Applications -list $applications })
 
-$extensions = Draw_Checkboxes -json $json_ext -wrap_panel $x_WP_Extensions
-$x_Button_Extensions.Add_Click({ Script_Extensions -list $extensions })
+$x_R_Winget.Foreground = if ($source.winget) { 'Green' }else { 'red' }
+$x_R_Winget.Tooltip = if (!$source.winget) { "Winget n'est pas installé, certaine applications ne seront donc pas accessible." }
+$x_R_Choco.Foreground = if ($source.choco) { 'Green' }else { 'red' }
+$x_R_Choco.Tooltip = if (!$source.choco) { "Chocolatey n'est pas installé, certaine applications ne seront donc pas accessible." }
+$x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
+$x_R_Github.Tooltip = if (!$source.github) { "Pas de Token Github, certaine applications ne seront donc pas accessible." }
+$x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-$packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages
+$applications = Draw_Checkboxes -json $json_app  -wrap_panel $x_WP_Applications -source $source -resources $resource_dictionary
+$x_Button_Applications.Add_Click({ Button_Applications -list $applications })
+
+$extensions = Draw_Checkboxes -json $json_ext -wrap_panel $x_WP_Extensions -resources $resource_dictionary
+$x_Button_Extensions.Add_Click({ Button_Applications -list $extensions })
+
+$packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages -resources $resource_dictionary
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
 
 $windows_list = @(
@@ -241,7 +235,7 @@ $windows_list = @(
         ("Device Manager", { Start-Process "devmgmt.msc" }, "Gérer les périphériques matériels", ""))
     ))
 
-Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows -form $form
+Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows -resources $resource_dictionary
 
 $tools_list = @(
     ('Folder', @(
@@ -267,7 +261,7 @@ $tools_list = @(
     )
 )
 
-Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools -form $form
+Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools -resources $resource_dictionary
 
 $soft_list = @(
     ('Tools', @(
@@ -299,7 +293,7 @@ $soft_list = @(
         'Windows et Office Activateur')) 
     )
 )
-Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft -form $form
+Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft -resources $resource_dictionary
 
 Write-Info "Ready to go !"
 

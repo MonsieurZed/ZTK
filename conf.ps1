@@ -25,7 +25,8 @@ $var_dict = @{
 }
 
 $xaml_dict = @{
-  main = "$base_path/xaml/MainWindow.xaml"
+  main  = "$base_path/xaml/MainWindow.xaml"
+  style = "$base_path/xaml/style.xaml"
 }
 
 $json_dict = @{
@@ -47,6 +48,7 @@ $library_dict = @{
   drawing     = "$base_path/library/drawing.ps1"
   interaction = "$base_path/library/interaction.ps1"
 }
+
 $source = @{
   choco  = $false
   winget = $false
