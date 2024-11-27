@@ -9,10 +9,7 @@
 #===========================================================================
 
 Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-$xaml_dict = @{
-    main  = "$base_path/xaml/MainWindow.xaml"
-    style = "$base_path/xaml/style.xaml"
-}
+
 # ===========================================================================
 # Admin     
 # ============================================================================
