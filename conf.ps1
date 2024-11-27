@@ -26,7 +26,7 @@ $var_dict = @{
 
 $xaml_dict = @{
   main  = "$base_path/xaml/MainWindow.xaml"
-  style = "$base_path/xaml/style.xaml"
+  style = "$base_path/xaml/Style.xaml"
 }
 
 $json_dict = @{
@@ -96,3 +96,6 @@ Function Load_Library {
     Invoke-Expression (Invoke-WebRequest -Uri $lib_name).Content
   }
 }
+
+https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml
+https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/style.xaml
