@@ -265,7 +265,15 @@ function Load_Resource_Dictionary {
     [void][System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
 
     if ($xamlFilePath -match 'http') {
-        $xamlContent = Invoke-WebRequest -Uri "$xamlFilePath" -UseBasicParsing | Select-Object -ExpandProperty Content
+        try {
+            
+            $xamlContent = Invoke-WebRequest -Uri $xamlFilePath -UseBasicParsing | Select-Object -ExpandProperty Content
+        }
+        catch {
+            write-host $xamlFilePath
+            write-host $_
+            $xamlContent = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" -UseBasicParsing | Select-Object -ExpandProperty Content
+        }
     }
     else {
         $xamlContent = Get-Content $xamlFilePath -Raw
