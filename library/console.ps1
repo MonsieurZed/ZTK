@@ -257,12 +257,21 @@ function Button_Install_Choco {
 
 
 function Load_Resource_Dictionary {
-    param([string]$xamlFilePath)
+    param(
+        [Parameter(Position = 0, ValueFromPipeline = $true)]    
+        [string]$xamlFilePath
+    )
 
     [void][System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
 
     if ($xamlFilePath -match 'http') {
-        $xamlContent = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" -UseBasicParsing | Select-Object -ExpandProperty Content
+        try {
+            write-host $xamlFilePath
+            $xamlContent = Invoke-WebRequest -Uri "$xamlFilePath" -UseBasicParsing | Select-Object -ExpandProperty Content
+        }
+        catch {
+            $xamlContent = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" -UseBasicParsing | Select-Object -ExpandProperty Content
+        }
     }
     else {
         $xamlContent = Get-Content $xamlFilePath -Raw
