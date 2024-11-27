@@ -8,8 +8,8 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<!--<ResourceDictionary Source="D:/ZMT/xaml/Style.xaml" />-->
-				<ResourceDictionary Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/xaml/Style.xaml" />
+				<!-- <ResourceDictionary Source="D:/ZMT/xaml/Style.xaml" /> -->
+				<ResourceDictionary Source="https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/xaml/Style.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Window.Resources>
