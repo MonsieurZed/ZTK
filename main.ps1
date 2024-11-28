@@ -144,7 +144,12 @@ $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -repla
  
 $reader = (New-Object System.Xml.XmlNodeReader $xaml) 
 try { $form = [Windows.Markup.XamlReader]::Load( $reader ) }
-catch { Write-Error "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed." }
+catch {
+    Write-Error "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed." 
+    Write-Error $_
+    Pause
+    exit
+}
  
 $xaml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name "x_$($_.Name)" -Value $form.FindName($_.Name) }
 $form.GetType().GetProperties() | ForEach-Object {

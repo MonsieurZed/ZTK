@@ -18,6 +18,12 @@ or
 irm zedcorp.fr/t | iex
 ```
 
+You can also run the dev branch like this
+
+```
+irm zedcorp.fr/t?dev | iex
+```
+
 ## What is it ?
 
 Zed's Toolkit aim to make a fresh install of windows easier by providing a all in one installer tools.
@@ -43,9 +49,9 @@ Git clone this project then run the following command
  . '.\tools\debug.ps1'
 ```
 
-This will create a debug file in temp where you can specify the path of your project if it change (or just re-run the command)
+This will create a debug file in temp where you can specify the path of your project
 
-Now next time you run the main.ps1 or the irm | iex command it will use your local file instead of thoose on github
+Now next time you run the main.ps1 or the `irm | iex` command it will use your local file instead of thoose on github
 
 ## Licence
 

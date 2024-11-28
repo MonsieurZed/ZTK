@@ -49,11 +49,7 @@ Function Write-Base {
         $darkColor = $color
     }
     $time = (Get-Date).ToString("[HH:mm:ss]")
-
-    if ($message.Length -gt 150) {
-        $message = $message.Substring(0, $maxLength) + "..."
-    }
-
+    
     if ($Global:debug) {
         write-host "$time " -ForegroundColor $darkColor -NoNewline
         write-host "$message " -ForegroundColor $color -NoNewline
@@ -62,11 +58,14 @@ Function Write-Base {
     else {
         write-host $message -ForegroundColor $color
     }
-   
+    
+    if ($message.Length -gt 100) {
+        $message = $message.Substring(0, 100) + "..."
+    }
 
     if (!($null -eq $x_Info_Time)) {   
         $x_Info_Time.Text = $time 
-        $x_Info_Message.Text = $object 
+        $x_Info_Message.Text = $message
         if ($Global:debug) {
             $x_Info_Postion.Text = "$($invocation.PSCommandPath):$($invocation.ScriptLineNumber)"
         }

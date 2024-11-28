@@ -121,7 +121,7 @@
 					</StackPanel>
 				</Grid>
 			</Grid>
-			<Grid x:Name="Grid_StatusBar" Grid.Row="2" Height="auto">
+			<Grid x:Name="Grid_StatusBar" Grid.Row="2" Height="auto" Background="{StaticResource ThirdColor}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="auto" />
