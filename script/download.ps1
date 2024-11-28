@@ -3,7 +3,7 @@ if ($Global:debug) {
     . "$base_path/library/console.ps1"
 }
 else {
-    Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
+    Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/$Global:branch/library/console.ps1").Content
 }
 
 Console_Setup "Downloader"

@@ -8,8 +8,9 @@
 # Conf loader
 #===========================================================================
 
+$Global:branch = if ($MyInvocation.MyCommand -match "dev") { "dev" }else { "main" }
 $Global:debug = $false
-$Global:github_path = "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main"
+$Global:github_path = "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/$branch"
 
 if (Test-Path "$env:TEMP\zedstoolkit\debug") {
   $json_debug = Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw | ConvertFrom-Json

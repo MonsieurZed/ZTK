@@ -198,6 +198,7 @@ function Console_Header {
     write-host "_______________________________________________________________"
     write-host "                                                               "
     Write-Host $default_dict.name.PadLeft((($default_dict.name.Length + 63) / 2), " ").PadRight(63, " ")
+    Write-Host $Global:branch.name.PadLeft((($Global:branch.name.Length + 63) / 2), " ").PadRight(63, " ")
     write-host "                                                               "
     if (!($null -eq $default_dict.version)) {
         Write-Host $default_dict.version.PadLeft((($default_dict.version.Length + 63) / 2), " ").PadRight(63, " ")
