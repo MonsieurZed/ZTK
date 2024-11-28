@@ -8,7 +8,7 @@
 # Config
 #===========================================================================
 
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/entry.ps1").Content
 
 # ===========================================================================
 # Admin     

@@ -1,21 +1,11 @@
-
-$Global:debug = $false
-$Global:base_path = "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main"
-
-if (Test-Path "$env:TEMP\zedstoolkit\debug") {
-  $json_debug = Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw | ConvertFrom-Json
-  $Global:debug = $json_debug.debug
-  $Global:base_path = $json_debug.path
-} 
-
-$version = "v0.2.13"
+$version = "v0.2.17"
 
 $default_dict = @{
-  command     = "irm $base_path/main.ps1 | iex"
+  command     = "irm $Global:base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
-  icon_path   = "$base_path/icon/purple-shark.ico" 
+  icon_path   = "$Global:base_path/icon/purple-shark.ico" 
   version     = "0.2.12"
 }
 
@@ -25,28 +15,28 @@ $var_dict = @{
 }
 
 $xaml_dict = @{
-  main  = "$base_path/xaml/MainWindow.xaml"
-  style = "$base_path/xaml/Style.xaml"
+  main  = "$Global:base_path/xaml/MainWindow.xaml"
+  style = "$Global:base_path/xaml/Style.xaml"
 }
 
 $json_dict = @{
-  apps    = "$base_path/json/app.json"
-  web     = "$base_path/json/web.json"
-  package = "$base_path/json/packages.json"
+  apps    = "$Global:base_path/json/app.json"
+  web     = "$Global:base_path/json/web.json"
+  package = "$Global:base_path/json/packages.json"
 }
 
 $script_dict = @{
-  download  = "$base_path/script/download.ps1"
-  backup    = "$base_path/script/backup.ps1"
-  installer = "$base_path/script/installer.ps1"
+  download  = "$Global:base_path/script/download.ps1"
+  backup    = "$Global:base_path/script/backup.ps1"
+  installer = "$Global:base_path/script/installer.ps1"
 }
 
 $library_dict = @{
-  function    = "$base_path/library/function.ps1"
-  console     = "$base_path/library/console.ps1"
-  script      = "$base_path/library/script.ps1"
-  drawing     = "$base_path/library/drawing.ps1"
-  interaction = "$base_path/library/interaction.ps1"
+  function    = "$Global:base_path/library/function.ps1"
+  console     = "$Global:base_path/library/console.ps1"
+  script      = "$Global:base_path/library/script.ps1"
+  drawing     = "$Global:base_path/library/drawing.ps1"
+  interaction = "$Global:base_path/library/interaction.ps1"
 }
 
 $source = @{
