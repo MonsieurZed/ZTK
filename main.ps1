@@ -202,7 +202,7 @@ $applications = Draw_Checkboxes -json $json_app  -wrap_panel $x_WP_Applications 
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
 $extensions = Draw_Checkboxes -json $json_ext -wrap_panel $x_WP_Extensions -resources $resource_dictionary
-$x_Button_Extensions.Add_Click({ Button_Applications -list $extensions })
+$x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
 $packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages -resources $resource_dictionary
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })

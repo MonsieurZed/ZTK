@@ -1,5 +1,10 @@
-Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/conf.ps1").Content
-Load_Library $library_dict.console 
+Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/entry.ps1").Content
+if ($Global:debug) {
+    . "$base_path/library/console.ps1"
+}
+else {
+    Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/library/console.ps1").Content
+}
 
 Console_Setup "Downloader"
 Console_Header "Downloader"
@@ -10,6 +15,9 @@ try {
     if ($Global:debug) {
         Write-Pretty $params
     }
+    if ($null -eq $params) {
+        throw
+    }
 }
 catch {
     Write-Cancel "Something is wrong"
@@ -17,7 +25,6 @@ catch {
     Pause
     exit
 }
-
 
 $outputPath = $default_dict.temp_folder
 
@@ -31,6 +38,13 @@ if ($params.PSObject.Properties.Match("download_filename")) {
 }
 
 $filePath = Join-Path -Path $outputPath -ChildPath $params.download_filename
+if ($outputPath -eq $filePath) {
+    Write-Cancel "Something is wrong"
+    Write-Cancel "Please check parameters"
+    Pause
+    exit
+}
+
 
 $webRequest = Invoke-WebRequest -Uri $params.file_url -Method Head
 $remoteFileSize = [Convert]::ToInt64($webRequest.Headers["Content-Length"])

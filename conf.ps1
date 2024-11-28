@@ -1,12 +1,10 @@
-$version = "v0.2.17"
-
 $default_dict = @{
   command     = "irm $Global:base_path/main.ps1 | iex"
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
   icon_path   = "$Global:base_path/icon/purple-shark.ico" 
-  version     = "0.2.12"
+  version     = "v0.2.17"
 }
 
 $var_dict = @{
@@ -77,13 +75,13 @@ $web_dict = @{
 Function Load_Library {
   param (
     [Parameter(Position = 0, Mandatory = $true)]
-    [object]$lib_name
+    [object]$lib_path
   )
   write-host $lib_name
   if ($Global:debug) {
-    . $lib_name
+    . $lib_path
   }
   else {
-    Invoke-Expression (Invoke-WebRequest -Uri $lib_name).Content
+    Invoke-Expression (Invoke-WebRequest -Uri $lib_path).Content
   }
 }

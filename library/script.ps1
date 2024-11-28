@@ -63,7 +63,7 @@ function Script_Add_Exclusion_Folder {
     $exclusionFolderPath = "C:\Exclusions" 
     if (!(Test-Path -Path $exclusionFolderPath)) {
         New-Item -Path $exclusionFolderPath -ItemType Directory | Out-Null
-        Write-Ok "Folder created: $exclusionFolderPath" 
+        Write-Sucess "Folder created: $exclusionFolderPath" 
     }
     else {
         Write-Info "The folder already exists: $exclusionFolderPath" 
@@ -71,7 +71,7 @@ function Script_Add_Exclusion_Folder {
     Add-MpPreference -ExclusionPath $exclusionFolderPath
     $exclusions = Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
     if ($exclusionFolderPath -in $exclusions) {
-        Write-Ok "Folder added to Windows Defender exclusion list." 
+        Write-Sucess "Folder added to Windows Defender exclusion list." 
         if ($exclusionFolderPath) {
             Invoke-Item -Path $exclusionFolderPath
         }
@@ -120,7 +120,7 @@ function Script_Winget {
     Remove-Item $default_dict.temp_folder
 
     if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Ok "Winget is installed"
+        Write-Sucess "Winget is installed"
         return $true
     }
     else {
@@ -143,7 +143,7 @@ function Script_Choco {
     & $installScript | Out-Null  
 
     if (Get-Command choco -ErrorAction SilentlyContinue) {
-        Write-Ok "Chocolatey has been installed with sucess."
+        Write-Sucess "Chocolatey has been installed with sucess."
         return $true
     }
     else {

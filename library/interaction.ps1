@@ -78,21 +78,20 @@ function Button_Extensions {
     }
 
     $names = ($checked | ForEach-Object { "[$($_.browser)]$($_.name)" }) -join ", "
-    $result = [System.Windows.MessageBox]::Show("Voulez vous installez le(s) logiciel(s) suivant : $names", "Package Manager", [System.Windows.MessageBoxButton]::OKCancel)
+    $result = [System.Windows.MessageBox]::Show("Voulez vous installez le(s) site(s) suivant : $names", "Package Manager", [System.Windows.MessageBoxButton]::OKCancel)
    
     if ($result -eq [System.Windows.MessageBoxResult]::OK) {
         $checked |
         ForEach-Object {
             $current = $PSItem
             Write-Info "Ouverture [$($current.browser)] $($current.name)" 
-            $success = $false
 
-            $web_dict[$_.browser] |
+            $success = $false
+            $web_dict[$current.browser] |
             ForEach-Object {
                 $path = $PSItem
-                Write-Info $path
                 if (Test-Path $path) {
-                    Write-Info "$($current.browser) is installed"
+                    Write-Info "Found $($current.browser)"
                     Start-Process $path -ArgumentList $current.url
                     $success = $true
                 }
@@ -127,7 +126,7 @@ function Load_Application {
             }
         }
     }
-    Write-Ok "Application Loaded"
+    Write-Sucess "Application Loaded"
 }
 
 function Copy_Applications {
@@ -146,7 +145,7 @@ function Copy_Applications {
 
     $trimmedString = ($ids | ForEach-Object { $_.Trim() }) -replace "`r?`n", "" -replace " ", ""
     Set-Clipboard -Value $trimmedString
-    Write-Ok "Apps list has been copied to clipboard"
+    Write-Sucess "Apps list has been copied to clipboard"
 }
 
 function Paste_Applications {
@@ -164,7 +163,7 @@ function Clear_Applications {
         [object[]]$list
     )
     $list | Where-Object { $_.checkbox.IsChecked = $false } 
-    Write-Ok "Cleared"
+    Write-Sucess "Cleared"
 }
 
 Function Load_Configfile {
