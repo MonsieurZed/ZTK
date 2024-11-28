@@ -2,18 +2,20 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!-- Color Dictionnary -->
+
   <SolidColorBrush x:Key="PrimaryColor" Color="#151515" />
   <SolidColorBrush x:Key="SecondColor" Color="#301B3F" />
   <SolidColorBrush x:Key="ThirdColor" Color="#3C415C" />
   <SolidColorBrush x:Key="FourthColor" Color="#B4A5A5" />
-
   <SolidColorBrush x:Key="TextColor" Color="White" />
+
   <!-- Top Style -->
+
   <Style x:Key="TopButtonStyle" TargetType="Button">
     <Setter Property="Background" Value="{StaticResource ThirdColor}"/>
     <Setter Property="Foreground" Value="#FFFFFF"/>
     <Setter Property="FontWeight" Value="Bold"/>
-    <Setter Property="Margin" Value="10,10,10,0"/>
+    <Setter Property="Margin" Value="10,0,10,0"/>
     <Setter Property="Width" Value="100"/>
     <Setter Property="Height" Value="30"/>
     <Setter Property="BorderThickness" Value="0"/>
@@ -38,11 +40,13 @@
       </Setter.Value>
     </Setter>
   </Style>
+
   <!-- Main Style -->
+
   <Style x:Key="Main_Stack_Button" TargetType="Button">
-    <Setter Property="Background" Value="{StaticResource SecondColor}"/>
+    <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
     <Setter Property="Foreground" Value="White"/>
-    <Setter Property="Margin" Value="1"/>
+    <Setter Property="Margin" Value="0,1,0,1"/>
     <Setter Property="BorderThickness" Value="0.4"/>
     <Setter Property="BorderBrush" Value="{StaticResource ThirdColor}"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -65,24 +69,29 @@
       </Setter.Value>
     </Setter>
   </Style>
+
   <Style x:Key="Main_Stack_Border" TargetType="Border">
     <Setter Property="Background" Value="{StaticResource SecondColor}"/>
     <Setter Property="Margin" Value="2"/>
     <Setter Property="Padding" Value="2"/>
     <Setter Property="CornerRadius" Value="5"/>
   </Style>
+
   <Style x:Key="Main_Stack_StackPanel" TargetType="StackPanel">
     <Setter Property="Orientation" Value="Vertical"/>
     <Setter Property="Margin" Value="2"/>
   </Style>
+
   <Style x:Key="Main_Stack_Title_StackPanel" TargetType="StackPanel">
     <Setter Property="Orientation" Value="Horizontal"/>
     <Setter Property="Margin" Value="0,2,0,2"/>
   </Style>
+
   <Style x:Key="Main_Stack_Title_TextBlock" TargetType="TextBlock">
     <Setter Property="FontWeight" Value="Bold"/>
     <Setter Property="Foreground" Value="White"/>
   </Style>
+
   <Style x:Key="Main_Stack_Title_Image" TargetType="Image">
     <Setter Property="Width" Value="15"/>
     <Setter Property="Height" Value="15"/>
@@ -106,7 +115,7 @@
           <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
               <Setter TargetName="Border" Property="Background" Value="{StaticResource FourthColor}" />
-              <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource FourthColor}" />
+              <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource SecondColor}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryColor}" />
