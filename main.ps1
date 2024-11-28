@@ -65,7 +65,7 @@ else {
     Write-Event "Some packages need Winget to be installed" 
     $result = Read-Host " - Would you like to install it now? (Y/n)"
     if ($result.ToLower() -ieq "y") {
-        $source.winget = Install_Winget
+        $source.winget = Script_Winget
     }
 }
 
@@ -78,7 +78,7 @@ else {
     Write-Event "Some packages need Choloatey to be installed" 
     $result = Read-Host "Would you like to install it now? (Y/n)"
     if ($result.ToLower() -ieq "y") {
-        $source.choco = Install_Choco
+        $source.choco = Script_Choco
     }
 }
 
@@ -252,8 +252,8 @@ $tools_list = @(
         ("Clean and Exit", { Script_Clean_App }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
     ),
     ("Utility", @(
-        ("Winget", { Install_Winget }, "Install Winget Packet Manager", ""),
-        ("Choco", { Install_Choco }, "Install Choco Packet Manager", ""))
+        ("Winget", { Script_Winget }, "Install Winget Packet Manager", ""),
+        ("Choco", { Script_Choco }, "Install Choco Packet Manager", ""))
     )
 )
 

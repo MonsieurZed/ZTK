@@ -79,6 +79,7 @@ Function Load_Library {
     [Parameter(Position = 0, Mandatory = $true)]
     [object]$lib_name
   )
+  write-host $lib_name
   if ($Global:debug) {
     . $lib_name
   }

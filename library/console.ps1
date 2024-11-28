@@ -210,52 +210,6 @@ function Console_Header {
 
 #================ Manager =============================
 
-function Button_Install_Winget {
-
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Info "Winget is already installed"
-        return $true
-    }
-
-    $url = "https://aka.ms/getwinget"
-    $default_dict.temp_folder = "$env:TEMP\Microsoft.DesktopAppInstaller.appxbundle"
-    Invoke-WebRequest -Uri $url -OutFile $default_dict.temp_folder
-    Add-AppxPackage -Path $default_dict.temp_folder
-    Remove-Item $default_dict.temp_folder
-
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Ok "Winget is installed"
-        return $true
-    }
-    else {
-        Write-Error "Winget failed to install" 
-    }
-}
-
-function Button_Install_Choco {
-    if (Get-Command choco -ErrorAction SilentlyContinue) {
-        Write-Info "Chocolatey is already installed"
-        return $true
-    }
-   
-    Set-ExecutionPolicy Bypass -Scope Process -Force
-
-    $installScript = {
-        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-    }
-    & $installScript | Out-Null  
-
-    if (Get-Command choco -ErrorAction SilentlyContinue) {
-        Write-Ok "Chocolatey has been installed with sucess."
-        return $true
-    }
-    else {
-        Write-Error "Chocolatey failed to install" 
-    }
-}
-
-
 function Load_Resource_Dictionary {
     param(
         [Parameter(Position = 0, ValueFromPipeline = $true)]    
