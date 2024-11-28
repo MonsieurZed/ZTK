@@ -176,11 +176,6 @@ Function Console_Setup {
 }
 
 function Console_Header {
-    param (
-        [Parameter(Position = 0, ValueFromPipeline = $true)]
-        [string]$script = $null
-    )
-
     Clear-Host 
     write-host 
     write-host "_______________________________________________________________"
