@@ -15,6 +15,7 @@ if (Test-Path "$env:TEMP\zedstoolkit\debug") {
   $Global:debug = $json_debug.debug
   $Global:base_path = $json_debug.path
   . "$($Global:base_path)/conf.ps1"
+  $Global:branch = "debug"
 } 
 else {
   $Global:branch = if ($MyInvocation.MyCommand -match "dev") { "dev" }else { "main" }
