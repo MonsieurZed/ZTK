@@ -82,7 +82,7 @@
           "id": "APPC56E4",
           "name": "Outlook For Windows",
           "package": "9NRX63209R7B",
-          "description": "Microsoft Store : Outlook For Windows",
+          "description": "Microsoft Store : Outlook",
           "provider": "winget",
           "icon": "https://cdn.icon-icons.com/icons2/3053/PNG/512/microsoft_outlook_macos_bigsur_icon_189971.png"
         }
