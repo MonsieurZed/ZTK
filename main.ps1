@@ -212,86 +212,256 @@ $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 $packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages -resources $resource_dictionary
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
 
+
+
+
+
 $windows_list = @(
-    ('Connectivity', @(
-        ("Internet", { Start-Process "ms-settings:network" }, "Paramètres réseau et Internet", ""),
-        ("Bluetooth", { Start-Process "ms-settings:bluetooth" }, "Ouvrir les paramètres Bluetooth", ""),
-        ("VPN", { Start-Process "ms-settings:network-vpn" }, "Gérer les connexions VPN", ""))
+    (
+        'Connectivity', @(
+            (
+                "Internet", 
+                { Start-Process "ms-settings:network" },
+                "Paramètres réseau et Internet"
+            ),
+            (
+                "Bluetooth",
+                { Start-Process "ms-settings:bluetooth" },
+                "Ouvrir les paramètres Bluetooth"
+            ),
+            (
+                "VPN",
+                { Start-Process "ms-settings:network-vpn" }, 
+                "Gérer les connexions VPN"
+            )
+        )
     ),
-    ('Audio Video', @(
-        ("Audio", { Start-Process "ms-settings:sound" }, "Gérer les paramètres audio", ""),
-        ("Display Settings", { Start-Process "ms-settings:display" }, "Ajuster les paramètres d’affichage", ""),
-        ("Personalization", { Start-Process "ms-settings:personalization" }, "Personnaliser l’apparence", ""))
+    (
+        'Audio Video',
+        @(
+            (
+                "Audio",
+                { Start-Process "ms-settings:sound" }, 
+                "Gérer les paramètres audio"
+            ),
+            (
+                "Display Settings", 
+                { Start-Process "ms-settings:display" }, 
+                "Ajuster les paramètres d’affichage"
+            ),
+            (
+                "Personalization", 
+                { Start-Process "ms-settings:personalization" },
+                "Personnaliser l’apparence"
+            ))
     ),
-    ('Configuration', @(
-        ("Defender", { Start-Process "windowsdefender:" }, "Ouvrir Windows Defender", ""),
-        ("Power Plan", { Start-Process "powercfg.cpl" }, "Modifier les options d’alimentation", ""),
-        ("Printer", { Start-Process "ms-settings:printers" }, "Ouvrir les paramètres des imprimantes", ""),
-        ("Reset PC", { Start-Process "ms-settings:recovery" }, "Réinitialiser ou restaurer le PC", ""),
-        ("Update", { Start-Process "ms-settings:windowsupdate" }, "Rechercher des mises à jour Windows", ""))
+    (
+        'Configuration',
+        @(
+            (
+                "Defender", 
+                { Start-Process "windowsdefender:" },
+                "Ouvrir Windows Defender"
+            ),
+            (
+                "Power Plan", 
+                { Start-Process "powercfg.cpl" },
+                "Modifier les options d’alimentation"
+            ),
+            (
+                "Printer", 
+                { Start-Process "ms-settings:printers" }, 
+                "Ouvrir les paramètres des imprimantes"
+            ),
+            (
+                "Reset PC", 
+                { Start-Process "ms-settings:recovery" },
+                "Réinitialiser ou restaurer le PC"
+            ),
+            (
+                "Update", 
+                { Start-Process "ms-settings:windowsupdate" },
+                "Rechercher des mises à jour Windows"
+            ))
     ),
-    ('Manager', @(
-        ("Disk Manager", { Start-Process "diskmgmt.msc" }, "Ouvrir la gestion des disques", ""),
-        ("Task Manager", { Start-Process "taskmgr" }, "Voir les processus et performances", ""),
-        ("Device Manager", { Start-Process "devmgmt.msc" }, "Gérer les périphériques matériels", ""))
-    ))
+    (
+        'Manager', 
+        @(
+            (
+                "Disk Manager",
+                { Start-Process "diskmgmt.msc" },
+                "Ouvrir la gestion des disques"
+            ),
+            (
+                "Task Manager",
+                { Start-Process "taskmgr" },
+                "Voir les processus et performances"
+            ),
+            (
+                "Device Manager",
+                { Start-Process "devmgmt.msc" },
+                "Gérer les périphériques matériels"
+            ))
+    )
+)
 
 Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows -resources $resource_dictionary
 
 $tools_list = @(
-    ('Folder', @(
-        ('User', { Invoke-Item -Path $env:USERPROFILE }, $null, "shell32.dll,-1024"),
-        ('Desktop', { Invoke-Item -Path "$env:USERPROFILE\Desktop" }, $null, "shell32.dll,-108"),
-        ('Documents', { Invoke-Item -Path "$env:USERPROFILE\Documents" }, $null, "shell32.dll,-112"),
-        ('Downloads', { Invoke-Item -Path "$env:USERPROFILE\Downloads" }, $null, "shell32.dll,-226"),
-        ('Videos', { Invoke-Item -Path "$env:USERPROFILE\Videos" }, $null, "shell32.dll,-116"),
-        ('Pictures', { Invoke-Item -Path "$env:USERPROFILE\Pictures" }, $null, "shell32.dll,-113"),
-        ('Exclusion', { Script_Add_Exclusion_Folder }, $null, "shell32.dll,-45"),
-        ('Appdata', { Invoke-Item -Path $env:APPDATA }, $null, "shell32.dll,-154"),
-        ('Temp', { Invoke-Item -Path $env:TEMP }, $null, "shell32.dll,-152"))
+    (
+        'Folder', 
+        @(
+            (
+                'User', 
+                { Invoke-Item -Path $env:USERPROFILE },
+                $nul
+            ),
+            (
+                'Desktop',
+                { Invoke-Item -Path "$env:USERPROFILE\Desktop" },
+                $nul
+            ),
+            (
+                'Documents', 
+                { Invoke-Item -Path "$env:USERPROFILE\Documents" },
+                $nul
+            ),
+            (
+                'Downloads', 
+                { Invoke-Item -Path "$env:USERPROFILE\Downloads" },
+                $null
+            ),
+            (
+                'Videos',
+                { Invoke-Item -Path "$env:USERPROFILE\Videos" },
+                $nul
+            ),
+            (
+                'Pictures',
+                { Invoke-Item -Path "$env:USERPROFILE\Pictures" },
+                $nul
+            ),
+            (
+                'Exclusion',
+                { Script_Add_Exclusion_Folder }, 
+                $null
+            ),
+            (
+                'Appdata',
+                { Invoke-Item -Path $env:APPDATA },
+                $null
+            ),
+            (
+                'Temp',
+                { Invoke-Item -Path $env:TEMP }, 
+                $null
+            )
+        )
     ),
-    ("Zed Toolkit", @(
-        ("Add Shortcut", { Script_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
-        ("Backup User", { Execute_Script $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
-        ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
-        ("Clean and Exit", { Script_Clean_App }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
+    (
+        "Zed Toolkit",
+        @(
+            (
+                "Add Shortcut",
+                { Script_Add_Shortcut },
+                "Ajoute ZMT à ton ordinateur"
+            ),
+            (
+                "Backup User",
+                { Execute_Script $script_dict.backup },
+                "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix"
+            ),
+            (
+                "Temp Folder",
+                { Invoke-Item -Path $default_dict.temp_folder },
+                "Ouvre le dossier temporaire de ZMT"
+            ),
+            (
+                "Clean and Exit",
+                { Script_Clean_App }, 
+                "Vide le dossier Temp, retire les raccouci et ferme ZMT"
+            )
+        )
     ),
-    ("Utility", @(
-        ("Winget", { Script_Winget }, "Install Winget Packet Manager", ""),
-        ("Choco", { Script_Choco }, "Install Choco Packet Manager", ""))
+    (
+        "Utility",
+        @(
+            (
+                "Winget", 
+                { Script_Winget }, 
+                "Install Winget Packet Manager"
+            ),
+            (
+                "Choco", 
+                { Script_Choco }, 
+                "Install Choco Packet Manager"
+            )
+        )
     )
 )
 
 Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools -resources $resource_dictionary
 
 $soft_list = @(
-    ('Tools', @(
-        ('Powershell', { Start-Process powershell }, ''),
-        ('Debloat', { Script_Debloat }, 'Supprime les application bloatware de windows'),
-        ('Titus', { Script_Titus }, 'Package installer + Windows Script_isation'))
+    (
+        'Tools', 
+        @(
+            (
+                'Powershell', 
+                { Start-Process powershell }, 
+                'Ouvre un powershell'
+            ),
+            (
+                'Debloat',
+                { New_Shell_Command "irm https://win11debloat.raphi.re/ | iex; exit" },
+                'Supprime les application bloatware de windows'
+            ),
+            (
+                'Titus',
+                { New_Shell_Command "irm https://christitus.com/win| iex; exit" }, 
+                'Package installer + Windows optimisation'
+            )
+        )
     ),
-    ('Software', @(
-        ('Dipiscan', { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { Execute_Script $script_dict.download  -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } }, $null),
-        ('Sublime Text', { Execute_Script $script_dict.download  -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }, $null),
-        ('Office Tool Plus', { Execute_Script $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null))
+    (
+        'Software',
+        @(
+            (
+                'Dipiscan',
+                { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } },
+                $null
+            ),
+            (
+                'TreeSize',
+                { Execute_Script $script_dict.download  -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } },
+                $null
+            ),
+            (
+                'Sublime Text',
+                { Execute_Script $script_dict.download  -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }, 
+                $null
+            ),
+            (
+                'Office Tool Plus', 
+                { Execute_Script $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, 
+                $null
+            )
+        )
     ),
-    ('Hack', @(
-        ('SpotX', 
-        {
-            Write-Host "Installation de $($current.Text) [$($current.name)]"
-            Invoke-Expression "& { $(Invoke-WebRequest -useb 'https://raw.githubusercontent.com/SpotX-Official/spotx-official.github.io/main/run.ps1') } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_off -block_update_on -start_spoti -new_theme -adsections_off -lyrics_stat spotify"
-            Write-Host "Installation terminé de $($current.Text) : $rt"
-        },
-        "Spotify No Ads Mods"),
-        ('MassGrave',
-        {
-            $job = Start-Job -ScriptBlock {
-                Invoke-RestMethod https://get.activated.win | Invoke-Expression | Write-Host
-            }
-            $job | Wait-Job | Receive-Job
-        },
-        'Windows et Office Activateur')) 
+    (
+        'Hack',
+        @(
+            (
+                'SpotX',
+                { Start-Process cmd.exe -ArgumentList "/c", "curl -sSL https://raw.githack.com/amd64fox/SpotX/main/scripts/Install_Auto.bat | cmd" -Verb RunAs },
+                "Spotify No Ads Mods"
+            ),
+            (
+                'MassGrave',
+                { New_Shell_Command -cmd "irm https://get.activated.win | iex; exit" },
+                'Windows et Office Activateur'
+            )
+        ) 
     )
 )
 Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft -resources $resource_dictionary
