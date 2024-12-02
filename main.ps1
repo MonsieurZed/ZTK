@@ -181,14 +181,16 @@ Add-Type -AssemblyName WindowsBase
 $resource_dictionary = Load_Resource_Dictionary -xamlFilePath $xaml_dict.style
 
 if ($Global:debug) {
-    $json_app = Get-Content -Path $json_dict.apps -Raw | ConvertFrom-Json
-    $json_ext = Get-Content -Path $json_dict.web -Raw | ConvertFrom-Json
-    $json_pac = Get-Content -Path $json_dict.package -Raw | ConvertFrom-Json
+    $data_app = Get-Content -Path $data_dict.apps -Raw | ConvertFrom-Json
+    $data_ext = Get-Content -Path $data_dict.web -Raw | ConvertFrom-Json
+    $data_pac = Get-Content -Path $data_dict.package -Raw | ConvertFrom-Json
+    $data_btn = Invoke-Expression (Get-Content $data_dict.commands -Raw)
 }
 else {
-    $json_app = Invoke-WebRequest -Uri $json_dict.apps -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-    $json_ext = Invoke-WebRequest -Uri $json_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-    $json_pac = Invoke-WebRequest -Uri $json_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $data_app = Invoke-WebRequest -Uri $data_dict.apps -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $data_ext = Invoke-WebRequest -Uri $data_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $data_pac = Invoke-WebRequest -Uri $data_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $data_btn = Invoke-Expression (Invoke-WebRequest -Uri $data_dict.commands).Content
 }
 
 $x_Button_Copy_Applications.Add_Click({ Copy_Applications -list $applications })
@@ -203,98 +205,20 @@ $x_R_Github.Foreground = if ($source.github) { 'Green' }else { 'red' }
 $x_R_Github.Tooltip = if (!$source.github) { "Pas de Token Github, certaine applications ne seront donc pas accessible." }
 $x_R_Admin.Foreground = if ($admin) { 'Green' }else { 'red' }
 
-$applications = Draw_Checkboxes -json $json_app  -wrap_panel $x_WP_Applications -source $source -resources $resource_dictionary
+$applications = Draw_Checkboxes -list $data_app  -wrap_panel $x_WP_Applications -source $source -resources $resource_dictionary
 $x_Button_Applications.Add_Click({ Button_Applications -list $applications })
 
-$extensions = Draw_Checkboxes -json $json_ext -wrap_panel $x_WP_Extensions -resources $resource_dictionary
+$extensions = Draw_Checkboxes -list $data_ext -wrap_panel $x_WP_Extensions -resources $resource_dictionary
 $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 
-$packages = Draw_Package -json $json_pac -combo_box $x_Dropdown_Packages -resources $resource_dictionary
+$packages = Draw_Package -list $data_pac -combo_box $x_Dropdown_Packages -resources $resource_dictionary
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
 
-$windows_list = @(
-    ('Connectivity', @(
-        ("Internet", { Start-Process "ms-settings:network" }, "Paramètres réseau et Internet", ""),
-        ("Bluetooth", { Start-Process "ms-settings:bluetooth" }, "Ouvrir les paramètres Bluetooth", ""),
-        ("VPN", { Start-Process "ms-settings:network-vpn" }, "Gérer les connexions VPN", ""))
-    ),
-    ('Audio Video', @(
-        ("Audio", { Start-Process "ms-settings:sound" }, "Gérer les paramètres audio", ""),
-        ("Display Settings", { Start-Process "ms-settings:display" }, "Ajuster les paramètres d’affichage", ""),
-        ("Personalization", { Start-Process "ms-settings:personalization" }, "Personnaliser l’apparence", ""))
-    ),
-    ('Configuration', @(
-        ("Defender", { Start-Process "windowsdefender:" }, "Ouvrir Windows Defender", ""),
-        ("Power Plan", { Start-Process "powercfg.cpl" }, "Modifier les options d’alimentation", ""),
-        ("Printer", { Start-Process "ms-settings:printers" }, "Ouvrir les paramètres des imprimantes", ""),
-        ("Reset PC", { Start-Process "ms-settings:recovery" }, "Réinitialiser ou restaurer le PC", ""),
-        ("Update", { Start-Process "ms-settings:windowsupdate" }, "Rechercher des mises à jour Windows", ""))
-    ),
-    ('Manager', @(
-        ("Disk Manager", { Start-Process "diskmgmt.msc" }, "Ouvrir la gestion des disques", ""),
-        ("Task Manager", { Start-Process "taskmgr" }, "Voir les processus et performances", ""),
-        ("Device Manager", { Start-Process "devmgmt.msc" }, "Gérer les périphériques matériels", ""))
-    ))
+Draw_Buttons -list $data_btn[0] -wrap_panel $x_WP_Windows -resources $resource_dictionary
 
-Draw_Buttons -button_list $windows_list -wrap_panel $x_WP_Windows -resources $resource_dictionary
+Draw_Buttons -list $data_btn[1] -wrap_panel $x_WP_Tools -resources $resource_dictionary
 
-$tools_list = @(
-    ('Folder', @(
-        ('User', { Invoke-Item -Path $env:USERPROFILE }, $null, "shell32.dll,-1024"),
-        ('Desktop', { Invoke-Item -Path "$env:USERPROFILE\Desktop" }, $null, "shell32.dll,-108"),
-        ('Documents', { Invoke-Item -Path "$env:USERPROFILE\Documents" }, $null, "shell32.dll,-112"),
-        ('Downloads', { Invoke-Item -Path "$env:USERPROFILE\Downloads" }, $null, "shell32.dll,-226"),
-        ('Videos', { Invoke-Item -Path "$env:USERPROFILE\Videos" }, $null, "shell32.dll,-116"),
-        ('Pictures', { Invoke-Item -Path "$env:USERPROFILE\Pictures" }, $null, "shell32.dll,-113"),
-        ('Exclusion', { Script_Add_Exclusion_Folder }, $null, "shell32.dll,-45"),
-        ('Appdata', { Invoke-Item -Path $env:APPDATA }, $null, "shell32.dll,-154"),
-        ('Temp', { Invoke-Item -Path $env:TEMP }, $null, "shell32.dll,-152"))
-    ),
-    ("Zed Toolkit", @(
-        ("Add Shortcut", { Script_Add_Shortcut }, "Ajoute ZMT à ton ordinateur", ""),
-        ("Backup User", { Execute_Script $script_dict.backup }, "Copie le contenu de $([System.Environment]::GetFolderPath("UserProfile")) sur un disque de votre choix", ""),
-        ("Temp Folder", { Invoke-Item -Path $default_dict.temp_folder }, "Ouvre le dossier temporaire de ZMT", ""),
-        ("Clean and Exit", { Script_Clean_App }, "Vide le dossier Temp, retire les raccouci et ferme ZMT", ""))
-    ),
-    ("Utility", @(
-        ("Winget", { Script_Winget }, "Install Winget Packet Manager", ""),
-        ("Choco", { Script_Choco }, "Install Choco Packet Manager", ""))
-    )
-)
-
-Draw_Buttons -button_list $tools_list -wrap_panel $x_WP_Tools -resources $resource_dictionary
-
-$soft_list = @(
-    ('Tools', @(
-        ('Powershell', { Start-Process powershell }, ''),
-        ('Debloat', { Script_Debloat }, 'Supprime les application bloatware de windows'),
-        ('Titus', { Script_Titus }, 'Package installer + Windows Script_isation'))
-    ),
-    ('Software', @(
-        ('Dipiscan', { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } }, $null),
-        ('TreeSize', { Execute_Script $script_dict.download  -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } }, $null),
-        ('Sublime Text', { Execute_Script $script_dict.download  -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }, $null),
-        ('Office Tool Plus', { Execute_Script $script_dict.download -params @{file_url = "https://download.coolhub.top/Office_Tool_Plus/10.18.11.0/Office_Tool_with_runtime_v10.18.11.0_x64.zip" ; filter_filename = "Plus.exe" } }, $null))
-    ),
-    ('Hack', @(
-        ('SpotX', 
-        {
-            Write-Host "Installation de $($current.Text) [$($current.name)]"
-            Invoke-Expression "& { $(Invoke-WebRequest -useb 'https://raw.githubusercontent.com/SpotX-Official/spotx-official.github.io/main/run.ps1') } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_off -block_update_on -start_spoti -new_theme -adsections_off -lyrics_stat spotify"
-            Write-Host "Installation terminé de $($current.Text) : $rt"
-        },
-        "Spotify No Ads Mods"),
-        ('MassGrave',
-        {
-            $job = Start-Job -ScriptBlock {
-                Invoke-RestMethod https://get.activated.win | Invoke-Expression | Write-Host
-            }
-            $job | Wait-Job | Receive-Job
-        },
-        'Windows et Office Activateur')) 
-    )
-)
-Draw_Buttons -button_list $soft_list -wrap_panel $x_WP_Soft -resources $resource_dictionary
+Draw_Buttons -list $data_btn[2] -wrap_panel $x_WP_Soft -resources $resource_dictionary
 
 Write-Info "Ready to go !"
 

@@ -175,3 +175,11 @@ Function Load_Configfile {
         $keyValuePairs[$key.Trim()] = $value.Trim()
     }
 }
+
+Function New_Shell_Command {
+    param (
+        [Parameter(Position = 0, Mandatory = $true)]
+        [string]$cmd
+    )
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmd -Verb RunAs
+}

@@ -4,14 +4,6 @@
 # ================================   Script_ Function  =========================================  
 # =============================================================================================  
 
-function Script_Debloat {
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "Invoke-RestMethod https://win11debloat.raphi.re/ | Invoke-Expression" -Verb RunAs
-}
-
-Function Script_Titus {
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "irm https://christitus.com/win | iex" -Verb RunAs
-}
-
 function Script_Upgrade_All_Package {
     if (Get-Command winget -ErrorAction SilentlyContinue) {
         $command_winget = {

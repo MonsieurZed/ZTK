@@ -9,14 +9,14 @@ else {
 
 
 if ($Global:debug) {
-    $json_app = Get-Content -Path $json_dict.console -Raw | ConvertFrom-Json
-    $json_ext = Get-Content -Path $json_dict.web -Raw | ConvertFrom-Json
-    $json_pac = Get-Content -Path $json_dict.package -Raw | ConvertFrom-Json
+    $json_app = Get-Content -Path $data_dict.console -Raw | ConvertFrom-Json
+    $json_ext = Get-Content -Path $data_dict.web -Raw | ConvertFrom-Json
+    $json_pac = Get-Content -Path $data_dict.package -Raw | ConvertFrom-Json
 }
 else {
-    $json_app = Invoke-WebRequest -Uri $json_dict.console -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-    $json_ext = Invoke-WebRequest -Uri $json_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-    $json_pac = Invoke-WebRequest -Uri $json_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $json_app = Invoke-WebRequest -Uri $data_dict.console -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $json_ext = Invoke-WebRequest -Uri $data_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
+    $json_pac = Invoke-WebRequest -Uri $data_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
 }
 
 Console_Setup "Downloader"

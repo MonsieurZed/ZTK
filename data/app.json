@@ -80,7 +80,7 @@
         },
         {
           "id": "APPC56E4",
-          "name": "Outlook For Windows",
+          "name": "Outlook",
           "package": "9NRX63209R7B",
           "description": "Microsoft Store : Outlook",
           "provider": "winget",
