@@ -27,11 +27,11 @@ function Script_Upgrade_All_Package {
 }
 
 function Script_Add_Shortcut {
-    $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$default_dict.name.lnk")
-    $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$default_dict.name.lnk")
+    $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$($default_dict.name).lnk")
+    $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$($default_dict.name).lnk")
 
     $powershellPath = (Get-Command "powershell.exe").Source
-    $arguments = "-NoProfile -Command Start-Process powershell -ArgumentList '-NoProfile -Command $default_dict.command' -Verb RunAs"
+    $arguments = "-NoProfile -Command Start-Process powershell -ArgumentList '-NoProfile -Command $($default_dict.command)' -Verb RunAs"
     #-WindowStyle Hidden 
 
     $wShell = New-Object -ComObject WScript.Shell
@@ -40,14 +40,14 @@ function Script_Add_Shortcut {
     $stm_shortcut.TargetPath = $powershellPath
     $stm_shortcut.Arguments = $arguments
     $stm_shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($powershellPath)
-    $stm_shortcut.IconLocation = $iconPath
+    $stm_shortcut.IconLocation = $default_dict.icon_path
     $stm_shortcut.Save()
  
     $desk_shortcut = $wShell.CreateShortcut($desktopPath)
     $desk_shortcut.TargetPath = $powershellPath
     $desk_shortcut.Arguments = $arguments
     $desk_shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($powershellPath)
-    $desk_shortcut.IconLocation = $iconPath
+    $desk_shortcut.IconLocation = $default_dict.icon_path
     $desk_shortcut.Save()
 }
 

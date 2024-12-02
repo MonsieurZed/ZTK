@@ -54,23 +54,38 @@ $conf_dict = @{
 
 $web_dict = @{
   default = @("default")
-  opera   = @(
-    "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\launcher.exe",
-    "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\opera.exe"
-  )
-  brave   = @(
-    "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
-    "C:\Users\$env:USERNAME\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe"
-  )
-  chrome  = @(
-    "C:\Program Files\Google\Chrome\Application\chrome.exe"
-  )
-  edge    = @(
-    "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-  )
-  firefox = @(
-    "C:\Program Files\Mozilla Firefox\firefox.exe"
-  )    
+  opera   = @{
+    path = @(
+      "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\launcher.exe",
+      "C:\Users\$env:USERNAME\AppData\Local\Programs\Opera\opera.exe"
+    )
+    reg  = @()
+  }
+  brave   = @{
+    path = @(
+      "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
+      "C:\Users\$env:USERNAME\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe"
+    )
+    reg  = @()
+  }
+  chrome  = @{
+    path = @(
+      "C:\Program Files\Google\Chrome\Application\chrome.exe"
+    )
+    reg  = @("HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\")
+  }
+  edge    = @{
+    path = @(
+      "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    )
+    reg  = @()
+  }
+  firefox = @{
+    path = @(
+      "C:\Program Files\Mozilla Firefox\firefox.exe"
+    )
+    reg  = @()
+  }    
 }
 
 Function Load_Library {

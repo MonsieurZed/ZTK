@@ -208,7 +208,7 @@
             )
         },
         @{
-            title = 'Software'
+            title = 'Portable'
             items = @(
                 @{
                     name        = 'Dipiscan'
@@ -224,6 +224,11 @@
                 @{
                     name        = 'Sublime Text'
                     action      = { Execute_Script $script_dict.download -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }
+                    description = $null
+                },
+                @{
+                    name        = 'Revo Uninstaller'
+                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://download.revouninstaller.com/download/RevoUninstaller_Portable.zip" ; download_filename = "revo.zip" ; filter_filename = "RevoUPort.exe" } }
                     description = $null
                 },
                 @{

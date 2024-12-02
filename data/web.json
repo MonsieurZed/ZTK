@@ -16,6 +16,13 @@
           "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr"
         },
         {
+          "id": "",
+          "name": "Lastpass",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://cdn.icon-icons.com/icons2/2699/PNG/96/lastpass_tile_logo_icon_168330.png",
+          "url": "https://chromewebstore.google.com/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd?hl=fr"
+        },
+        {
           "id": "WEB48C21",
           "name": "Ublock Origin",
           "description": "Extension de blocage des publicités",

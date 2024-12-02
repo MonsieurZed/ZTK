@@ -1,0 +1,101 @@
+{
+  "_comment_1": "Never change the id manually, Run update id on the file when adding news item to the list.",
+  "_comment_2": "I don't like the way it done, will be change in the future",
+  "list": [
+    {
+      "title": "blink",
+      "browser": ["opera", "brave", "chrome", "edge"],
+      "order": "alpha",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr",
+          "uid": "nngceckbapebfimnlniiiahkandclblb"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=fr",
+          "uid": "cjpalhdlnbpafiamejdnhcphjbkeiagm"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg?hl=fr",
+          "uid": "bgnkhhnnamicmpeenaelnjfhikgbkllg"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://chromewebstore.google.com/detail/sponsorblock-pour-youtube/mnjggcdmjocbbbhaepdhchncahnbgone?hl=fr",
+          "uid": "mnjggcdmjocbbbhaepdhchncahnbgone"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=fr",
+          "uid": "dhdgffkkebhmkfjojejmpbldmpobfkfo"
+        }
+      ]
+    },
+    {
+      "title": "gecko",
+      "browser": ["firefox"],
+      "order": "alpha",
+      "icon": "https://www.mozilla.org/favicon.ico",
+      "items": [
+        {
+          "id": "WEBFB54E",
+          "name": "Bitwarden",
+          "description": "Gestionnaire de mots de passe sécurisé",
+          "icon": "https://bitwarden.com/favicon.ico",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/bitwarden-password-manager/",
+          "uid": "nngceckbapebfimnlniiiahkandclblb"
+        },
+        {
+          "id": "WEB48C21",
+          "name": "Ublock Origin",
+          "description": "Extension de blocage des publicités",
+          "icon": "https://ublockorigin.com/img/favicons/favicon-32x32.png",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/ublock-origin/",
+          "uid": "nngceckbapebfimnlniiiahkandclblb"
+        },
+        {
+          "id": "WEBEFCF7",
+          "name": "Adguard",
+          "description": "Filtrage avancé des publicités et trackers",
+          "icon": "https://st.agrd.eu/favicons/adguard/favicon.ico",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/adguard-adblocker/",
+          "uid": "nngceckbapebfimnlniiiahkandclblb"
+        },
+        {
+          "id": "WEB45ECB",
+          "name": "SponsorBlock",
+          "description": "Blocage des sponsors sur YouTube",
+          "icon": "https://sponsor.ajay.app/favicon-32x32.png?v=2190b8dd66c9e760a732842073d0a087",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/sponsorblock/",
+          "uid": "nngceckbapebfimnlniiiahkandclblb"
+        },
+        {
+          "id": "WEB80A1F",
+          "name": "Tampermonkey",
+          "description": "Gestionnaire de scripts utilisateur",
+          "icon": "https://www.tampermonkey.net/favicon.ico",
+          "url": "https://addons.mozilla.org/fr/firefox/addon/tampermonkey/",
+          "uid": "nngceckbapebfimnlniiiahkandclblb"
+        }
+      ]
+    }
+  ]
+}

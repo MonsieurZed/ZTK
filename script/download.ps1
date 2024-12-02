@@ -32,7 +32,7 @@ if ($params.file_url -notmatch "^https?://") {
     $params.file_url = "https://$($params.file_url)"
 }
 
-if ($params.PSObject.Properties.Match("download_filename")) {
+if (!($params.PSObject.Properties.Match("download_filename"))) {
     $filename = ([System.IO.Path]::GetFileName($params.file_url)).ToString()
     $params | Add-Member -MemberType NoteProperty -Name "download_filename" -Value $filename -Force
 }
@@ -117,7 +117,7 @@ if (!(Test-Path -Path $filePath)) {
             Write-Info "Downloading with HttpWebRequest"  
             $startTime = Get-Date
             # Requête initiale pour obtenir la taille du fichier, en utilisant Int64 pour les grands fichiers
-            $request = [System.Net.WebRequest]::Create($params.file_url)
+            $request = [System.Net.WebRequest]::Create([Uri]::EscapeUriString($params.file_url))
             $request.Method = "HEAD"
             $response = $request.GetResponse()
             $totalFileSize = [Int64]$response.ContentLength  # Utiliser Int64 pour les fichiers > 2 Go
