@@ -69,14 +69,14 @@ function Get_Checkbox {
 
 function Draw_Checkboxes {
     param (
-        [object]$json,
+        [object]$list,
         [System.Windows.Controls.Panel]$wrap_panel,
         [System.Object]$source,
         [Windows.ResourceDictionary]$resources
     )
     $checkboxes = New-Object System.Collections.ArrayList
 
-    foreach ($app in $json.list) {
+    foreach ($app in $list.list) {
         $items = $null
 
         if ($app.order -eq 'alpha') {
@@ -132,38 +132,31 @@ function Draw_Checkboxes {
     return $checkboxes
 }
 
-
 function Draw_Buttons {
     param (
-        [Object[]]$button_list,
+        [Object]$list,
         [Object]$wrap_panel,
         [Windows.ResourceDictionary]$resources
     )
 
-    foreach ($category in $button_list) {
-        $categoryName = $category[0]
-        $items = $category[1]
-
+    foreach ($item in $list.column_items) {
         $groupBorder = New-Object Windows.Controls.Border
         $groupBorder.style = $resources['Main_Stack_Border']
 
         $groupPanel = New-Object Windows.Controls.StackPanel
         $groupPanel.style = $resources['Main_Stack_StackPanel']
 
-        $header = GetTextblockHeader -text $categoryName
+        $header = GetTextblockHeader -text $item.title
 
         [void]$groupPanel.Children.Add($header)
 
-        foreach ($item in $items) {           
-            $name = $item[0]
-            $action = $item[1]
-            $description = $item[2]
-
+        foreach ($subitem in $item.items) {           
+    
             $button = New-Object Windows.Controls.Button
-            $button.Content = $name
-            $button.ToolTip = $description
+            $button.Content = $subitem.name
+            $button.ToolTip = $subitem.description
             $button.Style = $resources['Main_Stack_Button']
-            $button.Add_Click($action)
+            $button.Add_Click($subitem.action)
 
             [void]$groupPanel.Children.Add($button)
         }
@@ -176,13 +169,13 @@ function Draw_Buttons {
 
 function Draw_Package {
     param (
-        [object]$json,
+        [object]$list,
         [System.Windows.Controls.ComboBox]$combo_box,
         [Windows.ResourceDictionary]$resources
     )
     $packages = New-Object System.Collections.ArrayList
 
-    foreach ($item in $json.list | Sort-Object -Property title) {
+    foreach ($item in $list.list | Sort-Object -Property title) {
 
         $combo_box_item = New-Object Windows.Controls.ComboBoxItem
         $combo_box_item.Content = $item.title

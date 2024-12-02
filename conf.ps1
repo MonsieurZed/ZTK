@@ -4,7 +4,7 @@ $default_dict = @{
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
   icon_path   = "$Global:base_path/icon/purple-shark.ico" 
-  version     = "$Global:branch.0.2.18"
+  version     = "$Global:branch.0.2.19"
 }
 
 $var_dict = @{
@@ -17,10 +17,11 @@ $xaml_dict = @{
   style = "$Global:base_path/xaml/Style.xaml"
 }
 
-$json_dict = @{
-  apps    = "$Global:base_path/json/app.json"
-  web     = "$Global:base_path/json/web.json"
-  package = "$Global:base_path/json/packages.json"
+$data_dict = @{
+  apps     = "$Global:base_path/data/app.json"
+  web      = "$Global:base_path/data/web.json"
+  package  = "$Global:base_path/data/packages.json"
+  commands = "$Global:base_path/data/commands.ps1"
 }
 
 $script_dict = @{
