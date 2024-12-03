@@ -81,7 +81,7 @@ Function Write-Error {
     Write-Base -message $message -invocation $invocation -color Red
 }
 
-Function Write-Sucess {
+Function Write-Event {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
         [string]$message,
@@ -89,6 +89,7 @@ Function Write-Sucess {
     )
     Write-Base -message $message -invocation $invocation -color DarkCyan
 }
+
 Function Write-Sucess {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
@@ -97,6 +98,7 @@ Function Write-Sucess {
     )
     Write-Base -message $message -invocation $invocation -color Green
 }
+
 Function Write-Info {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
@@ -115,15 +117,6 @@ Function Write-Cancel {
     Write-Base -message $message -invocation $invocation -color Magenta
 }
 
-Function Write-Event {
-    param (
-        [Parameter(Position = 0, Mandatory = $true)]
-        [string]$message,
-        [object]$invocation = $MyInvocation
-    )
-    Write-Base -message $message -invocation $invocation -color Blue
-}
-
 Function Write-Pretty {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
@@ -140,6 +133,7 @@ Function Write-Pretty {
         Write-Host " $value" -ForegroundColor White
     }
 }
+
 Function Write-Cleaner {
     param (
         [Parameter(Position = 0, ValueFromPipeline = $true)]

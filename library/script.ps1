@@ -76,7 +76,6 @@ function Script_Add_Exclusion_Folder {
     }   
 }
 
-
 function Script_Clean_App {
     $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$default_dict.name.lnk")
     $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$default_dict.name.lnk")

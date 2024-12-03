@@ -214,11 +214,11 @@ $x_Button_Extensions.Add_Click({ Button_Extensions -list $extensions })
 $packages = Draw_Package -list $data_pac -combo_box $x_Dropdown_Packages -resources $resource_dictionary
 $x_Dropdown_Packages.Add_DropDownClosed({ Load_Application -list $applications -array $x_Dropdown_Packages.SelectedItem.Tag })
 
-Draw_Buttons -list $data_btn[0] -wrap_panel $x_WP_Windows -resources $resource_dictionary
+Draw_Buttons -list $data_btn.windows -wrap_panel $x_WP_Windows -resources $resource_dictionary
 
-Draw_Buttons -list $data_btn[1] -wrap_panel $x_WP_Tools -resources $resource_dictionary
+Draw_Buttons -list $data_btn.tools -wrap_panel $x_WP_Tools -resources $resource_dictionary
 
-Draw_Buttons -list $data_btn[2] -wrap_panel $x_WP_Soft -resources $resource_dictionary
+Draw_Buttons -list $data_btn.softwares -wrap_panel $x_WP_Soft -resources $resource_dictionary
 
 Write-Info "Ready to go !"
 
