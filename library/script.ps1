@@ -40,14 +40,14 @@ function Script_Add_Shortcut {
     $stm_shortcut.TargetPath = $powershellPath
     $stm_shortcut.Arguments = $arguments
     $stm_shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($powershellPath)
-    $stm_shortcut.IconLocation = $iconPath
+    $stm_shortcut.IconLocation = $default_dict.icon_path
     $stm_shortcut.Save()
  
     $desk_shortcut = $wShell.CreateShortcut($desktopPath)
     $desk_shortcut.TargetPath = $powershellPath
     $desk_shortcut.Arguments = $arguments
     $desk_shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($powershellPath)
-    $desk_shortcut.IconLocation = $iconPath
+    $desk_shortcut.IconLocation = $default_dict.icon_path
     $desk_shortcut.Save()
 }
 
