@@ -1,5 +1,5 @@
-@(
-    @{
+@{
+    windows   = @{
         column_title = 'Windows'
         column_items = @{
             title = 'Connectivity'
@@ -91,8 +91,8 @@
                 }
             ) 
         }
-    },
-    @{
+    }
+    tools     = @{
         column_title = 'Outils'
         column_items = @{
             title = 'Folder'
@@ -181,12 +181,17 @@
                     name        = 'Choco'
                     action      = { Script_Choco }
                     description = 'Install Choco Packet Manager'
+                },
+                @{
+                    name        = 'Upgrade All'
+                    action      = { Script_Upgrade_All_Package }
+                    description = 'Met à jour tous les logiciels'
                 }
             )
         }
-    },
-    @{
-        column_title = 'Outils'
+    }
+    softwares = @{
+        column_title = 'Software'
         column_items = @{
             title = 'Tools'
             items = @(
@@ -255,4 +260,4 @@
         }
     
     }
-)
+}

@@ -111,7 +111,6 @@ function Button_Extensions {
     } 
 }
 
-
 function Load_Application {
     param (
         [object[]]$list,
