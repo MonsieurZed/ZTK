@@ -9,7 +9,7 @@
         {
           "id": "APPBC149",
           "name": "Office 365",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365HomePremRetail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365HomePremRetail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 365 : Excel, OneNote, PowerPoint, Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -17,7 +17,7 @@
         {
           "id": "APPEBA04",
           "name": "Office 365 Pro Plus",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365ProPlusRetail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365ProPlusRetail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 365 : Access, Excel, Lync, OneNote, Outlook, PowerPoint, Publisher, Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -25,7 +25,7 @@
         {
           "id": "APPB682C",
           "name": "Office 2024",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Home2024Retail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Home2024Retail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 2024 : Excel, OneNote, PowerPoint, Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -33,7 +33,7 @@
         {
           "id": "APP44827",
           "name": "Office 2021",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=HomeStudent2021Retail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=HomeStudent2021Retail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 2021 : Excel, OneNote, PowerPoint, Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -41,7 +41,7 @@
         {
           "id": "APP56D01",
           "name": "Office 2019",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Personal2019Retail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Personal2019Retail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 2019 : Excel, Outlook, Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -49,7 +49,7 @@
         {
           "id": "APPF0C67",
           "name": "Office 2016",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=PersonalRetail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=PersonalRetail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 2016 : Excel, Outlook, Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -57,7 +57,7 @@
         {
           "id": "APPB408E",
           "name": "Office 2013",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=HomeStudentRetail&platform=x64&language=fi-fi&version=O15GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=HomeStudentRetail&platform=x64&language=fr-fr&version=O15GA",
           "description": "Microsoft Office 2013: Excel, OneNote, PowerPoint, Word",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565573-microsoft-office_81557.png"
@@ -65,7 +65,7 @@
         {
           "id": "APP456BB",
           "name": "Excel 2024",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Excel2024Retail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Excel2024Retail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 2024: Excel, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565571-microsoft-office-excel_81549.png"
@@ -73,7 +73,7 @@
         {
           "id": "APPE6730",
           "name": "Word 2024",
-          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Word2024Retail&platform=x64&language=fi-fi&version=O16GA",
+          "package": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=Word2024Retail&platform=x64&language=fr-fr&version=O16GA",
           "description": "Microsoft Office 2024: Word, OneDrive",
           "provider": "exe",
           "icon": "https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565572-microsoft-office-word_81551.png"
