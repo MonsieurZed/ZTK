@@ -143,7 +143,7 @@ Function Write-Cleaner {
         if ($InputObject -ne "" -and $InputObject -notmatch "^[\|/-\\ ]+$" -and $InputObject -notmatch "^\s*-\s*$") {
             if ($InputObject -match "[█▒]") {
                 # Rewrite the same line
-                Write-Base  -NoNewline "`r  $InputObject"
+                write-host  -NoNewline "`r  $InputObject"
             }
             else {
                 # Write normally
