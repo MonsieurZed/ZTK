@@ -4,7 +4,7 @@ $default_dict = @{
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
   icon_path   = "$Global:base_path/icon/purple-shark.ico" 
-  version     = "$Global:branch.0.2.19"
+  version     = "$Global:branch.0.2.20"
 }
 
 $var_dict = @{

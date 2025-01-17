@@ -21,7 +21,7 @@ function Button_Applications {
         $checked |
         ForEach-Object {
             $item = $_
-            Write-Info " - [$($item.provider)] $($item.name)" 
+            Write-Info "- [$($item.provider)] $($item.name)" 
             switch ($item.provider) {
                 $conf_dict.winget {  
                     Write-Info "[$($item.provider)] $($item.name) : Starting"

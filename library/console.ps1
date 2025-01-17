@@ -36,7 +36,8 @@ Function Write-Base {
         [Parameter(Position = 0, Mandatory = $true)]
         [string]$message,
         [object]$invocation = $MyInvocation,
-        [System.ConsoleColor] $color = "White"
+        [System.ConsoleColor] $color = "White",
+        [bool] $NoNewLine = $false
     )
     $darkColor = ""
     if ($color -in $("Blue", "Green", "Cyan", "Red", "Magenta", "Yellow", "Gray")) {
@@ -49,14 +50,24 @@ Function Write-Base {
         $darkColor = $color
     }
     $time = (Get-Date).ToString("[HH:mm:ss]")
-    
+
     if ($Global:debug) {
         write-host "$time " -ForegroundColor $darkColor -NoNewline
-        write-host "$message " -ForegroundColor $color -NoNewline
-        write-host "at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)" -ForegroundColor $darkColor
+        write-host "$message. " -ForegroundColor $color -NoNewline
+        if ($NoNewLine) {
+            write-host "at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)" -ForegroundColor $darkColor -NoNewline
+        }
+        else {
+            write-host "at $($invocation.PSCommandPath):$($invocation.ScriptLineNumber)" -ForegroundColor $darkColor
+        }
     }
     else {
-        write-host $message -ForegroundColor $color
+        if ($NoNewLine) {
+            write-host $message -ForegroundColor $color -NoNewline
+        }
+        else {
+            write-host $message -ForegroundColor $color
+        }
     }
     
     if ($message.Length -gt 100) {
@@ -108,6 +119,15 @@ Function Write-Info {
     Write-Base -message $message -invocation $invocation -color White
 }
 
+Function Write-Log {
+    param (
+        [Parameter(Position = 0, Mandatory = $true)]
+        [string]$message,
+        [object]$invocation = $MyInvocation
+    )
+    Write-Base -message $message -invocation $invocation -color Gray
+}
+
 Function Write-Cancel {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
@@ -140,14 +160,15 @@ Function Write-Cleaner {
         [string]$InputObject
     )
     process {
+        $InputObject = $InputObject.TrimStart()
         if ($InputObject -ne "" -and $InputObject -notmatch "^[\|/-\\ ]+$" -and $InputObject -notmatch "^\s*-\s*$") {
             if ($InputObject -match "[█▒]") {
                 # Rewrite the same line
-                write-host  -NoNewline "`r  $InputObject"
+                Write-Base "`r$InputObject" -NoNewLine $true -color "DarkGray"
             }
             else {
                 # Write normally
-                Write-Base "  $InputObject"
+                Write-Base "$InputObject" -color "DarkGray"
             }
         }
     }
