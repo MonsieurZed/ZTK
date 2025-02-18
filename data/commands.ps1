@@ -166,11 +166,6 @@
                     name        = 'Clean and Exit'
                     action      = { Script_Clean_App }
                     description = 'Vide le dossier Temp, retire les raccouci et ferme ZMT'
-                },
-                @{
-                    name        = 'Github Token'
-                    action      = { Script_Github_Token }
-                    description = ''
                 }
             )
         },
@@ -222,18 +217,18 @@
             items = @(
                 @{
                     name        = 'Dipiscan'
-                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; filter_filename = "Dipiscan.exe" } 
+                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://www.dipisoft.com/file/Dipiscan274_portable.zip" ; download_filename = "Dipiscan274_portable.zip"; filter_filename = "Dipiscan.exe" } 
                     }
                     description = $null
                 },
                 @{
                     name        = 'TreeSize'
-                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; filter_filename = "TreeSizeFree.exe" } }
+                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe" ; download_filename = "TreeSizeFreeSetup.exe"; filter_filename = "TreeSizeFree.exe" } }
                     description = $null
                 },
                 @{
                     name        = 'Sublime Text'
-                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; filter_filename = "sublime_text.exe" } }
+                    action      = { Execute_Script $script_dict.download -params @{file_url = "https://download.sublimetext.com/Sublime%20Text%20Build%203211.zip" ; download_filename = "sublimetext.zip"; filter_filename = "sublime_text.exe" } }
                     description = $null
                 },
                 @{
