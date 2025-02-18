@@ -166,6 +166,11 @@
                     name        = 'Clean and Exit'
                     action      = { Script_Clean_App }
                     description = 'Vide le dossier Temp, retire les raccouci et ferme ZMT'
+                },
+                @{
+                    name        = 'Github Token'
+                    action      = { Script_Github_Token }
+                    description = ''
                 }
             )
         },

@@ -53,6 +53,18 @@ if (-not (Test-Path -Path $default_dict.temp_folder)) {
     New-Item -Path "$($default_dict.temp_folder)" -ItemType Directory | Out-Null
 }
 
+# ===========================================================================
+# load conf   
+# ============================================================================
+
+$local_json = '{ "debug": false, "path": "", "github": "" }'
+if (-Not (Test-Path $var_dict.local_json)) {
+    $local_json | Out-File $var_dict.local_json -Encoding utf8 
+}
+else {
+    $local_json = Get-Content $var_dict.local_json -Raw | ConvertFrom-Json
+}
+
 # =============================================================================================     
 #  Package manager  
 # =============================================================================================  
@@ -82,26 +94,11 @@ else {
     }
 }
 
-$github_token = if (Test-Path $var_dict.github_token) { Get-Content -Path $var_dict.github_token -Raw } else { $null }
-
-if ($github_token -eq $null) { 
-    $github_token = Read-Host "(Optionel) Enter your GitHub token (https://github.com/settings/tokens)" 
-    if (-not [string]::IsNullOrWhiteSpace($github_token)) {
-        $save = Read-Host "Do you want to save the token for later use  (Y/n)" 
-    }
-    if ($github_token) {
-        if ($save.ToLower() -ieq "y") { 
-            Set-Content -Path $var_dict.github_token -Value $github_token
-            Write-Event "Github token saved at $($var_dict.github_token)"
-        }
-    } 
-}
-
-if ($github_token) {
+if ($local_json.github) {
     $url = "https://api.github.com/user"
 
     $headers = @{
-        Authorization = "token $github_token"
+        Authorization = $local_json.github
         Accept        = "application/vnd.github.v3+json"
     }
 

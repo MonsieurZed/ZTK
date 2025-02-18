@@ -8,8 +8,7 @@ $default_dict = @{
 }
 
 $var_dict = @{
-  debug        = "$($default_dict.temp_folder)\debug"
-  github_token = "$($default_dict.temp_folder)\github_token"
+  local_json = "$($default_dict.temp_folder)\local.json"
 }
 
 $xaml_dict = @{

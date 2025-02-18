@@ -10,10 +10,10 @@
 
 $Global:debug = $false
 
-if (Test-Path "$env:TEMP\zedstoolkit\debug") {
-  $json_debug = Get-Content -Path "$env:TEMP\zedstoolkit\debug" -Raw | ConvertFrom-Json
-  $Global:debug = $json_debug.debug
-  $Global:base_path = $json_debug.path
+if (Test-Path "$env:TEMP\zedstoolkit\local.json") {
+  $Global:local_json = Get-Content -Path "$env:TEMP\zedstoolkit\local.json" -Raw | ConvertFrom-Json
+  $Global:debug = $local_json.debug
+  $Global:base_path = $local_json.path
   $Global:branch = "debug"
   . "$($Global:base_path)/conf.ps1"
 } 
