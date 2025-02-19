@@ -7,21 +7,9 @@ else {
     Invoke-Expression (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/$Global:branch/library/console.ps1").Content
 }
 
-
-if ($Global:debug) {
-    $json_app = Get-Content -Path $data_dict.console -Raw | ConvertFrom-Json
-    $json_ext = Get-Content -Path $data_dict.web -Raw | ConvertFrom-Json
-    $json_pac = Get-Content -Path $data_dict.package -Raw | ConvertFrom-Json
-}
-else {
-    $json_app = Invoke-WebRequest -Uri $data_dict.console -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-    $json_ext = Invoke-WebRequest -Uri $data_dict.web -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-    $json_pac = Invoke-WebRequest -Uri $data_dict.package -UseBasicParsing | Select-Object -ExpandProperty Content | ConvertFrom-Json
-}
-
-Console_Setup "Downloader"
+Console_Setup "Backup Tool"
 Console_Header "Downloader"
-
+$select = $false
 while ($select -eq $false) {      
 
     # Liste des disques logiques disponibles
@@ -30,7 +18,7 @@ while ($select -eq $false) {
     # Afficher les disques disponibles
     write-host "Choose output drive :"
     foreach ($drive in $drives) {
-        write-host "$($drive.DeviceID) - $($drive.VolumeName.PadLeft((($drive.VolumeName.Length + 12) / 2), " ").PadRight(12, " ")) : $([math]::Round($drive.FreeSpace / 1GB)) Go libres"
+        write-host "$($drive.DeviceID) - $($drive.VolumeName.PadLeft((($drive.VolumeName.Length + 6) / 2), " ").PadRight(6, " ")) : $([math]::Round($drive.FreeSpace / 1GB)) Go libres"
     }
 
     # Demande à l'utilisateur de choisir un disque pour la sauvegarde
@@ -66,7 +54,7 @@ if (!(Test-Path -Path $backupPath)) {
 $userProfilePath = [System.Environment]::GetFolderPath("UserProfile")
 
 # Dossiers à sauvegarder (Documents, Bureau, Téléchargements, etc.)
-$foldersToBackup = @("Desktop", "Documents", "Downloads", "Pictures", "Videos", "Music")
+$foldersToBackup = @("Desktop", "Documents", "Downloads", "Pictures", "Videos", "Music", "OneDrive", "Contacts", "Links", "Favorites", "Searches")
 
 # Utiliser Robocopy pour copier chaque dossier
 foreach ($folder in $foldersToBackup) {

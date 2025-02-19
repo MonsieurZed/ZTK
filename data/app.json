@@ -573,7 +573,7 @@
         {
           "id": "APP87374",
           "name": "Ankama",
-          "package": "https://download.ankama.com/launcher/full/win",
+          "package": "https://download.ankama.com/launcher-dofus/full/win",
           "description": "Lanceur de jeux Ankama",
           "provider": "exe",
           "icon": "https://static.ankama.com/dofus/ng/img/apple-touch-icon.png"

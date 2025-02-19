@@ -3,8 +3,8 @@ $default_dict = @{
   name        = "Zed's Toolkit"
   clearname   = "zedstoolkit"
   temp_folder = "$env:TEMP\zedstoolkit"
-  icon_path   = "$Global:base_path/icon/purple-shark.ico" 
-  version     = "$Global:branch.0.2.21"
+  icon_path   = "$Global:base_path/icon/logo.ico"
+  version     = "$Global:branch.0.2.22"
 }
 
 $var_dict = @{

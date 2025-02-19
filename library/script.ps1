@@ -36,6 +36,8 @@ function Script_Add_Shortcut {
 
     $wShell = New-Object -ComObject WScript.Shell
     
+    Start-Process $default_dict.icon_path
+
     $stm_shortcut = $wShell.CreateShortcut($startMenuPath)
     $stm_shortcut.TargetPath = $powershellPath
     $stm_shortcut.Arguments = $arguments

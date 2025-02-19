@@ -5,15 +5,27 @@ function Execute_Script {
     param (
         [Parameter(Position = 0, Mandatory = $true)]
         [string]$script_url,
-        [object]$params
+        [object]$params = $null 
     )
     try {
-        $encoded = EncodeHastable $params
-        Start-Process powershell -ArgumentList @(
-            "-NoProfile",
-            "-Command",
-            "irm $script_url | iex; '$encoded'"
-        )
+
+        if ($null -eq $params) {
+            Start-Process powershell -ArgumentList @(
+                "-NoProfile",
+                "-Command",
+                "irm $script_url | iex;"
+            )
+        }
+        else {
+            $encoded = EncodeHastable $params
+            Start-Process powershell -ArgumentList @(
+                "-NoProfile",
+                "-Command",
+                "irm $script_url | iex; '$encoded'"
+            )
+        }
+        
+
         # Start-Process powershell -ArgumentList "-NoExit", "-File", $scriptPath, $encoded -Verb RunAs
     }
     catch {
