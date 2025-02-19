@@ -141,6 +141,11 @@
                     name        = 'Temp'
                     action      = { Invoke-Item -Path $env:TEMP }
                     description = $null
+                },
+                @{
+                    name        = 'Startup'
+                    action      = { Invoke-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" }
+                    description = $null
                 }
             )
         },

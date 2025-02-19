@@ -27,6 +27,11 @@ function Script_Upgrade_All_Package {
 }
 
 function Script_Add_Shortcut {
+
+    $local_icon = $default_dict.temp_folder + "logo.ico"
+    Invoke-WebRequest -Uri $default_dict.icon_path -OutFile $local_icon
+
+
     $startMenuPath = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs", "$($default_dict.name).lnk")
     $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "$($default_dict.name).lnk")
 
@@ -36,20 +41,18 @@ function Script_Add_Shortcut {
 
     $wShell = New-Object -ComObject WScript.Shell
     
-    Start-Process $default_dict.icon_path
-
     $stm_shortcut = $wShell.CreateShortcut($startMenuPath)
     $stm_shortcut.TargetPath = $powershellPath
     $stm_shortcut.Arguments = $arguments
     $stm_shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($powershellPath)
-    $stm_shortcut.IconLocation = $default_dict.icon_path
+    $stm_shortcut.IconLocation = $local_icon
     $stm_shortcut.Save()
  
     $desk_shortcut = $wShell.CreateShortcut($desktopPath)
     $desk_shortcut.TargetPath = $powershellPath
     $desk_shortcut.Arguments = $arguments
     $desk_shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($powershellPath)
-    $desk_shortcut.IconLocation = $default_dict.icon_path
+    $desk_shortcut.IconLocation = $local_icon
     $desk_shortcut.Save()
 }
 
