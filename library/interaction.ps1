@@ -87,15 +87,13 @@ function Button_Extensions {
             Write-Info "Ouverture [$($current.browser)] $($current.name)" 
 
             $success = $false
-            $web_dict[$current.browser] |
+            $web_dict[$current.browser].path |
             ForEach-Object {
                 $path = $PSItem
-                Write-Info "Testing $($current.browser)"
-                if (Test-Path $path) {
+                if ((Test-Path $path) -and ($success -eq $false)) {
                     Write-Info "Found $($current.browser)"
                     Start-Process $path -ArgumentList $current.url
                     $success = $true
-                    break
                 }
             }
             
