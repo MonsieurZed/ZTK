@@ -10,14 +10,14 @@
       "items": [
         {
           "id": "",
-          "name": "Bookmark",
+          "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "opera://bookmarks"
         },
         {
           "id": "",
-          "name": "Password",
+          "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
           "url": "opera://password-manager/passwords"
@@ -74,14 +74,14 @@
       "items": [
         {
           "id": "",
-          "name": "Bookmark",
+          "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "brave://bookmarks"
         },
         {
           "id": "",
-          "name": "Password",
+          "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
           "url": "brave://password-manager/passwords"
@@ -131,14 +131,14 @@
       "items": [
         {
           "id": "",
-          "name": "Bookmark",
+          "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "chrome://bookmarks"
         },
         {
           "id": "",
-          "name": "Password",
+          "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
           "url": "chrome://password-manager/passwords"
@@ -188,14 +188,14 @@
       "items": [
         {
           "id": "",
-          "name": "Bookmark",
+          "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "edge://favorites"
         },
         {
           "id": "",
-          "name": "Password",
+          "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
           "url": "edge://wallet/passwords"
@@ -245,7 +245,7 @@
       "items": [
         {
           "id": "",
-          "name": "Password",
+          "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
           "url": "about:logins"
