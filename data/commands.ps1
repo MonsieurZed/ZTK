@@ -202,7 +202,7 @@
             items = @(
                 @{
                     name        = 'Powershell'
-                    action      = { Start-Process powershell }
+                    action      = { New_Shell_Command "cd $($default_dict.temp_folder); clear" }
                     description = 'Ouvre un powershell'
                 },
                 @{
