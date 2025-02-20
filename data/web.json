@@ -9,14 +9,14 @@
       "icon": "https://cdn-production-opera-website.operacdn.com/staticfiles/assets/images/favicon/favicon-32x32.ddd494719bed.png",
       "items": [
         {
-          "id": "",
+          "id": "WEBFC6A9",
           "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "opera://bookmarks"
         },
         {
-          "id": "",
+          "id": "WEB540D6",
           "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
@@ -30,7 +30,7 @@
           "url": "https://chromewebstore.google.com/detail/gestionnaire-de-mots-de-p/nngceckbapebfimnlniiiahkandclblb?hl=fr"
         },
         {
-          "id": "",
+          "id": "WEB31D35",
           "name": "Lastpass",
           "description": "Gestionnaire de mots de passe sécurisé",
           "icon": "https://cdn.icon-icons.com/icons2/2699/PNG/96/lastpass_tile_logo_icon_168330.png",
@@ -73,14 +73,14 @@
       "icon": "https://brave.com/static-assets/images/cropped-brave_appicon_release-32x32.png",
       "items": [
         {
-          "id": "",
+          "id": "WEBFC6A9",
           "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "brave://bookmarks"
         },
         {
-          "id": "",
+          "id": "WEB540D6",
           "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
@@ -130,14 +130,14 @@
       "icon": "https://www.google.com/favicon.ico",
       "items": [
         {
-          "id": "",
+          "id": "WEBFC6A9",
           "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "chrome://bookmarks"
         },
         {
-          "id": "",
+          "id": "WEB540D6",
           "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
@@ -187,14 +187,14 @@
       "icon": "https://www.microsoft.com/favicon.ico",
       "items": [
         {
-          "id": "",
+          "id": "WEBFC6A9",
           "name": "# Bookmark",
           "description": "Page des Favoris",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
           "url": "edge://favorites"
         },
         {
-          "id": "",
+          "id": "WEB540D6",
           "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
@@ -244,7 +244,7 @@
       "icon": "https://www.mozilla.org/favicon.ico",
       "items": [
         {
-          "id": "",
+          "id": "WEB540D6",
           "name": "# Password",
           "description": "Page des mots de passes",
           "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",

@@ -10,7 +10,7 @@ Function GenerateHash {
 }
 
 try {
-    $jsonAPP = ".\json\app.json"
+    $jsonAPP = ".\app.json"
     $key = "APP"
 
     $json = Get-Content $jsonAPP -Raw | ConvertFrom-Json
@@ -28,7 +28,7 @@ catch {
 
 
 try {
-    $jsonWEB = ".\json\web.json"
+    $jsonWEB = ".\web.json"
     $key = "WEB"
 
     $json = Get-Content $jsonWEB -Raw | ConvertFrom-Json
