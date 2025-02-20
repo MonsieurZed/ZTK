@@ -90,19 +90,17 @@ function Button_Extensions {
             $web_dict[$current.browser] |
             ForEach-Object {
                 $path = $PSItem
+                Write-Info "Testing $($current.browser)"
                 if (Test-Path $path) {
                     Write-Info "Found $($current.browser)"
                     Start-Process $path -ArgumentList $current.url
                     $success = $true
-                }
-                if ($success) {
                     break
                 }
             }
             
             if ($success -eq $false) {
-                Write-Canel "Couldn't fine browser, opening in the default one."
-                Start-Process $current.url     
+                Write-Cancel "Couldn't find browser, ignored"
             }
         }
     }  
