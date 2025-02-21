@@ -41,39 +41,19 @@ function Github_Download {
         [string]$filename_filter = $null
     )
     write-host $repo
-    $headers = @{
-        Accept = "application/vnd.github.v3+json"
-    }
-    if ($github_token -and ($github_token -ne 'no_token')) { $headers.Authorization = "token $github_token" }
 
-    $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest" -Headers $headers
+    $apiUrl = "https://api.github.com/repos/$repo/releases/latest"
+    $response = Invoke-RestMethod -Uri $apiUrl
+
+    $asset = $response.assets | Where-Object { $_.name -like $github_filename_filter } | Select-Object -First 1
 
     if ($response.assets.Count -eq 0) {
         Write-Cancel "No file in last release"
         return
     }
 
-    $file_url = ""
-    if ($github_filename_filter -eq $null) {
-        $file_url = $response.assets[0].browser_download_url
-    }
     else {
-        $response.assets | ForEach-Object {
-            if (($_.name -like $github_filename_filter) -or ($_.name -match $github_filename_filter)) {
-                $file_url = $_.browser_download_url
-            }
-        }
-    }
-
-    if ($file_url -eq "") {
-        if ($Global:debug) {
-            $response.assets  | ForEach-Object { Write-Base $_.name }
-        }
-        Write-Cancel "Couldn't file $github_filename_filter in $repo"
-        return
-    }
-    else {
-        Execute_Script $script_dict.download -params @{file_url = $file_url; download_filename = $asset.name ; filter_filename = $filename_filter }
+        Execute_Script $script_dict.download -params @{file_url = $asset.browser_download_url; download_filename = $asset.name ; filter_filename = $filename_filter }
     }
     
 }

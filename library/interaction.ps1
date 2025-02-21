@@ -49,7 +49,6 @@ function Button_Applications {
                 } 
                 $conf_dict.github {
                     Write-Info "[$($item.provider)] $($item.name) : Starting"
-                    Write-Info ($item.package -split ";")
                     $repo, $ghf, $ff = $item.package -split ";"
                     Github_Download -repo $repo -token $github_token -github_filename_filter $ghf -filename_filter $ff
                     Write-Info "Download started in a other shell"

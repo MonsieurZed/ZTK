@@ -104,9 +104,7 @@ if ($local_json.github) {
 
     try {
         $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Get 
-        Write-Sucess "Github User is: $($response.name)"
-        $source.github = $true
-        
+        Write-Sucess "Github User is: $($response.name)"        
     }
     catch {
         Write-Error "Github user validation failed" 
@@ -118,6 +116,7 @@ if ($local_json.github) {
 else {
     Write-Cancel "User did not specify an github token" 
 }
+$source.github = $true
 
 #===========================================================================
 # Load XAML  and Forms
