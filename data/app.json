@@ -573,7 +573,7 @@
         {
           "id": "APP87374",
           "name": "Ankama",
-          "package": "https://download.ankama.com/launcher-dofus/full/win",
+          "package": "https://launcher.cdn.ankama.com/installers/production/Ankama%20Launcher-Setup.exe",
           "description": "Lanceur de jeux Ankama",
           "provider": "exe",
           "icon": "https://static.ankama.com/dofus/ng/img/apple-touch-icon.png"
@@ -765,6 +765,37 @@
           "description": "Gestion avancée du volume audio",
           "provider": "winget",
           "icon": "https://www.storeimages.microsoft.com/favicon.ico"
+        }
+      ]
+    },
+    {
+      "title": "Debug",
+      "description": "Personnalisation et outils d'optimisation",
+      "order": "alpha",
+      "items": [
+        {
+          "id": "",
+          "name": "Benchmate",
+          "package": "https://dl.benchmate.org/bm-12.1.0.exe",
+          "description": "Gestion avancée du volume audio",
+          "provider": "exe",
+          "icon": "https://benchmate.org/favicon-16x16.png"
+        },
+        {
+          "id": "",
+          "name": "DriversCloud",
+          "package": "https://dcdrivers.driverscloud.com/applis/DriversCloud_win.exe",
+          "description": "Drivers manager",
+          "provider": "exe",
+          "icon": "https://www.driverscloud.com/favicon.ico"
+        },
+        {
+          "id": "",
+          "name": "Mes Drivers",
+          "package": "https://fichiers2.touslesdrivers.com/Mes_Drivers_3.0.4.exe",
+          "description": "Drivers manager",
+          "provider": "exe",
+          "icon": "https://www.touslesdrivers.com/favicon.ico"
         }
       ]
     }

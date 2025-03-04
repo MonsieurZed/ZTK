@@ -96,7 +96,7 @@ if (!(Test-Path -Path $filePath)) {
                 $totalSizeMB = [math]::Round($bytesTotal / 1MB, 2)
                 $downloadedSizeMB = [math]::Round($bytesTransferred / 1MB, 2)
 
-                Write-Progress -Activity "$params.download_filename" `
+                Write-Progress -Activity "Downloading $($params.download_filename)" `
                     -Status "$progressPercent% - $downloadedSizeMB MB / $totalSizeMB MB - $downloadSpeedMBps MB/s - $($eta.ToString('hh\:mm\:ss'))" `
                     -PercentComplete $progressPercent
 

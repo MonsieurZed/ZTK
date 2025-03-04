@@ -9,20 +9,6 @@
       "icon": "https://cdn-production-opera-website.operacdn.com/staticfiles/assets/images/favicon/favicon-32x32.ddd494719bed.png",
       "items": [
         {
-          "id": "WEBFC6A9",
-          "name": "# Bookmark",
-          "description": "Page des Favoris",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
-          "url": "opera://bookmarks"
-        },
-        {
-          "id": "WEB540D6",
-          "name": "# Password",
-          "description": "Page des mots de passes",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
-          "url": "opera://password-manager/passwords"
-        },
-        {
           "id": "WEBFB54E",
           "name": "Bitwarden",
           "description": "Gestionnaire de mots de passe sécurisé",
@@ -73,20 +59,6 @@
       "icon": "https://brave.com/static-assets/images/cropped-brave_appicon_release-32x32.png",
       "items": [
         {
-          "id": "WEBFC6A9",
-          "name": "# Bookmark",
-          "description": "Page des Favoris",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
-          "url": "brave://bookmarks"
-        },
-        {
-          "id": "WEB540D6",
-          "name": "# Password",
-          "description": "Page des mots de passes",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
-          "url": "brave://password-manager/passwords"
-        },
-        {
           "id": "WEBFB54E",
           "name": "Bitwarden",
           "description": "Gestionnaire de mots de passe sécurisé",
@@ -129,20 +101,6 @@
       "order": "alpha",
       "icon": "https://www.google.com/favicon.ico",
       "items": [
-        {
-          "id": "WEBFC6A9",
-          "name": "# Bookmark",
-          "description": "Page des Favoris",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
-          "url": "chrome://bookmarks"
-        },
-        {
-          "id": "WEB540D6",
-          "name": "# Password",
-          "description": "Page des mots de passes",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
-          "url": "chrome://password-manager/passwords"
-        },
         {
           "id": "WEBFB54E",
           "name": "Bitwarden",
@@ -187,20 +145,6 @@
       "icon": "https://www.microsoft.com/favicon.ico",
       "items": [
         {
-          "id": "WEBFC6A9",
-          "name": "# Bookmark",
-          "description": "Page des Favoris",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/star.png",
-          "url": "edge://favorites"
-        },
-        {
-          "id": "WEB540D6",
-          "name": "# Password",
-          "description": "Page des mots de passes",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
-          "url": "edge://wallet/passwords"
-        },
-        {
           "id": "WEBFB54E",
           "name": "Bitwarden",
           "description": "Gestionnaire de mots de passe sécurisé",
@@ -243,13 +187,6 @@
       "order": "alpha",
       "icon": "https://www.mozilla.org/favicon.ico",
       "items": [
-        {
-          "id": "WEB540D6",
-          "name": "# Password",
-          "description": "Page des mots de passes",
-          "icon": "https://raw.githubusercontent.com/MonsieurZed/ZTK/refs/heads/main/icon/lock.png",
-          "url": "about:logins"
-        },
         {
           "id": "WEBFB54E",
           "name": "Bitwarden",
