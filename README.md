@@ -1,8 +1,6 @@
 # Zed's Toolkit
 
-Open source setup tool
-
-Here is my take on a setup tool CTT Style
+Open source windows setup tool
 
 ![picture.png](./assets/picture.png)
 
@@ -33,23 +31,31 @@ Zed's Toolkit aim to make a fresh install of windows easier by providing a all i
 - Access user folders
 - Access to windows interface
 - Access to useful irm-iex tools
+- Simple Backup utilty
+
+## Work In Progress
+
+- Wifi Backup/Restoration
+- Bookmark and password backup
 
 ## What next ?
 
-- Better UI/UX
 - Redegit tweaks
 - Package search
 - Multi Language support
 
 ## Running Locally
 
-Git clone this project then run the following command
+Run this project
+Clone this project
+Acces to `C:\Users\{USERNAME}Zed\AppData\Local\Temp\zedstoolkit\local.json`
 
 ```
- . '.\tools\debug.ps1'
+{
+"debug": "true",
+"path": "X:\PATH\TO\CLONNED\PROJECT",
+}
 ```
-
-This will create a debug file in temp where you can specify the path of your project
 
 Now next time you run the main.ps1 or the `irm | iex` command it will use your local file instead of thoose on github
 

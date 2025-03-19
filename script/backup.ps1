@@ -9,7 +9,9 @@ else {
 
 Console_Setup "Backup Tool"
 Console_Header "Downloader"
+
 $select = $false
+write-host "File backup started"
 while ($select -eq $false) {      
 
     # Liste des disques logiques disponibles
@@ -73,5 +75,5 @@ foreach ($folder in $foldersToBackup) {
         write-host "Folder $folder doesn't exist."
     }
 }
+write-host "File backup is done"
 
-write-host "Backup is done"

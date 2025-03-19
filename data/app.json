@@ -179,6 +179,22 @@
           "description": "Git tool",
           "provider": "winget",
           "icon": "https://git-scm.com/images/logos/logomark-orange@2x.png"
+        },
+        {
+          "id": "",
+          "name": "Android Studio",
+          "package": "Google.AndroidStudio",
+          "description": "Android Studio",
+          "provider": "winget",
+          "icon": ""
+        },
+        {
+          "id": "",
+          "name": "Cursor",
+          "package": "Anysphere.Cursor",
+          "description": "Ai Editors",
+          "provider": "winget",
+          "icon": ""
         }
       ]
     },
